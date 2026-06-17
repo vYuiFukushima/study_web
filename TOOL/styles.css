@@ -70,6 +70,45 @@ a {
   outline-offset: 3px;
 }
 
+.page-top-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 999;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--warm-text);
+  border-radius: 50%;
+  color: #FFFFFF;
+  background: var(--warm-text);
+  box-shadow: 0 12px 28px rgba(102, 75, 79, 0.22);
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.page-top-button.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.page-top-button:hover {
+  background: var(--accent-color);
+}
+
+.page-top-button:focus-visible {
+  outline: 3px solid rgba(220, 159, 149, 0.36);
+  outline-offset: 3px;
+}
+
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -269,6 +308,7 @@ a {
   padding: 64px 0 44px;
 }
 
+
 .eyebrow,
 .section-label {
   margin: 0 0 10px;
@@ -289,12 +329,12 @@ p {
 
 h1 {
   margin-bottom: 18px;
-  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  font-size: 50px;
   line-height: 1.12;
 }
 
 .lead {
-  max-width: 760px;
+  max-width: 780px;
   margin-bottom: 0;
   font-size: 1.08rem;
 }
@@ -1198,6 +1238,13 @@ tbody tr:last-child td {
     bottom: 12px;
     padding: 11px 14px;
     font-size: 13px;
+  }
+
+  .page-top-button {
+    right: 12px;
+    bottom: 12px;
+    width: 42px;
+    height: 42px;
   }
 
   .hero__inner {
