@@ -7,8 +7,36 @@
   <link rel="stylesheet" href="styles.css?v=brand-nowrap-1">
   <link rel="stylesheet" href="projects.css">
   <script src="projects.js" defer></script>
+  <style id="study-home-link-style">
+    .study-home-link {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 14px;
+      color: #FBFCFD;
+      font: 700 0.9rem/1.3 "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      text-decoration: none;
+      background: #E97F12;
+      border: 1px solid rgba(77, 69, 53, 0.16);
+      border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(77, 69, 53, 0.2);
+    }
+
+    .study-home-link:hover,
+    .study-home-link:focus-visible {
+      filter: brightness(0.96);
+      outline: 3px solid rgba(233, 127, 18, 0.28);
+      outline-offset: 3px;
+    }
+  </style>
 </head>
 <body>
+  <a class="study-home-link" href="../index.html">学習コンテンツ一覧へ</a>
   <svg class="icon-sprite" aria-hidden="true">
     <symbol id="icon-home" viewBox="0 0 24 24">
       <path d="M3 10.8 12 3l9 7.8v9.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5Z"/>
