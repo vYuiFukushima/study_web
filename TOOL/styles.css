@@ -1061,6 +1061,10 @@ tbody tr:last-child td {
   min-width: max-content;
 }
 
+#start .tool-tree {
+  min-height: 0;
+}
+
 #start .tool-tree code {
   min-width: 0;
   white-space: pre-wrap;
