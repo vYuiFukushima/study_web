@@ -107,7 +107,7 @@ a {
 }
 
 .tool-top-nav__inner {
-  width: 100%;
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 12px 0 14px;
   display: grid;
@@ -1210,7 +1210,7 @@ tbody tr:last-child td {
   }
 
   .tool-top-nav__inner {
-    width: 100%;
+    width: min(100% - 24px, 560px);
   }
 
   .tool-top-nav__links {
