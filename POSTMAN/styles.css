@@ -229,6 +229,23 @@ h4 {
   display: none;
 }
 
+#postman > p {
+  margin-bottom: 0;
+  line-height: 1.55;
+}
+
+#postman > p + p {
+  margin-top: -0.6rem;
+}
+
+#syntax > ul {
+  margin-bottom: 0;
+}
+
+#syntax > ul + .code-panel {
+  margin-top: -0.35rem;
+}
+
 .chapter__heading {
   display: flex;
   align-items: center;
