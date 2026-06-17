@@ -3,6 +3,8 @@ const tableRows = document.querySelectorAll("tbody tr");
 const betaSwitch = document.querySelector(".switch");
 const triggerButton = document.querySelector(".trigger-button");
 const triggerSection = document.querySelector("#trigger-pipeline");
+const pipelineListTitle = document.querySelector("#pipeline-list-title");
+const pipelineListDescription = document.querySelector("#pipeline-list-description");
 
 document.body.classList.add("is-ready");
 
@@ -37,3 +39,15 @@ triggerButton?.addEventListener("click", () => {
 
   triggerSection?.scrollIntoView({ behavior: "smooth", block: "start" });
 });
+
+pipelineListTitle?.addEventListener("click", scrollToPipelineListDescription);
+pipelineListTitle?.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    scrollToPipelineListDescription();
+  }
+});
+
+function scrollToPipelineListDescription() {
+  pipelineListDescription?.scrollIntoView({ behavior: "smooth", block: "start" });
+}

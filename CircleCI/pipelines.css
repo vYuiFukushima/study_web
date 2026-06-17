@@ -73,6 +73,23 @@
   margin-bottom: 0.25rem;
 }
 
+.click-heading {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.click-heading:hover,
+.click-heading:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
+.click-heading:focus-visible {
+  box-shadow: 0 0 0 4px rgba(19, 83, 137, 0.14);
+}
+
 .panel-top p {
   margin-bottom: 0;
   color: var(--text-soft);
