@@ -1,0 +1,170 @@
+.settings-page {
+  min-height: 100%;
+  background: var(--panel);
+}
+
+.settings-header {
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 1.8rem;
+}
+
+.settings-header h1 {
+  font-size: 1.35rem;
+}
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 295px minmax(0, 1fr);
+  min-height: calc(100vh - 153px);
+}
+
+.settings-menu {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  display: grid;
+  gap: 0.35rem;
+  border-right: 1px solid var(--line);
+  padding: 1.15rem 1.65rem 2rem 1.75rem;
+}
+
+.settings-menu__item {
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #2f3b4b;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 650;
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.settings-menu__item:hover,
+.settings-menu__item.is-active {
+  background: #d7dce5;
+  color: #1d2d40;
+}
+
+.settings-content {
+  display: grid;
+  gap: 1.45rem;
+  max-width: 1120px;
+  padding: 1.55rem clamp(1rem, 4vw, 4.8rem) 4rem;
+}
+
+.settings-section {
+  scroll-margin-top: 1.4rem;
+}
+
+.settings-section,
+.setting-card {
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(19, 34, 54, 0.05);
+  padding: clamp(1rem, 2.2vw, 1.45rem);
+}
+
+.settings-section > :last-child,
+.setting-card > :last-child {
+  margin-bottom: 0;
+}
+
+.settings-section h2 {
+  margin-bottom: 0.9rem;
+}
+
+.settings-section h3,
+.setting-card h3 {
+  margin-top: 1rem;
+}
+
+.overview-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.setting-card {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.setting-card code {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #c8d8e7;
+  border-radius: 8px;
+  background: #eef6fc;
+  color: #172d42;
+  padding: 0.55rem 0.7rem;
+  font-family: Consolas, "Cascadia Code", "Courier New", monospace;
+  white-space: nowrap;
+}
+
+pre {
+  overflow-x: auto;
+  margin: 0.55rem 0 0.8rem;
+  border: 1px solid #c8d8e7;
+  border-radius: 8px;
+  background: #eef6fc;
+  color: #172d42;
+  padding: 0.72rem 0.82rem;
+}
+
+pre code {
+  font-family: Consolas, "Cascadia Code", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.role-list {
+  columns: 2;
+  column-gap: 2rem;
+}
+
+@media (max-width: 1180px) {
+  .settings-layout {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .settings-menu {
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .settings-header {
+    padding: 1rem;
+  }
+
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-menu {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 0.8rem;
+  }
+
+  .settings-menu__item {
+    min-height: 40px;
+    font-size: 0.85rem;
+    padding: 0 0.75rem;
+  }
+
+  .settings-content {
+    padding: 1rem 0.8rem 2rem;
+  }
+
+  .role-list {
+    columns: 1;
+  }
+}
