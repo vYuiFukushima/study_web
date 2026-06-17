@@ -15,9 +15,9 @@
       <div class="site-nav__links">
         <a href="index.html">ホーム</a>
         <a href="b01.html">APIとは</a>
-        <a href="b02.html">APIリクエスト/レスポンスについて</a>
-        <a href="b03.html">APIリクエストの構成要素について</a>
-        <a href="b04.html" aria-current="page">APIレスポンスの構成要素について</a>
+        <a href="b02.html">リクエスト/レスポンスについて</a>
+        <a href="b03.html">リクエストの構成要素について</a>
+        <a href="b04.html" aria-current="page">レスポンスの構成要素について</a>
         <a href="b05.html">JSONについて</a>
       </div>
     </div>
@@ -31,17 +31,326 @@
       </div>
     </header>
 
-    <section class="content-section placeholder-panel" aria-labelledby="placeholder-title">
+    <section class="content-section goal-section" aria-labelledby="goal-title">
+      <div class="section-heading">
+        <span class="section-marker">01</span>
+        <h2 id="goal-title">この章の目標</h2>
+      </div>
+      <ul class="check-list">
+        <li>
+          下記の <strong>APIレスポンスの構成要素</strong> について説明できるようになる
+          <ul class="inline-sublist">
+            <li>ステータスコード</li>
+            <li>レスポンスヘッダ</li>
+            <li>レスポンスボディ</li>
+          </ul>
+        </li>
+        <li>仕様書に記載されているレスポンスの期待値からテストケースを想定できるようになる</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <span class="section-marker">02</span>
+        <h2 id="overview-title">概要</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目名</th>
+              <th>概要</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><strong>ステータスコード</strong></th>
+              <td>レスポンスの状態を示す</td>
+              <td>3桁の数字 + ステータス</td>
+            </tr>
+            <tr>
+              <th><strong>レスポンスヘッダ</strong></th>
+              <td>レスポンス自体に関する情報</td>
+              <td>認証情報など</td>
+            </tr>
+            <tr>
+              <th><strong>レスポンスボディ</strong></th>
+              <td>APIから返却されたデータ</td>
+              <td><code>JSON</code>形式であることが多い</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="status-title">
+      <div class="section-heading">
+        <span class="section-marker">03</span>
+        <h2 id="status-title">HTTPステータスコード</h2>
+      </div>
+      <ul class="basic-list">
+        <li>APIレスポンスの状況を表す情報</li>
+        <li>レスポンスが成功したかどうか、失敗している場合は何が原因かをおおよそ判断できる</li>
+      </ul>
+
+      <article class="example-block">
+        <h3>ステータスコードとは</h3>
+        <p>APIへリクエストを送信すると、</p>
+        <pre class="flow-text"><code>リクエスト
+↓
+API処理
+↓
+レスポンス</code></pre>
+        <p>の流れで結果が返ってくる。</p>
+        <p>その結果を表すのが <strong>ステータスコード</strong> である。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>イメージ</h3>
+        <p>例えば</p>
+        <pre class="flow-text"><code>ユーザー情報を取得してください</code></pre>
+        <p>というリクエストを送った場合、</p>
+
+        <h3>成功</h3>
+        <pre class="flow-text"><code>200 OK</code></pre>
+        <p>↓</p>
+        <pre class="flow-text"><code>正常に処理できました</code></pre>
+
+        <h3>失敗</h3>
+        <pre class="flow-text"><code>404 Not Found</code></pre>
+        <p>↓</p>
+        <pre class="flow-text"><code>指定された情報が見つかりません</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>代表的なHTTPステータスコード</h3>
+        <aside class="reference-box">
+          <p><a href="https://ja.wikipedia.org/wiki/HTTP%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89" target="_blank" rel="noopener noreferrer">HTTPステータスコード - Wikipedia</a> も参照のこと</p>
+        </aside>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ステータスコード</th>
+                <th>概要</th>
+                <th>エラー原因</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th><code>200</code></th>
+                <td>リクエスト成功</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <th><code>400</code></th>
+                <td>リクエスト失敗</td>
+                <td>リクエストボディやパラメータが期待通りではない</td>
+              </tr>
+              <tr>
+                <th><code>401</code></th>
+                <td>認証失敗</td>
+                <td>ヘッダ設定不備などにより認証できていない</td>
+              </tr>
+              <tr>
+                <th><code>403</code></th>
+                <td>権限不備</td>
+                <td>エンドポイントへアクセスする権限がない</td>
+              </tr>
+              <tr>
+                <th><code>404</code></th>
+                <td>リソースが存在しない</td>
+                <td>URLやパラメータのタイプミス</td>
+              </tr>
+              <tr>
+                <th><code>502</code></th>
+                <td>通信失敗</td>
+                <td>リクエスト先が停止しているなど</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="example-block">
+        <h3>よく使うステータスコードの覚え方</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>コード</th>
+                <th>覚え方</th>
+                <th>例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th><code>200</code></th>
+                <td>成功</td>
+                <td>ユーザー情報取得成功<br>商品登録成功</td>
+              </tr>
+              <tr>
+                <th><code>400</code></th>
+                <td>リクエスト内容がおかしい</td>
+                <td>必須項目が未入力<br>パラメータが不正</td>
+              </tr>
+              <tr>
+                <th><code>401</code></th>
+                <td>認証できない</td>
+                <td>パスワード間違い<br>トークン未設定</td>
+              </tr>
+              <tr>
+                <th><code>403</code></th>
+                <td>権限がない</td>
+                <td>管理者専用APIへ一般ユーザーがアクセス</td>
+              </tr>
+              <tr>
+                <th><code>404</code></th>
+                <td>見つからない</td>
+                <td>URL間違い<br>存在しないデータを取得</td>
+              </tr>
+              <tr>
+                <th><code>502</code></th>
+                <td>通信先の問題</td>
+                <td>接続先サーバー停止<br>通信エラー</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="response-header-title">
       <div class="section-heading">
         <span class="section-marker">04</span>
-        <h2 id="placeholder-title">作成予定</h2>
+        <h2 id="response-header-title">レスポンスヘッダ</h2>
       </div>
-      <p>この章の内容は次に追加します。</p>
-      <ul class="basic-list term-list">
-        <li>ステータスコード</li>
-        <li>レスポンスヘッダ</li>
-        <li>レスポンスボディ</li>
-        <li>データ型</li>
+      <ul class="basic-list">
+        <li>レスポンス自体に関する情報</li>
+      </ul>
+      <aside class="reference-box">
+        <p>参考：<a href="https://developer.mozilla.org/ja/docs/Glossary/Response_header" target="_blank" rel="noopener noreferrer">https://developer.mozilla.org/ja/docs/Glossary/Response_header</a></p>
+      </aside>
+
+      <article class="example-block">
+        <h3>レスポンスヘッダとは</h3>
+        <p>レスポンスの説明情報。</p>
+        <p>リクエストのヘッダと同様に</p>
+        <pre class="flow-text"><code>key : value</code></pre>
+        <p>形式で表現される。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>主な用途</h3>
+        <p>例：</p>
+        <pre class="flow-text"><code>レスポンスのデータ形式
+
+レスポンスサイズ
+
+認証情報
+
+キャッシュ設定</code></pre>
+        <p>など。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>イメージ</h3>
+        <p>レスポンスボディが</p>
+        <pre class="flow-text"><code>荷物</code></pre>
+        <p>なら、</p>
+        <p>レスポンスヘッダは</p>
+        <pre class="flow-text"><code>荷物の説明書</code></pre>
+        <p>のような役割を持つ。</p>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="response-body-title">
+      <div class="section-heading">
+        <span class="section-marker">05</span>
+        <h2 id="response-body-title">レスポンスボディ</h2>
+      </div>
+      <ul class="basic-list">
+        <li>APIから返却されたデータ</li>
+        <li><code>JSON</code>形式であることが多い</li>
+      </ul>
+
+      <article class="example-block">
+        <h3>レスポンスボディとは</h3>
+        <p>APIの処理結果そのもの。</p>
+        <p>例：</p>
+        <pre class="code-block"><code>{
+    "id": 1,
+    "name": "Taro"
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>イメージ</h3>
+        <h3>リクエスト</h3>
+        <pre class="flow-text"><code>ユーザー情報を取得してください</code></pre>
+        <p>↓</p>
+        <h3>レスポンスボディ</h3>
+        <pre class="code-block"><code>{
+    "id": 1,
+    "name": "Taro"
+}</code></pre>
+        <p>つまり、</p>
+        <pre class="flow-text"><code>実際に欲しい情報</code></pre>
+        <p>がレスポンスボディに入っている。</p>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="exercise-title">
+      <div class="section-heading">
+        <span class="section-marker">06</span>
+        <h2 id="exercise-title">演習問題</h2>
+      </div>
+
+      <article class="exercise-block">
+        <h3>01. HTTPステータスコードについて</h3>
+        <p>下記のようなリクエストを送信した場合、</p>
+        <p>それぞれどのようなステータスコードが想定されるか、理由も添えて考える。</p>
+        <pre class="flow-text"><code>1. 誤ったパスワードでAPIリクエストを送信
+
+2. URLに誤字が含まれる状態でAPIリクエストを送信
+
+3. リクエストボディの要素が欠損した状態でリクエストを送信
+
+4. 管理者権限が必要なAPIに一般アカウントでリクエストを送信</code></pre>
+      </article>
+
+      <article class="exercise-block">
+        <h3>この問題で確認したいこと</h3>
+        <p>APIテストでは、</p>
+        <pre class="flow-text"><code>リクエスト内容
+↓
+どのステータスコードが返るか</code></pre>
+        <p>を予測できることが重要である。</p>
+        <p>例えば</p>
+        <pre class="flow-text"><code>パスワード間違い
+↓
+401</code></pre>
+        <p>や</p>
+        <pre class="flow-text"><code>URL間違い
+↓
+404</code></pre>
+        <p>のように、</p>
+        <p>状況から原因を推測できるようになることを目指す。</p>
+      </article>
+    </section>
+
+    <section class="content-section summary-section" aria-labelledby="summary-title">
+      <div class="section-heading">
+        <span class="section-marker">07</span>
+        <h2 id="summary-title">まとめ</h2>
+      </div>
+      <ul class="check-list">
+        <li><strong>ステータスコード</strong> はAPI処理結果を表す</li>
+        <li><strong>レスポンスヘッダ</strong> はレスポンスに関する説明情報</li>
+        <li><strong>レスポンスボディ</strong> はAPIから返ってくる実際のデータ</li>
+        <li>APIテストではステータスコードとレスポンス内容を確認することが重要</li>
+        <li>ステータスコードからエラー原因をおおよそ推測できる</li>
       </ul>
     </section>
 

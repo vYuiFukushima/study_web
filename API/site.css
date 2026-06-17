@@ -51,7 +51,7 @@ body {
 .site-nav__inner {
   display: grid;
   gap: 10px;
-  width: min(1320px, calc(100% - 32px));
+  width: min(1240px, calc(100% - 32px));
   margin: 0 auto;
   padding: 12px 0 14px;
 }
@@ -84,12 +84,12 @@ body {
   flex: 1 0 auto;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-  padding: 8px 10px;
+  min-height: 40px;
+  padding: 8px 14px;
   color: var(--text);
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   text-align: center;
   text-decoration: none;
   background: transparent;
@@ -113,7 +113,7 @@ body {
 }
 
 .page-shell {
-  width: min(1320px, calc(100% - 32px));
+  width: min(1240px, calc(100% - 32px));
   margin: 0 auto;
   padding: 32px 0 64px;
 }
@@ -577,7 +577,7 @@ tbody tr:last-child td {
 @media (max-width: 700px) {
   .site-nav__inner,
   .page-shell {
-    width: min(100% - 20px, 1320px);
+    width: min(100% - 20px, 1240px);
   }
 
   .page-shell {
