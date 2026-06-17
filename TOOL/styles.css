@@ -569,6 +569,8 @@ h1 {
 .tool-tree,
 .http-example {
   margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
   color: #FFFFFF;
   background: var(--cool-text);
@@ -846,6 +848,7 @@ tbody tr:last-child td {
 
 .content-card,
 .syntax-card {
+  min-width: 0;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.86);
@@ -1039,6 +1042,7 @@ tbody tr:last-child td {
 .import-panel pre {
   margin: 0;
   max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
   color: #FFFFFF;
   background: var(--cool-text);
@@ -1055,6 +1059,12 @@ tbody tr:last-child td {
 .http-example code {
   display: block;
   min-width: max-content;
+}
+
+#start .tool-tree code {
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .syntax-card pre {
