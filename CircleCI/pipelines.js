@@ -2,6 +2,7 @@ const tabButtons = document.querySelectorAll(".tab-button");
 const tableRows = document.querySelectorAll("tbody tr");
 const betaSwitch = document.querySelector(".switch");
 const triggerButton = document.querySelector(".trigger-button");
+const triggerSection = document.querySelector("#trigger-pipeline");
 
 document.body.classList.add("is-ready");
 
@@ -33,4 +34,6 @@ triggerButton?.addEventListener("click", () => {
     ],
     { duration: 260, easing: "ease-out" }
   );
+
+  triggerSection?.scrollIntoView({ behavior: "smooth", block: "start" });
 });
