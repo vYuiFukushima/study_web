@@ -24,19 +24,14 @@
   <aside class="sidebar" id="siteSidebar">
     <div class="sidebar-brand">
       <a href="index.html">CI/CD Memo</a>
-      <p>研修内容を、自分の言葉で整理するメモサイト。</p>
     </div>
     <nav class="global-nav" aria-label="サイト内ナビゲーション">
       <a class="nav-link" href="index.html"><span class="nav-icon">01</span><span>Home</span></a>
       <a class="nav-link" href="cicd.html"><span class="nav-icon">02</span><span>CI/CDとは</span></a>
       <a class="nav-link" href="github-actions.html"><span class="nav-icon">03</span><span>GitHub Actions</span></a>
       <a class="nav-link" href="workflow-sample.html"><span class="nav-icon">04</span><span>Workflow</span></a>
-      <a class="nav-link" href="exercises.html"><span class="nav-icon">05</span><span>確認メモ</span></a>
     </nav>
-    <div class="sidebar-note">
-      <strong>Goal</strong>
-      <p>Workflowファイルに出てくる基本用語を、自分の理解として整理する。</p>
-    </div>
+
   </aside>
 
   <main class="site-main">
@@ -63,8 +58,7 @@
             設定はYAMLファイルで管理し、リポジトリ内に置くことでコードと一緒に履歴管理できます。
           </p>
           <div class="info-box">
-            <h3>覚え方</h3>
-            <p>「GitHubで起きた出来事に反応して、決めておいた作業を実行する仕組み」と考えると理解しやすいです。</p>
+            <p>「GitHubで起きた出来事に反応して、決めておいた作業を実行する仕組み」</p>
           </div>
         </section>
 
@@ -167,10 +161,10 @@
         </section>
 
         <section class="point-box" id="beginner">
-          <h2>自分用の読み方メモ</h2>
+          <h2>ポイント</h2>
           <p>
             Workflowを読むときは、まず<code>on</code>で「いつ動くか」を確認し、次に<code>jobs</code>で「何をするか」を見ます。
-            最後に各<code>steps</code>を上から順に追うと、処理の流れをつかみやすくなります。
+            最後に各<code>steps</code>を上から順に追うと、処理の流れをつかみやすくなる。
           </p>
         </section>
       </article>

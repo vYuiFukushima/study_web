@@ -81,6 +81,7 @@ code {
   background: rgba(255, 255, 255, 0.88);
   border-right: 1px solid var(--line);
   backdrop-filter: blur(16px);
+
 }
 
 .sidebar-brand a,
@@ -92,6 +93,7 @@ code {
   font-size: 1.22rem;
   font-weight: 800;
   text-decoration: none;
+  margin-bottom: 30px;
 }
 
 .sidebar-brand a::before,
@@ -225,6 +227,10 @@ code {
   margin: 0 auto;
 }
 
+.content-layout--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .article {
   min-width: 0;
 }
@@ -329,9 +335,9 @@ p {
   border-radius: var(--radius);
 }
 
-.section-block > p,
-.section-block > ul,
-.section-block > ol {
+.section-block>p,
+.section-block>ul,
+.section-block>ol {
   margin-top: 14px;
 }
 
@@ -356,12 +362,20 @@ p {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+@media (min-width: 921px) {
+
+  .content-layout--single .summary-grid,
+  .content-layout--single .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .summary-item,
 .link-card,
 .compare-item,
-.feature-list > div,
+.feature-list>div,
 .term-card,
-.definition-list > div,
+.definition-list>div,
 .exercise-item {
   background: var(--card);
   border: 1px solid var(--line);
@@ -505,25 +519,27 @@ p {
 }
 
 .compare-item,
-.feature-list > div,
+.feature-list>div,
 .term-card,
-.definition-list > div {
+.definition-list>div {
   padding: 22px;
 }
 
 .flow-diagram {
   display: grid;
-  grid-template-columns: minmax(140px, 1fr) 38px minmax(140px, 1fr) 38px minmax(140px, 1fr) 38px minmax(140px, 1fr) 38px minmax(140px, 1fr);
+  grid-template-columns: minmax(0, 520px);
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 20px;
 }
 
 .flow-node {
-  min-height: 170px;
+  justify-self: center;
+  width: min(100%, 300px);
+  min-height: auto;
   padding: 20px 16px;
   text-align: center;
-  background: #FFFFFF;
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
@@ -548,11 +564,12 @@ p {
 }
 
 .flow-arrow {
+  justify-self: center;
   color: var(--strong);
   font-size: 2rem;
   font-weight: 800;
   text-align: center;
-  transform: rotate(-90deg);
+  line-height: 1;
 }
 
 .stack-diagram {
@@ -694,7 +711,7 @@ pre code {
   display: none;
 }
 
-.answer-panel p + p {
+.answer-panel p+p {
   margin-top: 8px;
 }
 
@@ -725,12 +742,10 @@ pre code {
 .blank-lines {
   min-height: 128px;
   margin-top: 10px;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 31px,
-    rgba(180, 154, 152, 0.38) 32px
-  );
+  background-image: repeating-linear-gradient(to bottom,
+      transparent 0,
+      transparent 31px,
+      rgba(180, 154, 152, 0.38) 32px);
 }
 
 .blank-lines.small {

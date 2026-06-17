@@ -30,7 +30,6 @@
       <a class="nav-link" href="cicd.html"><span class="nav-icon">02</span><span>CI/CDとは</span></a>
       <a class="nav-link" href="github-actions.html"><span class="nav-icon">03</span><span>GitHub Actions</span></a>
       <a class="nav-link" href="workflow-sample.html"><span class="nav-icon">04</span><span>Workflow</span></a>
-      <a class="nav-link" href="exercises.html"><span class="nav-icon">05</span><span>確認メモ</span></a>
     </nav>
   </aside>
 
@@ -44,7 +43,7 @@
       <article class="article">
         <section class="page-hero compact" id="intro">
           <p class="eyebrow">Workflow Memo</p>
-          <h1>ワークフロー作成：自動実行の実装</h1>
+          <h1>自動実行の実装</h1>
         </section>
 
         <section class="section-block" id="workflow-overview">
@@ -87,7 +86,7 @@
 
 •**name** : 実行ステップの名称
 
-		**•uses :**  
+		**•uses :**  　
 		*既存の actionsを使用する場合
 		
 		•**run**  :  
@@ -96,10 +95,11 @@
         </section>
 
         <section class="section-block" id="exercise-one">
-          <h2>演習①</h2>
+          <h2>Sampleコード</h2>
+          <p>mainブランチに push されたら、自動で「Hello,World!」を表示する</p>
           <div class="code-card">
             <div class="code-header">
-              <span>演習①</span>
+              <span>Sample</span>
               <button class="copy-button" type="button">コピー</button>
             </div>
             <pre><code>name: echo-helloWorld-test
@@ -120,7 +120,7 @@ jobs:
         </section>
 
         <section class="point-box" id="checkout-note">
-          <p>コードのチェックアウトを実行する=GitHubに置いてあるファイルを、GitHub Actionsが実行できる場所にコピーする</p>
+          <p>コードのチェックアウトを実行する<br>=GitHubに置いてあるファイルを、GitHub Actionsが実行できる場所にコピーする</p>
         </section>
       </article>
 
@@ -129,8 +129,7 @@ jobs:
         <a href="#intro">概要</a>
         <a href="#workflow-overview">ワークフロー概要</a>
         <a href="#workflow-jobs">実行内容の指定</a>
-        <a href="#exercise-one">演習①</a>
-        <a href="#checkout-note">チェックアウト</a>
+        <a href="#exercise-one">サンプルコード</a>
       </aside>
     </div>
   </main>
