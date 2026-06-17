@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Object パターンとデータ駆動テスト</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="tool-detail-page">
+  <a class="study-home-link" href="../index.html">学習コンテンツへ戻る</a>
+
+  <header class="hero hero--detail">
+    <div class="hero__inner">
+      <a class="back-link" href="playwright.html">Playwrightへ戻る</a>
+      <p class="eyebrow">Playwright / Test Design</p>
+      <h1>Page Object パターンとデータ駆動テスト</h1>
+      <p class="lead">画面操作とテストデータを分けて管理し、テストコードを読みやすく・修正しやすくする考え方です。</p>
+
+      <div class="hero-highlights" aria-label="このページの概要">
+        <div class="highlight-card">
+          <span>Page Object</span>
+          <strong>画面操作を管理</strong>
+        </div>
+        <div class="highlight-card">
+          <span>Data Driven</span>
+          <strong>テストデータを管理</strong>
+        </div>
+        <div class="highlight-card">
+          <span>目的</span>
+          <strong>保守しやすくする</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <nav class="toc" aria-label="Playwrightページ内メニュー">
+      <a href="#about">Playwrightとは</a>
+      <a href="#can-cannot">できること</a>
+      <a href="#syntax">基本文法</a>
+      <a href="#assertions">アサート</a>
+      <a href="#flow">サンプルコード</a>
+      <details class="toc-group">
+        <summary>保守性を高める</summary>
+        <div class="toc-submenu">
+          <a href="playwright-page-object-data-driven.html#overview">保守性を高める</a>
+          <a href="playwright-page-object-data-driven.html#page-object">Page Object</a>
+          <a href="playwright-page-object-data-driven.html#file-role">ファイル構成</a>
+          <a href="playwright-page-object-data-driven.html#data-driven">データ駆動</a>
+          <a href="playwright-page-object-data-driven.html#parametrize">parametrize</a>
+          <a href="playwright-page-object-data-driven.html#difference">違いと関係性</a>
+        </div>
+      </details>
+    </nav>
+
+    <div class="content-column">
+      <section id="overview" class="section">
+        <div class="section-heading">
+          <p class="section-label">Overview</p>
+          <h2>保守性を高める</h2>
+          <p>どちらもテストを管理しやすくするための手法ですが、管理する対象が異なります。</p>
+        </div>
+
+        <div class="assert-intro-grid">
+          <article class="content-card assert-intro-card">
+            <span class="status-badge status-badge--ok">Page Object</span>
+            <h3>画面操作をまとめる</h3>
+            <p>ボタンをクリックする処理や文字を入力する処理を、画面ごとにまとめます。</p>
+          </article>
+
+          <article class="content-card assert-intro-card">
+            <span class="status-badge status-badge--ok">Data Driven Test</span>
+            <h3>テストデータをまとめる</h3>
+            <p>同じテストを、複数のデータで実行できるようにします。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="page-object" class="section">
+        <div class="section-heading">
+          <p class="section-label">Page Object</p>
+          <h2>Page Object パターン</h2>
+        </div>
+
+        <article class="content-card">
+          <h3>何をするもの？</h3>
+          <blockquote>画面操作をまとめて管理する設計方法</blockquote>
+          <p>ボタンをクリックする処理や文字を入力する処理を、画面ごとにまとめます。</p>
+        </article>
+
+        <div class="compare-code-grid">
+          <article class="syntax-card">
+            <h3>Page Objectを使わない場合</h3>
+            <pre><code>page.fill("#username", "test")
+page.fill("#password", "pass")
+page.click("#login-button")</code></pre>
+            <p class="code-note">ログインするたびに同じコードを書くことになります。</p>
+          </article>
+
+          <article class="syntax-card">
+            <h3>Page Objectを使う場合</h3>
+            <pre><code>login_page.login("test", "pass")</code></pre>
+            <p>内部では次の処理を実行します。</p>
+            <pre><code>page.fill("#username", "test")
+page.fill("#password", "pass")
+page.click("#login-button")</code></pre>
+          </article>
+        </div>
+
+        <div class="assert-summary-grid">
+          <article class="content-card">
+            <h3>コードの重複を減らせる</h3>
+            <p>同じ操作を何度も書かなくて済みます。</p>
+          </article>
+
+          <article class="content-card">
+            <h3>保守しやすい</h3>
+            <p>ログインボタンのIDが変わった場合も、Page Object内だけ修正すれば済みます。</p>
+            <div class="compare-code-grid compare-code-grid--compact">
+              <pre><code>"#login-button"</code></pre>
+              <pre><code>"#submit-button"</code></pre>
+            </div>
+          </article>
+        </div>
+
+        <div class="note-panel role-panel">
+          <p>役割：画面操作を管理する</p>
+        </div>
+      </section>
+
+      <section id="file-role" class="section">
+        <div class="section-heading">
+          <p class="section-label">Files</p>
+          <h2>Page Object のファイル構成</h2>
+          <p>画面ごとにファイルを分けて管理することが多いです。</p>
+        </div>
+
+        <pre class="tool-tree"><code>プロジェクト
+├─ test_main.py
+└─ pages
+   ├─ form.py
+   └─ confirm.py</code></pre>
+
+        <div class="table-card">
+          <h3>各ファイルの役割</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>ファイル</th>
+                  <th>役割</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>test_main.py</th>
+                  <td>何をテストするかを書く</td>
+                </tr>
+                <tr>
+                  <th>form.py</th>
+                  <td>入力画面の操作を書く</td>
+                </tr>
+                <tr>
+                  <th>confirm.py</th>
+                  <td>確認画面の操作・確認処理を書く</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="file-role-grid file-role-grid--stacked">
+          <article class="syntax-card">
+            <h3>test_main.py</h3>
+            <p class="code-note">テストの流れを書く場所です。実際のクリックや入力処理は書かず、「何をしたいか」を中心に書きます。</p>
+            <pre><code>form_page.open()
+
+form_page.input_name("山田太郎")
+
+form_page.click_confirm()
+
+confirm_page.check_name("山田太郎")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>form.py</h3>
+            <p class="code-note">入力画面の操作をまとめる場所です。</p>
+            <pre><code>class FormPage:
+
+    def input_name(self, name):
+        self.page.fill("#username", name)
+
+    def click_confirm(self):
+        self.page.click("#submit")</code></pre>
+            <p>文字入力、ボタンクリック、チェックボックス選択、プルダウン選択などを書きます。</p>
+          </article>
+
+          <article class="syntax-card">
+            <h3>confirm.py</h3>
+            <p class="code-note">確認画面の操作や確認処理をまとめる場所です。</p>
+            <pre><code>class ConfirmPage:
+
+    def check_name(self, expected):
+        expect(
+            self.page.locator("#username")
+        ).to_have_text(expected)</code></pre>
+          </article>
+        </div>
+
+        <div class="table-card">
+          <h3>全体の流れ</h3>
+          <pre class="tool-tree"><code>test_reserve.py
+    ↓
+FormPage
+    ↓
+ConfirmPage</code></pre>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>ファイル</th>
+                  <th>一言でいうと</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>test_reserve.py</th>
+                  <td>テストの流れを書く</td>
+                </tr>
+                <tr>
+                  <th>form.py</th>
+                  <td>入力操作を書く</td>
+                </tr>
+                <tr>
+                  <th>confirm.py</th>
+                  <td>確認処理を書く</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <blockquote>Page Object パターンでは、「何をするか」と「どう操作するか」を分けることで、コードを読みやすく・修正しやすくします。</blockquote>
+      </section>
+
+      <section id="data-driven" class="section">
+        <div class="section-heading">
+          <p class="section-label">Data Driven</p>
+          <h2>データ駆動テスト</h2>
+          <p>テストデータを外部ファイルや変数などで管理し、同じテストを複数のデータで実行するテスト手法です。</p>
+        </div>
+
+        <article class="content-card">
+          <h3>何をするもの？</h3>
+          <blockquote>同じテストを複数のデータで実行する方法</blockquote>
+        </article>
+
+        <div class="assert-summary-grid">
+          <article class="content-card">
+            <h3>テストケースを増やしやすい</h3>
+            <p>コードを増やさずにテストパターンを追加できます。</p>
+          </article>
+
+          <article class="content-card">
+            <h3>テストデータを管理しやすい</h3>
+            <p>CSVやExcelで管理することもできます。</p>
+          </article>
+        </div>
+
+        <div class="note-panel role-panel">
+          <p>役割：テストデータを管理する</p>
+        </div>
+
+        <pre class="tool-tree"><code>test_data_driven.py
+│
+├─ utilities
+│   └─ read_csv.py
+│
+├─ pages
+│   ├─ form.py
+│   └─ confirm.py
+│
+└─ datadriven
+    └─ reservation.csv</code></pre>
+
+        <div class="file-role-grid file-role-grid--stacked">
+          <article class="syntax-card">
+            <h3>read_csv.py</h3>
+            <p class="code-note">CSVを読む共通関数を書きます。</p>
+            <pre><code>import csv
+
+def read_csv_data(csv_path):
+    rows = []
+    with open(str(csv_path), encoding="utf-8") as csv_data:
+        content = csv.reader(csv_data)
+        next(content, None)
+        for row in content:
+            rows.append(row)
+    return rows</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>test_data_driven.py</h3>
+            <p class="code-note">関数をインポートします。</p>
+            <pre><code>from utilities.read_csv import read_csv_data</code></pre>
+            <p class="code-note">そしてCSVを読み込みます。</p>
+            <pre><code>class TestDataDriven:
+    datalist = read_csv_data(
+        "datadriven/reservation.csv"
+    )</code></pre>
+          </article>
+        </div>
+
+        <div class="flow-summary content-card">
+          <pre><code>reservation.csv
+↓
+read_csv_data()
+↓
+datalist に格納</code></pre>
+
+          <div>
+            <h3>役割の整理</h3>
+            <ul class="check-list">
+              <li>read_csv.py：CSVを読む担当</li>
+              <li>test_data_driven.py：どのCSVを使うか決める担当</li>
+              <li>form.py：入力担当</li>
+              <li>confirm.py：確認担当</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="compare-code-grid">
+          <article class="syntax-card">
+            <h3>reservation.csv の例</h3>
+            <pre><code>name,term
+山田太郎,3
+鈴木花子,2</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>datalist の中身</h3>
+            <pre><code>[
+    ["山田太郎", "3"],
+    ["鈴木花子", "2"]
+]</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="parametrize" class="section">
+        <div class="section-heading">
+          <p class="section-label">pytest</p>
+          <h2>テストメソッドの引数として渡す処理</h2>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <pre><code>@pytest.mark.parametrize(
+    "変数名1,変数名2,変数名3",
+    datalist
+)
+def 関数名(self, page: Page, 変数名1, 変数名2, 変数名3):
+    # テスト処理を書く</code></pre>
+        </article>
+
+        <article class="content-card">
+          <h3>ポイント</h3>
+          <ul class="check-list">
+            <li><code>@pytest.mark.parametrize()</code> の変数名と、テストメソッドの引数名は同じにする</li>
+            <li><code>datalist</code> の1行分のデータが順番に各変数へ代入される</li>
+            <li>CSVのヘッダー名と同じ変数名にすると分かりやすい</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="difference" class="section">
+        <div class="section-heading">
+          <p class="section-label">Summary</p>
+          <h2>違いと関係性</h2>
+        </div>
+
+        <div class="table-card">
+          <h3>違い</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  <th>Page Object パターン</th>
+                  <th>データ駆動テスト</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>管理するもの</th>
+                  <td>画面操作</td>
+                  <td>テストデータ</td>
+                </tr>
+                <tr>
+                  <th>目的</th>
+                  <td>コードを整理する</td>
+                  <td>テストケースを増やしやすくする</td>
+                </tr>
+                <tr>
+                  <th>まとめるもの</th>
+                  <td>ボタン操作、入力処理など</td>
+                  <td>ユーザー名、パスワードなど</td>
+                </tr>
+                <tr>
+                  <th>メリット</th>
+                  <td>保守しやすい</td>
+                  <td>データ追加が簡単</td>
+                </tr>
+                <tr>
+                  <th>よく使う場所</th>
+                  <td>画面操作部分</td>
+                  <td>テストケース部分</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <article class="content-card">
+          <h3>関係性</h3>
+          <p>この2つはどちらか一方を選ぶものではなく、一緒に使われることが多いです。</p>
+          <pre class="tool-tree"><code>テストコード
+    ↓
+Page Object
+（画面操作を管理）
+    ↓
+Web画面
+
+テストデータ
+（データ駆動テスト）
+    ↓
+テストコードへ渡す</code></pre>
+        </article>
+
+        <div class="table-card">
+          <h3>まとめ</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>用語</th>
+                  <th>一言でいうと</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Page Object パターン</th>
+                  <td>画面操作をまとめる</td>
+                </tr>
+                <tr>
+                  <th>データ駆動テスト</th>
+                  <td>テストデータをまとめる</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
