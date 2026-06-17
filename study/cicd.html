@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CI/CDとは | CI/CD研修 理解メモ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="mobile-header">
+    <a class="mobile-brand" href="index.html">CI/CD Memo</a>
+    <button class="menu-toggle" type="button" aria-controls="siteSidebar" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="visually-hidden">メニューを開く</span>
+    </button>
+  </header>
+
+  <div class="sidebar-backdrop" data-close-menu></div>
+
+  <aside class="sidebar" id="siteSidebar">
+    <div class="sidebar-brand">
+      <a href="index.html">CI/CD Memo</a>
+      <p>研修内容を、自分の言葉で整理するメモサイト。</p>
+    </div>
+    <nav class="global-nav" aria-label="サイト内ナビゲーション">
+      <a class="nav-link" href="index.html"><span class="nav-icon">01</span><span>Home</span></a>
+      <a class="nav-link" href="cicd.html"><span class="nav-icon">02</span><span>CI/CDとは</span></a>
+      <a class="nav-link" href="github-actions.html"><span class="nav-icon">03</span><span>GitHub Actions</span></a>
+      <a class="nav-link" href="workflow-sample.html"><span class="nav-icon">04</span><span>Workflow</span></a>
+      <a class="nav-link" href="exercises.html"><span class="nav-icon">05</span><span>確認メモ</span></a>
+    </nav>
+    <div class="sidebar-note">
+      <strong>Goal</strong>
+      <p>CI/CDが解決する課題と、自動化の流れを自分の理解として残す。</p>
+    </div>
+  </aside>
+
+  <main class="site-main">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <a href="index.html">Home</a>
+      <span>CI/CDとは</span>
+    </nav>
+
+    <div class="content-layout">
+      <article class="article">
+        <section class="page-hero compact" id="intro">
+          <p class="eyebrow">Basic</p>
+          <h1>CI/CDとは</h1>
+          <p class="lead">
+            CI/CDは、開発したコードを安全に、すばやく、継続的に届けるための考え方と仕組みです。
+            手作業で行っていた確認やリリース作業を自動化し、品質とスピードの両立を目指します。
+          </p>
+        </section>
+
+        <section class="section-block" id="ci">
+          <h2>CIとは</h2>
+          <p>
+            CIはContinuous Integrationの略で、日本語では「継続的インテグレーション」と呼ばれます。
+            開発者が変更したコードをこまめに共有リポジトリへ取り込み、自動テストや静的チェックを実行して、問題を早く見つけるための仕組みです。
+          </p>
+          <div class="point-box">
+            <h3>ポイント</h3>
+            <p>CIの目的は「あとでまとめて確認する」のではなく、「変更のたびに小さく確認する」ことです。</p>
+          </div>
+        </section>
+
+        <section class="section-block" id="cd">
+          <h2>CDとは</h2>
+          <p>
+            CDはContinuous DeliveryまたはContinuous Deploymentの略として使われます。
+            どちらもCIの後に続く工程で、テスト済みの成果物を利用者へ届けやすくするための考え方です。
+          </p>
+          <div class="compare-grid">
+            <div class="compare-item">
+              <h3>継続的デリバリー</h3>
+              <p>リリース可能な状態まで自動化し、最後の本番反映は人が判断します。</p>
+            </div>
+            <div class="compare-item">
+              <h3>継続的デプロイ</h3>
+              <p>テストを通過した変更を、本番環境まで自動で反映します。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block" id="integration">
+          <h2>継続的インテグレーション</h2>
+          <p>
+            複数人で開発していると、各自の変更が後から衝突したり、想定外の不具合を生んだりします。
+            継続的インテグレーションでは、変更をこまめに統合し、自動テストで問題を検出します。
+          </p>
+          <ul class="check-list">
+            <li>小さな単位でコードを統合する</li>
+            <li>pushやpull requestをきっかけにテストを実行する</li>
+            <li>不具合を早い段階で発見する</li>
+          </ul>
+        </section>
+
+        <section class="section-block" id="delivery">
+          <h2>継続的デリバリー</h2>
+          <p>
+            継続的デリバリーでは、ビルドやテストに通った成果物を、いつでもリリースできる状態に保ちます。
+            リリース作業の多くが自動化されるため、判断が必要なタイミングで人が落ち着いて確認できます。
+          </p>
+          <div class="info-box">
+            <h3>実務でのイメージ</h3>
+            <p>ステージング環境までは自動で反映し、本番リリースだけ承認ボタンを押す運用が代表的です。</p>
+          </div>
+        </section>
+
+        <section class="section-block" id="deployment">
+          <h2>継続的デプロイ</h2>
+          <p>
+            継続的デプロイでは、テストに通った変更が自動的に本番環境へ反映されます。
+            自動テストや監視、ロールバックの仕組みが整っているほど、安全に運用しやすくなります。
+          </p>
+          <div class="warning-box">
+            <h3>注意</h3>
+            <p>本番反映まで完全自動化する場合は、テストの信頼性、権限管理、障害時の戻し方を必ず考える必要があります。</p>
+          </div>
+        </section>
+
+        <section class="section-block" id="flow">
+          <div class="section-heading">
+            <p class="eyebrow">Diagram</p>
+            <h2>CI/CDの流れ</h2>
+          </div>
+          <div class="flow-diagram" aria-label="CI/CDの基本的な流れ">
+            <div class="flow-node">
+              <span class="flow-icon">Dev</span>
+              <strong>開発者</strong>
+              <p>コードを変更</p>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node">
+              <span class="flow-icon">Git</span>
+              <strong>Git Push</strong>
+              <p>リポジトリへ反映</p>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node">
+              <span class="flow-icon">Test</span>
+              <strong>自動テスト</strong>
+              <p>品質を確認</p>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node">
+              <span class="flow-icon">Build</span>
+              <strong>ビルド</strong>
+              <p>成果物を作成</p>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node">
+              <span class="flow-icon">Ship</span>
+              <strong>デプロイ</strong>
+              <p>環境へ反映</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block" id="benefits">
+          <h2>CI/CDのメリット</h2>
+          <div class="feature-list">
+            <div>
+              <h3>不具合を早く見つけられる</h3>
+              <p>変更直後にテストが走るため、原因を追いやすくなります。</p>
+            </div>
+            <div>
+              <h3>手作業のミスを減らせる</h3>
+              <p>毎回同じ手順を自動化することで、抜け漏れを防ぎます。</p>
+            </div>
+            <div>
+              <h3>リリースの心理的負担が下がる</h3>
+              <p>小さく頻繁に届けることで、大きなリリースの不安を減らせます。</p>
+            </div>
+            <div>
+              <h3>チームで品質を共有できる</h3>
+              <p>テスト結果やビルド結果が見える化され、共通の判断材料になります。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block" id="usecase">
+          <h2>開発現場での利用例</h2>
+          <ul class="case-list">
+            <li><strong>Webアプリ開発:</strong> pull request作成時にテストとLintを実行し、mainブランチへmerge後にステージングへ反映する。</li>
+            <li><strong>API開発:</strong> push時にユニットテストを実行し、タグを付けたときだけ本番デプロイを行う。</li>
+            <li><strong>ドキュメント運用:</strong> Markdownのビルド確認を自動化し、mainブランチ更新時に静的サイトを公開する。</li>
+          </ul>
+        </section>
+      </article>
+
+      <aside class="toc" aria-label="目次">
+        <p class="toc-title">目次</p>
+        <a href="#intro">概要</a>
+        <a href="#ci">CIとは</a>
+        <a href="#cd">CDとは</a>
+        <a href="#integration">継続的インテグレーション</a>
+        <a href="#delivery">継続的デリバリー</a>
+        <a href="#deployment">継続的デプロイ</a>
+        <a href="#flow">図解</a>
+        <a href="#benefits">メリット</a>
+        <a href="#usecase">利用例</a>
+      </aside>
+    </div>
+  </main>
+
+  <button class="back-to-top" type="button" aria-label="ページトップへ戻る">↑</button>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

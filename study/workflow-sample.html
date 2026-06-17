@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>研修①：ワークフロー作成：自動実行の実装</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="mobile-header">
+    <a class="mobile-brand" href="index.html">CI/CD Memo</a>
+    <button class="menu-toggle" type="button" aria-controls="siteSidebar" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="visually-hidden">メニューを開く</span>
+    </button>
+  </header>
+
+  <div class="sidebar-backdrop" data-close-menu></div>
+
+  <aside class="sidebar" id="siteSidebar">
+    <div class="sidebar-brand">
+      <a href="index.html">CI/CD Memo</a>
+    </div>
+    <nav class="global-nav" aria-label="サイト内ナビゲーション">
+      <a class="nav-link" href="index.html"><span class="nav-icon">01</span><span>Home</span></a>
+      <a class="nav-link" href="cicd.html"><span class="nav-icon">02</span><span>CI/CDとは</span></a>
+      <a class="nav-link" href="github-actions.html"><span class="nav-icon">03</span><span>GitHub Actions</span></a>
+      <a class="nav-link" href="workflow-sample.html"><span class="nav-icon">04</span><span>Workflow</span></a>
+      <a class="nav-link" href="exercises.html"><span class="nav-icon">05</span><span>確認メモ</span></a>
+    </nav>
+  </aside>
+
+  <main class="site-main">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <a href="index.html">Home</a>
+      <span>研修①：ワークフロー作成：自動実行の実装</span>
+    </nav>
+
+    <div class="content-layout">
+      <article class="article">
+        <section class="page-hero compact" id="intro">
+          <p class="eyebrow">Workflow Memo</p>
+          <h1>ワークフロー作成：自動実行の実装</h1>
+        </section>
+
+        <section class="section-block" id="workflow-overview">
+          <h2>記述方法：ワークフロー概要</h2>
+          <div class="code-card">
+            <div class="code-header">
+              <span>ワークフロー概要</span>
+              <button class="copy-button" type="button">コピー</button>
+            </div>
+            <pre><code>•name : ワークフロー名
+
+•on : 実行トリガー条件
+
+•schedule : 定期実行
+
+	•push : ブランチへのプッシュ時
+	
+	•branches : ブランチ名  
+	省略した場合は全pushでトリガー
+
+	•pull-request：プルリクエスト作成時
+
+		•branches : ブランチ名  
+		省略した場合は全pushでトリガー</code></pre>
+          </div>
+        </section>
+
+        <section class="section-block" id="workflow-jobs">
+          <h2>記述方法：実行内容の指定</h2>
+          <div class="code-card">
+            <div class="code-header">
+              <span>実行内容の指定</span>
+              <button class="copy-button" type="button">コピー</button>
+            </div>
+            <pre><code>•**jobs** : 実行するジョブの内容
+
+	•**runs-on** : 実行環境のOS
+	
+	**•steps :** 実行ステップの内容
+
+•**name** : 実行ステップの名称
+
+		**•uses :**  
+		*既存の actionsを使用する場合
+		
+		•**run**  :  
+		*任意のコマンドを実行する場合(GitHub Actions の中で、コマンドを実行する欄)</code></pre>
+          </div>
+        </section>
+
+        <section class="section-block" id="exercise-one">
+          <h2>演習①</h2>
+          <div class="code-card">
+            <div class="code-header">
+              <span>演習①</span>
+              <button class="copy-button" type="button">コピー</button>
+            </div>
+            <pre><code>name: echo-helloWorld-test
+
+on:
+  push:
+    branches: [ main ]
+jobs:
+  echo_hello_world_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codes  # GitHub Actions画面に表示される処理名
+        uses: actions/checkout@v5 # GitHub上のコードを、Actionsの仮想PCにダウンロード
+
+      - name: echo-helloWorld-test
+        run: echo "Hello,World!"*</code></pre>
+          </div>
+        </section>
+
+        <section class="point-box" id="checkout-note">
+          <p>コードのチェックアウトを実行する=GitHubに置いてあるファイルを、GitHub Actionsが実行できる場所にコピーする</p>
+        </section>
+      </article>
+
+      <aside class="toc" aria-label="目次">
+        <p class="toc-title">目次</p>
+        <a href="#intro">概要</a>
+        <a href="#workflow-overview">ワークフロー概要</a>
+        <a href="#workflow-jobs">実行内容の指定</a>
+        <a href="#exercise-one">演習①</a>
+        <a href="#checkout-note">チェックアウト</a>
+      </aside>
+    </div>
+  </main>
+
+  <button class="back-to-top" type="button" aria-label="ページトップへ戻る">↑</button>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

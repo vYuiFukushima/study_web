@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Actions | CI/CD研修 理解メモ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="mobile-header">
+    <a class="mobile-brand" href="index.html">CI/CD Memo</a>
+    <button class="menu-toggle" type="button" aria-controls="siteSidebar" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="visually-hidden">メニューを開く</span>
+    </button>
+  </header>
+
+  <div class="sidebar-backdrop" data-close-menu></div>
+
+  <aside class="sidebar" id="siteSidebar">
+    <div class="sidebar-brand">
+      <a href="index.html">CI/CD Memo</a>
+      <p>研修内容を、自分の言葉で整理するメモサイト。</p>
+    </div>
+    <nav class="global-nav" aria-label="サイト内ナビゲーション">
+      <a class="nav-link" href="index.html"><span class="nav-icon">01</span><span>Home</span></a>
+      <a class="nav-link" href="cicd.html"><span class="nav-icon">02</span><span>CI/CDとは</span></a>
+      <a class="nav-link" href="github-actions.html"><span class="nav-icon">03</span><span>GitHub Actions</span></a>
+      <a class="nav-link" href="workflow-sample.html"><span class="nav-icon">04</span><span>Workflow</span></a>
+      <a class="nav-link" href="exercises.html"><span class="nav-icon">05</span><span>確認メモ</span></a>
+    </nav>
+    <div class="sidebar-note">
+      <strong>Goal</strong>
+      <p>Workflowファイルに出てくる基本用語を、自分の理解として整理する。</p>
+    </div>
+  </aside>
+
+  <main class="site-main">
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+      <a href="index.html">Home</a>
+      <span>GitHub Actions</span>
+    </nav>
+
+    <div class="content-layout">
+      <article class="article">
+        <section class="page-hero compact" id="intro">
+          <p class="eyebrow">Automation Tool</p>
+          <h1>GitHub Actions</h1>
+          <p class="lead">
+            GitHub Actionsは、GitHub上のイベントをきっかけに処理を自動実行できる機能です。
+            CI/CDでは、テスト、ビルド、デプロイなどを自動化するためによく利用されます。
+          </p>
+        </section>
+
+        <section class="section-block" id="what">
+          <h2>GitHub Actionsとは</h2>
+          <p>
+            GitHub Actionsは、リポジトリに対する操作をきっかけに、あらかじめ定義した処理を実行する自動化サービスです。
+            設定はYAMLファイルで管理し、リポジトリ内に置くことでコードと一緒に履歴管理できます。
+          </p>
+          <div class="info-box">
+            <h3>覚え方</h3>
+            <p>「GitHubで起きた出来事に反応して、決めておいた作業を実行する仕組み」と考えると理解しやすいです。</p>
+          </div>
+        </section>
+
+        <section class="section-block" id="why">
+          <h2>なぜCI/CDで利用されるのか</h2>
+          <div class="feature-list">
+            <div>
+              <h3>GitHubと連携しやすい</h3>
+              <p>push、pull request、tag作成など、開発で使うイベントをそのまま自動化の起点にできます。</p>
+            </div>
+            <div>
+              <h3>設定をコード化できる</h3>
+              <p>Workflowファイルをリポジトリで管理できるため、変更履歴やレビュー対象にできます。</p>
+            </div>
+            <div>
+              <h3>小さく始めやすい</h3>
+              <p>最初はテスト実行だけ、慣れてきたらビルドやデプロイも追加するように段階的に導入できます。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block" id="terms">
+          <div class="section-heading">
+            <p class="eyebrow">Core Terms</p>
+            <h2>基本用語</h2>
+          </div>
+
+          <div class="term-grid">
+            <section class="term-card" id="runner">
+              <span class="term-label">Runner</span>
+              <h3>Runnerとは</h3>
+              <p>
+                Runnerは、Workflowに書かれた処理を実際に実行するマシンです。
+                たとえば<code>ubuntu-latest</code>を指定すると、Ubuntu環境のRunner上でコマンドが実行されます。
+              </p>
+            </section>
+
+            <section class="term-card" id="workflow">
+              <span class="term-label">Workflow</span>
+              <h3>Workflowとは</h3>
+              <p>
+                Workflowは、自動化したい一連の処理をまとめた設定です。
+                <code>.github/workflows/</code>配下にYAMLファイルとして配置します。
+              </p>
+            </section>
+
+            <section class="term-card" id="job">
+              <span class="term-label">Job</span>
+              <h3>Jobとは</h3>
+              <p>
+                Jobは、Workflow内で実行される処理のまとまりです。
+                テスト用Job、ビルド用Job、デプロイ用Jobのように目的ごとに分けられます。
+              </p>
+            </section>
+
+            <section class="term-card" id="step">
+              <span class="term-label">Step</span>
+              <h3>Stepとは</h3>
+              <p>
+                Stepは、Jobの中で順番に実行される1つ1つの作業です。
+                コマンドを実行する<code>run</code>や、既存Actionを使う<code>uses</code>を指定できます。
+              </p>
+            </section>
+
+            <section class="term-card" id="event">
+              <span class="term-label">Event</span>
+              <h3>Eventとは</h3>
+              <p>
+                Eventは、Workflowを開始するきっかけです。
+                代表例は<code>push</code>、<code>pull_request</code>、手動実行の<code>workflow_dispatch</code>です。
+              </p>
+            </section>
+          </div>
+        </section>
+
+        <section class="section-block" id="relationship">
+          <h2>用語の関係</h2>
+          <div class="stack-diagram">
+            <div>
+              <span>Event</span>
+              <strong>pushやpull requestが発生</strong>
+            </div>
+            <div>
+              <span>Workflow</span>
+              <strong>自動化の設定全体が起動</strong>
+            </div>
+            <div>
+              <span>Job</span>
+              <strong>テストやビルドなどのまとまりを実行</strong>
+            </div>
+            <div>
+              <span>Step</span>
+              <strong>コマンドやActionを順番に実行</strong>
+            </div>
+            <div>
+              <span>Runner</span>
+              <strong>実行環境として処理を動かす</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="point-box" id="beginner">
+          <h2>自分用の読み方メモ</h2>
+          <p>
+            Workflowを読むときは、まず<code>on</code>で「いつ動くか」を確認し、次に<code>jobs</code>で「何をするか」を見ます。
+            最後に各<code>steps</code>を上から順に追うと、処理の流れをつかみやすくなります。
+          </p>
+        </section>
+      </article>
+
+      <aside class="toc" aria-label="目次">
+        <p class="toc-title">目次</p>
+        <a href="#intro">概要</a>
+        <a href="#what">GitHub Actionsとは</a>
+        <a href="#why">利用される理由</a>
+        <a href="#runner">Runner</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#job">Job</a>
+        <a href="#step">Step</a>
+        <a href="#event">Event</a>
+        <a href="#relationship">用語の関係</a>
+      </aside>
+    </div>
+  </main>
+
+  <button class="back-to-top" type="button" aria-label="ページトップへ戻る">↑</button>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

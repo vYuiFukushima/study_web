@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD研修 理解メモ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="mobile-header">
+        <a class="mobile-brand" href="index.html">CI/CD Memo</a>
+        <button class="menu-toggle" type="button" aria-controls="siteSidebar" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="visually-hidden">メニューを開く</span>
+        </button>
+    </header>
+
+    <div class="sidebar-backdrop" data-close-menu></div>
+
+    <aside class="sidebar" id="siteSidebar">
+        <div class="sidebar-brand">
+            <a href="index.html">CI/CD Memo</a>
+        </div>
+        <nav class="global-nav" aria-label="サイト内ナビゲーション">
+            <a class="nav-link" href="index.html"><span class="nav-icon">01</span><span>Home</span></a>
+            <a class="nav-link" href="cicd.html"><span class="nav-icon">02</span><span>CI/CDとは</span></a>
+            <a class="nav-link" href="github-actions.html"><span class="nav-icon">03</span><span>GitHub
+                    Actions</span></a>
+            <a class="nav-link" href="workflow-sample.html"><span class="nav-icon">04</span><span>Workflow</span></a>
+            <a class="nav-link" href="exercises.html"><span class="nav-icon">05</span><span>確認メモ</span></a>
+        </nav>
+    </aside>
+
+    <main class="site-main">
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+            <a href="index.html">Home</a>
+            <span>サイト概要</span>
+        </nav>
+
+        <div class="content-layout">
+            <article class="article">
+                <section class="page-hero" id="overview">
+                    <p class="eyebrow">CI/CD Training Memo</p>
+                    <h1>CICDアーキテクチャ研修</h1>
+                    <p class="lead">
+                        2026年6月研修まとめ
+                    </p>
+
+                </section>
+
+                <section class="section-block" id="learned">
+                    <div class="section-heading">
+                        <p class="eyebrow">My Notes</p>
+                        <h2>CI/CD研修で整理したい内容</h2>
+                    </div>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="summary-number">1</span>
+                            <h3>CI/CDの全体像</h3>
+                            <p>開発者がコードを変更してから、テスト・ビルド・デプロイまで進む一連の流れを整理します。</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-number">2</span>
+                            <h3>GitHub Actionsの基本</h3>
+                            <p>Workflow、Job、Step、Runner、Eventなど、設定ファイルを読むために必要な用語を自分の言葉で整理します。</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-number">3</span>
+                            <h3>YAMLによる自動化設定</h3>
+                            <p>最小構成、push時実行、Pythonテスト実行の欄を用意し、自分でWorkflowを書き残します。</p>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-number">4</span>
+                            <h3>理解確認メモ</h3>
+                            <p>自分で問いを作り、答えや曖昧な点を書き残して理解を確認します。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-block" id="pages">
+                    <div class="section-heading">
+                        <p class="eyebrow">Contents</p>
+                        <h2>メモページ</h2>
+                    </div>
+                    <div class="card-grid">
+                        <a class="link-card" href="cicd.html">
+                            <span class="card-kicker">Basic</span>
+                            <h3>CI/CDとは</h3>
+                            <p>CI、CD、継続的デリバリー、継続的デプロイの違いを整理します。</p>
+                        </a>
+                        <a class="link-card" href="github-actions.html">
+                            <span class="card-kicker">Tool</span>
+                            <h3>GitHub Actions</h3>
+                            <p>GitHub Actionsでよく使う用語と、CI/CDで使われる理由をメモします。</p>
+                        </a>
+                        <a class="link-card" href="workflow-sample.html">
+                            <span class="card-kicker">YAML</span>
+                            <h3>Workflowメモ</h3>
+                            <p>研修で見たWorkflow例を、自分で書き込むための空欄ページです。</p>
+                        </a>
+                        <a class="link-card" href="exercises.html">
+                            <span class="card-kicker">Check</span>
+                            <h3>確認メモ</h3>
+                            <p>自分で問いと答えを追加し、理解できている点と曖昧な点を確認します。</p>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section-block" id="roadmap">
+                    <div class="section-heading">
+                        <p class="eyebrow">Flow</p>
+                        <h2>整理の流れ</h2>
+                    </div>
+                    <ol class="roadmap">
+                        <li>
+                            <span class="roadmap-step">Memo 1</span>
+                            <div>
+                                <h3>CI/CDの目的を書く</h3>
+                                <p>なぜ自動化するのか、手作業の何を減らすのかを自分の言葉で残します。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="roadmap-step">Memo 2</span>
+                            <div>
+                                <h3>GitHub Actionsの構成要素を整理する</h3>
+                                <p>Event、Workflow、Job、Step、Runnerの関係を自分なりにまとめます。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="roadmap-step">Memo 3</span>
+                            <div>
+                                <h3>Workflowファイルを書き写す</h3>
+                                <p>研修で見たYAMLを自分で書き、どのタイミングで何が実行されるかを確認します。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="roadmap-step">Memo 4</span>
+                            <div>
+                                <h3>疑問点を残す</h3>
+                                <p>理解が曖昧な用語や、あとで試したい設定を確認メモに書きます。</p>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="point-box" id="review">
+                    <h2>メモのコツ</h2>
+                    <p>
+                        きれいにまとめるよりも、「自分はどこまで理解したか」「どこがまだ曖昧か」が後から見える形にしておくと、復習しやすくなります。
+                    </p>
+                </section>
+            </article>
+
+            <aside class="toc" aria-label="目次">
+                <p class="toc-title">目次</p>
+                <a href="#overview">サイト概要</a>
+                <a href="#learned">学んだ内容</a>
+                <a href="#pages">ページリンク</a>
+                <a href="#roadmap">整理の流れ</a>
+                <a href="#review">メモのコツ</a>
+            </aside>
+        </div>
+    </main>
+
+    <button class="back-to-top" type="button" aria-label="ページトップへ戻る">↑</button>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

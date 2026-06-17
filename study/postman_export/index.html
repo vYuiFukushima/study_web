@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Postman 学習ノート</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__title">
+      <p class="eyebrow">Postman Notes</p>
+      <h1>Postman 学習ノート</h1>
+    </div>
+    <div class="topbar__tools" aria-label="表示操作">
+      <label class="search-box">
+        <span>検索</span>
+        <input id="searchInput" type="search" placeholder="キーワード">
+      </label>
+      <button id="toggleCodeButton" class="soft-button" type="button">コードを折りたたむ</button>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <aside class="sidebar" aria-label="目次">
+      <nav class="toc">
+        <a class="toc__link is-active" href="#postman">01. Postman</a>
+        <a class="toc__link" href="#syntax">02. 基本構文</a>
+        <a class="toc__link" href="#difference">03. JavaScriptとPythonの違い</a>
+      </nav>
+    </aside>
+
+    <main class="content" id="mainContent">
+      <section class="chapter" id="postman">
+        <div class="chapter__heading">
+          <span class="chapter__number">01</span>
+          <div>
+            <p class="chapter__label">Postman</p>
+            <h2>Postmanとは</h2>
+          </div>
+        </div>
+
+        <p>Postmanとは、APIテストツールの一種である。</p>
+
+        <article class="topic">
+          <div class="topic__title">
+            <span class="method-badge method-badge--get">GET</span>
+            <h3>1.GETメソッド</h3>
+          </div>
+
+          <ul>
+            <li>URLが下記となるようなクエリパラメータを指定せよ
+              <ul>
+                <li><code>https://postman-echo.com/get?hoge1=fuga1&amp;hoge2=fuga2</code></li>
+              </ul>
+            </li>
+            <li>上記リクエストを送信し、下記期待結果を確認するテストケースを記述せよ
+              <ul>
+                <li>「ステータスコードが<code>200</code>である」</li>
+              </ul>
+            </li>
+          </ul>
+
+          <figure class="image-frame">
+            <img src="assets/Pasted image 20260616143242.png" alt="PostmanのGETリクエストURL入力欄">
+            <figcaption>どのAPIに何をお願いするかを書く場所</figcaption>
+          </figure>
+
+          <figure class="image-frame">
+            <img src="assets/Pasted image 20260616143325.png" alt="PostmanのScriptsタブ">
+            <figcaption>返ってきた結果を確認するためのコード<br>＝ステータスコードが200であることを確認するためのコード</figcaption>
+          </figure>
+
+          <p>Scriptsを書かなくても200 OKは表示されていた。APIが少ない時は人間の目で手動で確認できるけど、<br>APIが100個200個となると大変になる<br>⇒人間が見なくても自動で確認できるようにするためにScriptsを書く。</p>
+        </article>
+
+        <article class="topic">
+          <div class="topic__title">
+            <span class="method-badge method-badge--post">POST</span>
+            <h3>2.POSTメソッド</h3>
+          </div>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>const jsonData = pm.response.json();
+
+    pm.test("emailチェック", function () {
+        pm.expect(jsonData.json.email).to.equal("test@example.com");
+    });
+    pm.test("nameチェック", function () {
+        pm.expect(jsonData.json.name).to.equal("test_taro");
+    });</code></pre>
+          </div>
+
+          <p>pm.test(...)の中に入れると、Postmanは「これはテストです」と認識できる<br>pm.expect(実際の値).to.equal(期待値)</p>
+
+          <blockquote>
+            <p>equal = 数字・文字・null</p>
+          </blockquote>
+
+          <blockquote>
+            <p>eql = {} のようなオブジェクト</p>
+          </blockquote>
+        </article>
+
+        <article class="topic">
+          <div class="topic__title">
+            <span class="method-badge method-badge--delete">DELETE</span>
+            <h3>3.DELETEメソッド</h3>
+          </div>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>const jsonData = pm.response.json();
+
+pm.test("data_check",function(){
+    pm.expect(jsonData.data).to.eql({});
+});
+pm.test("null_check",function(){
+    pm.expect(jsonData.json).to.equal(null);
+});</code></pre>
+          </div>
+        </article>
+      </section>
+
+      <section class="chapter" id="syntax">
+        <div class="chapter__heading">
+          <span class="chapter__number">02</span>
+          <div>
+            <p class="chapter__label">Basic Syntax</p>
+            <h2>基本構文</h2>
+          </div>
+        </div>
+
+        <ul>
+          <li>Postmanのテストスクリプトは下記の言語で記述可能
+            <ul>
+              <li><code>JavaScript</code>(主言語)</li>
+              <li><code>Chai</code>(アサーションライブラリ)</li>
+            </ul>
+          </li>
+          <li>基本構文は下記</li>
+        </ul>
+
+        <div class="code-panel" data-language="JavaScript">
+          <pre><code>pm.test('テストの名称',function(){
+    //テスト内容の詳細
+    pm.expect("実行結果").to.be("期待結果")
+});</code></pre>
+        </div>
+
+        <div class="syntax-pair">
+          <article class="note-block">
+            <h3><code>JavaScript</code></h3>
+            <p>テストを実行する処理を書く場所</p>
+            <div class="code-panel" data-language="JavaScript">
+              <pre><code>pm.test('テストの名称',function(){
+
+});</code></pre>
+            </div>
+          </article>
+
+          <article class="note-block">
+            <h3><code>Chai</code></h3>
+            <p>実行結果と期待結果が同じか確認する</p>
+            <div class="code-panel" data-language="Chai">
+              <pre><code>pm.==expect==("実行結果").to.be("期待結果")</code></pre>
+            </div>
+            <p>= 実際の値は期待値のはず！</p>
+          </article>
+        </div>
+
+        <article class="topic">
+          <h3>基礎編</h3>
+
+          <ul>
+            <li><strong>ステータスコードが<code>200(OK)</code>であることの確認</strong></li>
+          </ul>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>pm.test("ステータスコードチェック", function () { 
+    //テストの名称　任意の文字列に変更可能
+    pm.response.to.have.status(200);
+    //()内が期待値　こちらも任意の値に変更可能
+});</code></pre>
+          </div>
+
+          <ul>
+            <li><strong>レスポンスボディに特定の文字列が含まれているかどうかの確認</strong></li>
+          </ul>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>pm.test("文字列部分一致チェック", function () { 
+    pm.expect(pm.response.text()).to.include("期待値");
+    //pm.response.text()
+    // 　:レスポンスボディをそのままテキストデータに変換したもの。
+    //    jsonなどの構造は一切引き継がれないので非推奨
+});`</code></pre>
+          </div>
+        </article>
+
+        <article class="topic">
+          <h3>発展編</h3>
+
+          <ul>
+            <li><strong>レスポンスボディの特定の要素が期待値と一致していることの確認</strong></li>
+          </ul>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>// レスポンスボディ期待値(仕様書)
+// {
+//     "success" : false,
+//     "message" : "Some Error was Found."
+// }
+
+const json = pm.response.json();
+//リクエストボディをjsonなどの構造を維持したまま取得する記述
+const errorMessage  = "Some Error was Found.";
+
+pm.test("エラーメッセージが仕様通りであることを確認する",function(){
+    pm.expect(json.message).is.eql(errorMessage);
+})</code></pre>
+          </div>
+
+          <ul>
+            <li><strong>真偽値(<code>true</code>/<code>false</code>)一致確認</strong></li>
+          </ul>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>// レスポンスボディ期待値(仕様書)
+// {
+//     "success" : false,
+//     "message" : "Some Error was Found."
+// }
+
+const json = pm.response.json();
+
+pm.test("success要素の値が仕様通りであることを確認する",function(){
+    pm.expect(json.success).to.be.false;
+    //[!]エラーになる記載例
+    //  pm.expect(json.success).is.eql.false;
+    //  pm.expect(json.success).to.be(false);
+})</code></pre>
+          </div>
+        </article>
+      </section>
+
+      <section class="chapter" id="difference">
+        <div class="chapter__heading">
+          <span class="chapter__number">03</span>
+          <div>
+            <p class="chapter__label">JavaScript / Python</p>
+            <h2>JavaScriptとPythonの違い</h2>
+          </div>
+        </div>
+
+        <article class="topic">
+          <h3>変数の型を明記する必要がある</h3>
+
+          <div class="compare-grid">
+            <div class="note-block">
+              <h4>Python</h4>
+              <div class="code-panel" data-language="Python">
+                <pre><code># Python：左辺は変数名だけでよい
+x = 0
+y = 'hello'
+Z = true</code></pre>
+              </div>
+            </div>
+
+            <div class="note-block">
+              <h4>JavaScript</h4>
+              <div class="code-panel" data-language="JavaScript">
+                <pre><code>//JavaScript：**変数名と同時に変数の型を宣言しなくてはいけない**
+//下記はエラー「ReferenceError: x is not defined」になる
+x = 1;
+//下記は通る(それぞれの型の違いについては後述)
+const x = 1;
+let y = 'Hello';
+var Z = true;
+//**一度宣言した変数は変数名だけで呼び出せる**
+y = 'Goodbye';</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="topic">
+          <h3>関数の定義の仕方</h3>
+
+          <div class="compare-grid">
+            <div class="note-block">
+              <h4>Python</h4>
+              <div class="code-panel" data-language="Python">
+                <pre><code># python
+def greet(name):
+    print(f"{name}さん、こんにちは！")</code></pre>
+              </div>
+            </div>
+
+            <div class="note-block">
+              <h4>JavaScript</h4>
+              <div class="code-panel" data-language="JavaScript">
+                <pre><code>//JavaScript
+//基本構成は似ているが、下記はPythonにはない規則
+// - {}で囲む必要がある
+// - functionで明示的に関数であることを宣言する必要がある
+function greet(name){
+    console.log(`${name}さん、こんにちは！`);
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="topic">
+          <h3><code>Chai</code>のアサーションについて</h3>
+
+          <ul>
+            <li>PythonやJavaScriptの比較演算子とは記法が違う
+              <ul>
+                <li><code>&lt;</code>/<code>&gt;</code>/<code>==</code>/<code>!=</code>などは使わない</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Chaiでの記述例</th>
+                  <th>内容</th>
+                  <th>備考</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>(A).to.equal(B)</code></td>
+                  <td><code>A == B</code></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><code>(A).to.be.a(データ型)</code></td>
+                  <td><code>Aが(データ型)である</code></td>
+                  <td><code>Array</code>/<code>Object</code>/<code>String</code>/<code>Number</code></td>
+                </tr>
+                <tr>
+                  <td><code>(A).to.be.above(B)</code></td>
+                  <td><code>A &gt; B</code></td>
+                  <td><code>A == B</code>はエラー扱い</td>
+                </tr>
+                <tr>
+                  <td><code>(A).to.be.below(B)</code></td>
+                  <td><code>A &lt; B</code></td>
+                  <td><code>A == B</code>はエラー扱い</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="topic">
+          <h3>Postmanのテスト関数の記法について</h3>
+
+          <ul>
+            <li>基本の構文は下記
+              <ul>
+                <li>少々構造が複雑でsyntaxErrorが出やすいので注意</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>pm.test('テストケース名',function(){
+    //ここで実測値に対する処理を行うこともある
+    // ex:list各要素のパラメータをforで判定するなど
+    pm.expect('実測値').to.equal(`期待値`);
+});</code></pre>
+          </div>
+        </article>
+
+        <article class="topic">
+          <h3>余談：JavaScriptの変数の型について</h3>
+
+          <ul>
+            <li><strong>再代入/再宣言</strong>を軸に3つの変数の型が定義されている</li>
+          </ul>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>型</th>
+                  <th>再代入</th>
+                  <th>同一スコープでの再宣言</th>
+                  <th>備考</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>const</code></td>
+                  <td><strong>不可</strong></td>
+                  <td><strong>不可</strong></td>
+                  <td>基本はこれを使用</td>
+                </tr>
+                <tr>
+                  <td><code>let</code></td>
+                  <td><strong>可</strong></td>
+                  <td><strong>不可</strong></td>
+                  <td>値の変更・分岐が発生する場合に使用</td>
+                </tr>
+                <tr>
+                  <td><code>var</code></td>
+                  <td><strong>可</strong></td>
+                  <td><strong>可</strong></td>
+                  <td><strong>非推奨(古い書き方)</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <hr>
+
+          <ul>
+            <li><strong>再代入</strong>
+              <ul>
+                <li>変数の値を書き換えること<br>これができない場合は厳密には<strong>変数</strong>ではなく<strong>定数</strong>となる</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>let string = `goodMorning`;
+//(略)
+string = 'hello';//これが変数stringの再代入</code></pre>
+          </div>
+
+          <hr>
+
+          <ul>
+            <li><strong>再宣言</strong>
+              <ul>
+                <li>変数を再度宣言すること<br>変数名がごちゃごちゃになるので非推奨</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="code-panel" data-language="JavaScript">
+            <pre><code>var string = `goodMorning`;
+//(略)
+var string = 'hello';//これが変数stringの再宣言</code></pre>
+          </div>
+        </article>
+      </section>
+
+      <p id="emptyState" class="empty-state" hidden>該当する内容がありません。</p>
+    </main>
+  </div>
+
+  <button id="backToTop" class="back-to-top" type="button" aria-label="ページ上部へ戻る">↑</button>
+</body>
+</html>
