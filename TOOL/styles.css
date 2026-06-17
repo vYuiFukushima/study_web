@@ -111,7 +111,7 @@ a {
 .hero__inner {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 72px 0 52px;
+  padding: 64px 0 44px;
 }
 
 .eyebrow,
@@ -146,14 +146,14 @@ h1 {
 
 .hero-highlights {
   max-width: 900px;
-  margin-top: 26px;
+  margin-top: 22px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .highlight-card {
-  padding: 18px;
+  padding: 16px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.78);
@@ -176,15 +176,15 @@ h1 {
 
 .subpage-links {
   max-width: 900px;
-  margin-top: 16px;
+  margin-top: 14px;
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .subpage-link {
   display: grid;
   gap: 4px;
-  padding: 18px;
+  padding: 16px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--cool-text);
@@ -221,10 +221,10 @@ h1 {
 .page-shell {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 28px 0 88px;
+  padding: 22px 0 72px;
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
-  gap: 28px;
+  gap: 24px;
   align-items: start;
 }
 
@@ -235,7 +235,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 16px;
+  padding: 14px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.84);
@@ -338,12 +338,12 @@ h1 {
 
 .section {
   scroll-margin-top: 24px;
-  padding: 46px 0;
+  padding: 34px 0;
 }
 
 .section-heading {
   max-width: 780px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .section-heading h2 {
@@ -374,11 +374,11 @@ h1 {
 
 .tool-tree {
   min-height: 100%;
-  padding: 24px;
+  padding: 20px;
 }
 
 .http-example {
-  padding: 16px;
+  padding: 14px;
 }
 
 .overview-cards {
@@ -396,7 +396,7 @@ h1 {
 }
 
 .overview-card {
-  padding: 22px;
+  padding: 20px;
 }
 
 .overview-card__tag,
@@ -427,8 +427,8 @@ h1 {
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 18px;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .tool-grid--three {
@@ -436,7 +436,7 @@ h1 {
 }
 
 .tool-card {
-  padding: 24px;
+  padding: 22px;
 }
 
 .tool-card--wide {
@@ -448,8 +448,8 @@ h1 {
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 18px;
-  padding-bottom: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -461,7 +461,7 @@ h1 {
 }
 
 .tool-card h4 {
-  margin: 18px 0 8px;
+  margin: 16px 0 7px;
   color: var(--cool-text);
   font-size: 1rem;
 }
@@ -472,7 +472,7 @@ h1 {
 }
 
 .tool-card__actions {
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .detail-link {
@@ -505,11 +505,11 @@ h1 {
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .fit {
-  margin-top: 18px;
+  margin-top: 16px;
   padding: 12px 14px;
   border-left: 5px solid var(--accent-color);
   border-radius: 0 8px 8px 0;
@@ -519,8 +519,8 @@ h1 {
 }
 
 blockquote {
-  margin: 18px 0 0;
-  padding: 16px 18px;
+  margin: 16px 0 0;
+  padding: 14px 16px;
   border-left: 5px solid var(--warm-text);
   border-radius: 0 8px 8px 0;
   color: var(--cool-text);
@@ -528,19 +528,27 @@ blockquote {
   font-weight: 700;
 }
 
+blockquote + p {
+  margin-top: 14px;
+}
+
 .table-card {
-  margin-top: 18px;
-  padding: 24px;
+  margin-top: 16px;
+  padding: 22px;
 }
 
 .table-card h3 {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   color: var(--warm-text);
   font-size: 1.28rem;
 }
 
 .table-scroll {
   overflow-x: auto;
+}
+
+.tool-tree + .table-scroll {
+  margin-top: 16px;
 }
 
 table {
@@ -555,7 +563,7 @@ table {
 
 th,
 td {
-  padding: 13px 14px;
+  padding: 12px 14px;
   border-bottom: 1px solid rgba(34, 41, 44, 0.12);
   text-align: left;
   vertical-align: top;
@@ -586,7 +594,7 @@ tbody tr:last-child td {
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
 }
 
 .content-card,
@@ -598,7 +606,14 @@ tbody tr:last-child td {
 }
 
 .content-card {
-  padding: 26px;
+  padding: 22px;
+}
+
+.content-card > :last-child,
+.syntax-card > :last-child,
+.table-card > :last-child,
+.assert-section-card > :last-child {
+  margin-bottom: 0;
 }
 
 .content-card strong {
@@ -612,7 +627,7 @@ tbody tr:last-child td {
 }
 
 .content-card h3 {
-  margin: 24px 0 10px;
+  margin: 20px 0 10px;
   font-size: 1.22rem;
 }
 
@@ -647,12 +662,12 @@ tbody tr:last-child td {
 .split-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
-  gap: 18px;
+  gap: 16px;
   align-items: start;
 }
 
 .card-heading {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .card-heading h3 {
@@ -682,7 +697,7 @@ tbody tr:last-child td {
 .capability-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .capability-card,
@@ -710,17 +725,17 @@ tbody tr:last-child td {
 }
 
 .note-panel {
-  margin-top: 14px;
+  margin-top: 12px;
   color: var(--warm-text);
   font-weight: 700;
 }
 
 .limitation-card + .limitation-card {
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .flow-panel {
-  margin-top: 14px;
+  margin-top: 12px;
   display: grid;
   gap: 8px;
 }
@@ -745,7 +760,7 @@ tbody tr:last-child td {
 .syntax-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
 }
 
 .syntax-grid--single {
@@ -753,7 +768,7 @@ tbody tr:last-child td {
 }
 
 .syntax-card {
-  padding: 20px;
+  padding: 18px;
 }
 
 .syntax-card--wide {
@@ -796,18 +811,18 @@ tbody tr:last-child td {
 }
 
 .syntax-card pre {
-  padding: 18px;
+  padding: 16px;
 }
 
 .flow-summary {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 20px;
   align-items: start;
 }
 
 .flow-summary pre {
-  padding: 20px;
+  padding: 18px;
 }
 
 .flow-summary > div {
@@ -820,8 +835,8 @@ tbody tr:last-child td {
 
 .step-list {
   display: grid;
-  gap: 10px;
-  margin: 18px 0 0;
+  gap: 8px;
+  margin: 16px 0 0;
   padding: 0;
   list-style: none;
   counter-reset: step;
@@ -856,7 +871,7 @@ tbody tr:last-child td {
 .assert-summary-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
 }
 
 .assert-intro-card h3 {
@@ -864,8 +879,8 @@ tbody tr:last-child td {
 }
 
 .assert-section-card {
-  margin-top: 22px;
-  padding: 26px;
+  margin-top: 20px;
+  padding: 22px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.86);
@@ -873,7 +888,7 @@ tbody tr:last-child td {
 }
 
 .assert-heading {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .assert-heading h3 {
@@ -886,7 +901,7 @@ tbody tr:last-child td {
 .assert-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
 }
 
 .assert-grid .syntax-card {
@@ -903,8 +918,8 @@ tbody tr:last-child td {
 .file-role-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 18px;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .file-role-grid {
@@ -931,7 +946,7 @@ tbody tr:last-child td {
 }
 
 .role-panel {
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .code-note {
@@ -942,7 +957,7 @@ tbody tr:last-child td {
 }
 
 .import-panel {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .import-panel pre {
@@ -950,7 +965,7 @@ tbody tr:last-child td {
 }
 
 .assert-compare-card {
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .assert-compare-card code {
@@ -959,7 +974,7 @@ tbody tr:last-child td {
 }
 
 .assert-summary-grid {
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .assert-summary-grid .content-card h3 {
@@ -1011,7 +1026,7 @@ tbody tr:last-child td {
   }
 
   .hero__inner {
-    padding: 48px 0 34px;
+    padding: 44px 0 30px;
   }
 
   .page-shell {
@@ -1020,7 +1035,7 @@ tbody tr:last-child td {
   }
 
   .section {
-    padding: 34px 0;
+    padding: 28px 0;
   }
 
   .tool-card,
@@ -1029,7 +1044,7 @@ tbody tr:last-child td {
   .content-card,
   .syntax-card,
   .assert-section-card {
-    padding: 18px;
+    padding: 16px;
   }
 
   .tool-card__header,
