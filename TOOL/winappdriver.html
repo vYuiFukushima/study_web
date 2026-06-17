@@ -92,7 +92,7 @@
 
           <article class="content-card">
             <h3>2. cmdを起動してvenvを有効化</h3>
-            <pre class="tool-tree"><code>C:\Users\yui.fukushima\Documents\venv_winapp\Scripts\activate.bat</code></pre>
+            <pre class="tool-tree"><code>C:\Users\SAMPLE\Documents\venv_winapp\Scripts\activate.bat</code></pre>
           </article>
         </div>
 
@@ -106,7 +106,7 @@ python -m pip install Appium-Python-Client==1.3.0</code></pre>
           <article class="syntax-card">
             <h3>テスト実行</h3>
             <p>コマンドでファイルのある場所へ移動してから実行します。</p>
-            <pre><code>cd "C:\Users\yui.fukushima\Documents\WinAppDriver"
+            <pre><code>cd "C:\Users\SAMPLE\Documents\WinAppDriver"
 python -m unittest -v ファイル名（拡張子なし）</code></pre>
           </article>
         </div>
@@ -452,17 +452,22 @@ element.send_keys(Keys.BACKSPACE * 3)</code></pre>
                 <tr>
                   <th>基本キー</th>
                   <td>Enter / Tab / Esc / Backspace / Delete / Space</td>
-                  <td><code>Keys.ENTER</code> / <code>Keys.TAB</code> / <code>Keys.ESCAPE</code> / <code>Keys.BACKSPACE</code> / <code>Keys.DELETE</code> / <code>Keys.SPACE</code></td>
+                  <td><code>Keys.ENTER</code> / <code>Keys.TAB</code> / <code>Keys.ESCAPE</code> /
+                    <code>Keys.BACKSPACE</code> / <code>Keys.DELETE</code> / <code>Keys.SPACE</code>
+                  </td>
                 </tr>
                 <tr>
                   <th>矢印キー</th>
                   <td>↑ / ↓ / ← / →</td>
-                  <td><code>Keys.UP</code> / <code>Keys.DOWN</code> / <code>Keys.LEFT</code> / <code>Keys.RIGHT</code></td>
+                  <td><code>Keys.UP</code> / <code>Keys.DOWN</code> / <code>Keys.LEFT</code> / <code>Keys.RIGHT</code>
+                  </td>
                 </tr>
                 <tr>
                   <th>編集系キー</th>
                   <td>Home / End / PageUp / PageDown</td>
-                  <td><code>Keys.HOME</code> / <code>Keys.END</code> / <code>Keys.PAGE_UP</code> / <code>Keys.PAGE_DOWN</code></td>
+                  <td><code>Keys.HOME</code> / <code>Keys.END</code> / <code>Keys.PAGE_UP</code> /
+                    <code>Keys.PAGE_DOWN</code>
+                  </td>
                 </tr>
                 <tr>
                   <th>修飾キー</th>
@@ -495,7 +500,7 @@ from datetime import datetime
 def take_screenshot(self, label):
     daytext = datetime.now().strftime("%Y%m%d")
     time_text = datetime.now().strftime("%H%M%S")
-    folder = r"C:\Users\yui.fukushima\Documents"
+    folder = r"C:\Users\SAMPLE\Documents"
     folder_path = os.path.join(folder, f"●●_{daytext}")
     os.makedirs(folder_path, exist_ok=True)
     file_path = os.path.join(folder_path, f"{time_text}_{label}.png")
