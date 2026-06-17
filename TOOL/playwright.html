@@ -40,6 +40,7 @@
       <a href="#about">Playwrightとは</a>
       <a href="#can-cannot">できること</a>
       <a href="#syntax">基本文法</a>
+      <a href="#assertions">アサート</a>
       <a href="#flow">よく使う流れ</a>
     </nav>
 
@@ -203,6 +204,226 @@ class テスト名(object):
 
           </article>
         </div>
+      </section>
+
+      <section id="assertions" class="section">
+        <div class="section-heading">
+          <p class="section-label">Assert</p>
+          <h2>Playwrightのアサート</h2>
+          <p>Playwrightでは主に、Python標準の <code>assert</code> と Playwright標準の <code>expect</code> で結果を確認します。</p>
+        </div>
+
+        <div class="assert-intro-grid">
+          <article class="content-card assert-intro-card">
+            <span class="status-badge status-badge--ok">assert</span>
+            <h3>Python標準</h3>
+            <p>値を取得して、期待値と比較します。</p>
+          </article>
+
+          <article class="content-card assert-intro-card">
+            <span class="status-badge status-badge--ok">expect</span>
+            <h3>Playwright標準</h3>
+            <p>要素の状態を確認します。表示されるまで自動で待機してくれるため、Playwrightではよく使われます。</p>
+          </article>
+        </div>
+
+        <article class="assert-section-card">
+          <div class="section-heading assert-heading">
+            <p class="section-label">Python Standard</p>
+            <h3>assert</h3>
+            <p>Python標準のアサートです。</p>
+          </div>
+
+          <div class="assert-grid">
+            <section class="syntax-card">
+              <h4>完全一致</h4>
+              <pre><code>assert 実際の値 == 期待値</code></pre>
+              <p>例</p>
+              <pre><code>assert page.url == "https://example.com"</code></pre>
+              <p class="code-note">今開いているページのURLと期待値のURLを比較します。</p>
+            </section>
+
+            <section class="syntax-card">
+              <h4>部分一致</h4>
+              <pre><code>assert "文字列" in 実際の値</code></pre>
+              <p>例</p>
+              <pre><code>message = page.text_content("#message")
+
+assert "登録完了" in message</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>URL確認</h4>
+              <pre><code>assert 変数名.url == "期待値URL"</code></pre>
+              <p>例</p>
+              <pre><code>assert page.url == "https://example.com/mypage"</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>タイトル確認</h4>
+              <pre><code>assert 変数名.title() == "期待値タイトル"</code></pre>
+              <p>例</p>
+              <pre><code>assert page.title() == "マイページ"</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>チェック状態確認</h4>
+              <pre><code>assert 変数名.is_checked("セレクタ")</code></pre>
+              <p>例</p>
+              <pre><code>assert page.is_checked("#agree")</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>表示確認</h4>
+              <pre><code>assert 変数名.is_visible("セレクタ")</code></pre>
+              <p>例</p>
+              <pre><code>assert page.is_visible("#message")</code></pre>
+            </section>
+          </div>
+        </article>
+
+        <article class="assert-section-card">
+          <div class="section-heading assert-heading">
+            <p class="section-label">Playwright Standard</p>
+            <h3>expect</h3>
+            <p>Playwright標準のアサートです。使用する場合はインポートが必要です。</p>
+          </div>
+
+          <div class="import-panel">
+            <pre><code>from playwright.sync_api import expect</code></pre>
+          </div>
+
+          <div class="assert-grid">
+            <section class="syntax-card">
+              <h4>URL確認</h4>
+              <pre><code>expect(変数名).to_have_url("期待値URL")</code></pre>
+              <p>例</p>
+              <pre><code>expect(page).to_have_url(
+    "https://example.com/mypage"
+)</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>タイトル確認</h4>
+              <pre><code>expect(変数名).to_have_title("期待値タイトル")</code></pre>
+              <p>例</p>
+              <pre><code>expect(page).to_have_title("マイページ")</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>テキスト完全一致</h4>
+              <pre><code>expect(ロケータ).to_have_text("期待値")</code></pre>
+              <p class="code-note">ロケータ（Locator）：画面上のボタンやテキストボックスなど、操作・確認したい要素を指定するためのものです。</p>
+              <p>例</p>
+              <pre><code>expect(
+    page.locator("#message")
+).to_have_text("登録完了")</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>テキスト部分一致</h4>
+              <pre><code>expect(ロケータ).to_contain_text("文字列")</code></pre>
+              <p>例</p>
+              <pre><code>expect(
+    page.locator("#message")
+).to_contain_text("登録完了")</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>チェック状態確認</h4>
+              <pre><code>expect(ロケータ).to_be_checked()</code></pre>
+              <p>例</p>
+              <pre><code>expect(
+    page.locator("#agree")
+).to_be_checked()</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>表示確認</h4>
+              <pre><code>expect(ロケータ).to_be_visible()</code></pre>
+              <p>例</p>
+              <pre><code>expect(
+    page.locator("#message")
+).to_be_visible()</code></pre>
+            </section>
+
+            <section class="syntax-card">
+              <h4>非表示確認</h4>
+              <pre><code>expect(ロケータ).not_to_be_visible()</code></pre>
+              <p>例</p>
+              <pre><code>expect(
+    page.locator("#loading")
+).not_to_be_visible()</code></pre>
+            </section>
+          </div>
+        </article>
+
+        <div class="table-card assert-compare-card">
+          <h3>assert と expect の違い</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>確認内容</th>
+                  <th>assert</th>
+                  <th>expect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>URL確認</th>
+                  <td><code>assert page.url == "URL"</code></td>
+                  <td><code>expect(page).to_have_url("URL")</code></td>
+                </tr>
+                <tr>
+                  <th>タイトル確認</th>
+                  <td><code>assert page.title() == "タイトル"</code></td>
+                  <td><code>expect(page).to_have_title("タイトル")</code></td>
+                </tr>
+                <tr>
+                  <th>テキスト完全一致</th>
+                  <td><code>assert 実際の値 == "文字列"</code></td>
+                  <td><code>expect(locator).to_have_text("文字列")</code></td>
+                </tr>
+                <tr>
+                  <th>テキスト部分一致</th>
+                  <td><code>assert "文字列" in 実際の値</code></td>
+                  <td><code>expect(locator).to_contain_text("文字列")</code></td>
+                </tr>
+                <tr>
+                  <th>チェック状態確認</th>
+                  <td><code>assert page.is_checked("セレクタ")</code></td>
+                  <td><code>expect(locator).to_be_checked()</code></td>
+                </tr>
+                <tr>
+                  <th>表示確認</th>
+                  <td><code>assert page.is_visible("セレクタ")</code></td>
+                  <td><code>expect(locator).to_be_visible()</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="assert-summary-grid">
+          <article class="content-card">
+            <h3>assert</h3>
+            <ul class="check-list">
+              <li>Python標準</li>
+              <li>値を取得して比較する</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h3>expect</h3>
+            <ul class="check-list">
+              <li>Playwright標準</li>
+              <li>要素が表示されるまで自動で待機してくれる</li>
+            </ul>
+          </article>
+        </div>
+
+        <blockquote class="closing-note">Playwrightでは <code>expect()</code> がよく使われます。</blockquote>
       </section>
 
       <section id="flow" class="section">
