@@ -389,6 +389,10 @@ p {
   grid-template-columns: 1fr;
 }
 
+#benefits .feature-list {
+  grid-template-columns: 1fr;
+}
+
 .summary-item,
 .link-card,
 .compare-item,
