@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>テスト自動化ツールまとめ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <a class="study-home-link" href="../index.html">学習コンテンツへ戻る</a>
+
+  <header class="hero">
+    <div class="hero__inner">
+      <p class="eyebrow">Test Automation Tools</p>
+      <h1>テスト自動化ツールまとめ</h1>
+      <p class="lead">Web、スマホ、Windowsアプリ、APIなど、テスト対象ごとに使われる自動化ツールを整理します。</p>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <nav class="toc" aria-label="ページ内メニュー">
+      <a href="#overview">全体像</a>
+      <a href="#code-tools">プログラミング</a>
+      <a href="#nocode-tools">ノーコード</a>
+      <a href="#api-tools">APIテスト</a>
+      <a href="#summary">まとめ</a>
+    </nav>
+
+    <div class="content-column">
+    <section id="overview" class="section">
+      <div class="section-heading">
+        <p class="section-label">Overview</p>
+        <h2>全体像</h2>
+      </div>
+
+      <div class="overview-layout">
+        <pre class="tool-tree"><code>プログラミング
+├─ Playwright
+├─ Selenium
+├─ Appium
+└─ WinAppDriver
+
+ノーコード
+├─ MagicPod
+├─ mabl
+└─ Autify
+
+APIテスト
+└─ Postman</code></pre>
+
+
+      </div>
+    </section>
+
+    <section id="code-tools" class="section">
+      <div class="section-heading">
+        <p class="section-label">Programming</p>
+        <h2>プログラミング</h2>
+        <p>プログラムを書いてテストを作成するツールです。</p>
+      </div>
+
+      <div class="tool-grid">
+        <article class="tool-card" id="playwright">
+          <div class="tool-card__header">
+            <span class="tool-card__category">Webブラウザ</span>
+            <h3>Playwright</h3>
+          </div>
+          <h4>何をするもの？</h4>
+          <p>Webブラウザを自動操作するツールです。人がブラウザで行う操作を自動化できます。</p>
+          <div class="detail-grid">
+            <div>
+              <h4>できること</h4>
+              <ul>
+                <li>ログイン</li>
+                <li>検索</li>
+                <li>ボタン押下</li>
+                <li>画面遷移確認</li>
+                <li>入力チェック</li>
+              </ul>
+            </div>
+            <div>
+              <h4>操作対象</h4>
+              <ul>
+                <li>Chrome</li>
+                <li>Edge</li>
+                <li>Firefox</li>
+                <li>Safari</li>
+              </ul>
+            </div>
+          </div>
+          <h4>特徴</h4>
+          <ul>
+            <li>Microsoft製</li>
+            <li>比較的新しい</li>
+            <li>動作が速い</li>
+            <li>自動待機機能が優秀</li>
+          </ul>
+          <p class="fit">向いているもの：Webシステム、Webアプリ、ECサイト</p>
+          <blockquote>最近主流になりつつあるWebテストツール</blockquote>
+        </article>
+
+        <article class="tool-card" id="selenium">
+          <div class="tool-card__header">
+            <span class="tool-card__category">Webブラウザ</span>
+            <h3>Selenium</h3>
+          </div>
+          <h4>何をするもの？</h4>
+          <p>Webブラウザを自動操作するツールです。長年利用されている定番のWebテストツールです。</p>
+          <div class="detail-grid">
+            <div>
+              <h4>できること</h4>
+              <ul>
+                <li>ログイン</li>
+                <li>検索</li>
+                <li>ボタン押下</li>
+                <li>データ入力</li>
+                <li>画面確認</li>
+              </ul>
+            </div>
+            <div>
+              <h4>操作対象</h4>
+              <ul>
+                <li>Chrome</li>
+                <li>Edge</li>
+                <li>Firefox</li>
+              </ul>
+            </div>
+          </div>
+          <h4>特徴</h4>
+          <ul>
+            <li>歴史が長い</li>
+            <li>利用企業が多い</li>
+            <li>情報量が豊富</li>
+          </ul>
+          <p class="fit">向いているもの：Webシステム、Webアプリ</p>
+          <blockquote>昔から使われている定番Webテストツール</blockquote>
+        </article>
+      </div>
+
+      <div class="table-card">
+        <h3>Playwright と Selenium の違い</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>Playwright</th>
+                <th>Selenium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>新しさ</th>
+                <td>新しい</td>
+                <td>古い</td>
+              </tr>
+              <tr>
+                <th>速度</th>
+                <td>速い</td>
+                <td>やや遅い</td>
+              </tr>
+              <tr>
+                <th>自動待機</th>
+                <td>強い</td>
+                <td>弱い</td>
+              </tr>
+              <tr>
+                <th>情報量</th>
+                <td>多い</td>
+                <td>非常に多い</td>
+              </tr>
+              <tr>
+                <th>利用実績</th>
+                <td>増加中</td>
+                <td>非常に多い</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tool-grid">
+        <article class="tool-card" id="appium">
+          <div class="tool-card__header">
+            <span class="tool-card__category">スマホアプリ</span>
+            <h3>Appium</h3>
+          </div>
+          <h4>何をするもの？</h4>
+          <p>スマホアプリを自動操作するツールです。</p>
+          <div class="detail-grid">
+            <div>
+              <h4>できること</h4>
+              <ul>
+                <li>ボタン押下</li>
+                <li>テキスト入力</li>
+                <li>スワイプ</li>
+                <li>画面遷移確認</li>
+              </ul>
+            </div>
+            <div>
+              <h4>操作対象</h4>
+              <ul>
+                <li>Androidアプリ</li>
+                <li>iPhoneアプリ</li>
+              </ul>
+            </div>
+          </div>
+          <h4>特徴</h4>
+          <ul>
+            <li>スマホアプリテストの定番</li>
+            <li>AndroidとiPhone両方に対応</li>
+          </ul>
+          <p class="fit">向いているもの：スマホアプリ</p>
+          <blockquote>スマホアプリ版のSelenium</blockquote>
+        </article>
+
+        <article class="tool-card" id="winappdriver">
+          <div class="tool-card__header">
+            <span class="tool-card__category">Windowsアプリ</span>
+            <h3>WinAppDriver</h3>
+          </div>
+          <h4>何をするもの？</h4>
+          <p>Windowsアプリを自動操作するツールです。</p>
+          <div class="detail-grid">
+            <div>
+              <h4>できること</h4>
+              <ul>
+                <li>ボタン押下</li>
+                <li>メニュー操作</li>
+                <li>テキスト入力</li>
+                <li>ファイル保存</li>
+                <li>ファイル選択</li>
+              </ul>
+            </div>
+            <div>
+              <h4>操作対象</h4>
+              <ul>
+                <li>Excel</li>
+                <li>メモ帳</li>
+                <li>電卓</li>
+                <li>ConTrack</li>
+                <li>TortoiseSVN</li>
+              </ul>
+            </div>
+          </div>
+          <h4>特徴</h4>
+          <ul>
+            <li>Microsoft製</li>
+            <li>Windowsアプリ専用</li>
+          </ul>
+          <p class="fit">向いているもの：デスクトップアプリ</p>
+          <blockquote>Windowsアプリ版のSelenium</blockquote>
+        </article>
+      </div>
+
+      <div class="table-card">
+        <h3>Appium と WinAppDriver の違い</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>Appium</th>
+                <th>WinAppDriver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Android</th>
+                <td>○</td>
+                <td>×</td>
+              </tr>
+              <tr>
+                <th>iPhone</th>
+                <td>○</td>
+                <td>×</td>
+              </tr>
+              <tr>
+                <th>Windowsアプリ</th>
+                <td>△</td>
+                <td>○</td>
+              </tr>
+              <tr>
+                <th>Excel操作</th>
+                <td>△</td>
+                <td>○</td>
+              </tr>
+              <tr>
+                <th>ConTrack操作</th>
+                <td>△</td>
+                <td>○</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">※ Windowsアプリテストでは Appium と WinAppDriver を組み合わせる場合もあります。</p>
+      </div>
+    </section>
+
+    <section id="nocode-tools" class="section">
+      <div class="section-heading">
+        <p class="section-label">No Code</p>
+        <h2>ノーコード</h2>
+        <p>プログラムを書かずに、画面操作だけでテストを作成するツールです。</p>
+      </div>
+
+      <div class="tool-grid tool-grid--three">
+        <article class="tool-card" id="magicpod">
+          <div class="tool-card__header">
+            <span class="tool-card__category">Web・スマホ</span>
+            <h3>MagicPod</h3>
+          </div>
+          <h4>何をするもの？</h4>
+          <p>Webアプリやスマホアプリの自動テストを作成するツールです。</p>
+          <h4>できること</h4>
+          <ul>
+            <li>ログインテスト</li>
+            <li>入力チェック</li>
+            <li>画面遷移確認</li>
+          </ul>
+          <h4>特徴</h4>
+          <ul>
+            <li>日本製</li>
+            <li>ノーコード</li>
+            <li>初心者でも扱いやすい</li>
+          </ul>
+          <p class="fit">向いているもの：自動テスト未経験者、コーディングが苦手なチーム</p>
+          <blockquote>プログラムを書かずに自動テストを作れるツール</blockquote>
+        </article>
+
+        <article class="tool-card" id="mabl">
+          <div class="tool-card__header">
+            <span class="tool-card__category">Web</span>
+            <h3>mabl</h3>
+          </div>
+          <h4>何をするもの？</h4>
+          <p>AIを利用したWebテストツールです。</p>
+          <h4>できること</h4>
+          <ul>
+            <li>ログインテスト</li>
+            <li>入力チェック</li>
+            <li>画面確認</li>
+          </ul>
+          <h4>特徴</h4>
+          <ul>
+            <li>AIによる要素認識</li>
+            <li>画面変更に強い</li>
+            <li>保守コストを下げやすい</li>
+          </ul>
+          <p class="fit">向いているもの：Webアプリ</p>
+          <blockquote>AIがテスト保守を手伝ってくれるツール</blockquote>
+        </article>
+
+        <article class="tool-card" id="autify">
+          <div class="tool-card__header">
+            <span class="tool-card__category">Web・スマホ</span>
+            <h3>Autify</h3>
+          </div>
+          <h4>何をするもの？</h4>
+          <p>AIを利用したノーコード自動テストツールです。</p>
+          <h4>できること</h4>
+          <ul>
+            <li>ログインテスト</li>
+            <li>入力チェック</li>
+            <li>画面遷移確認</li>
+          </ul>
+          <h4>特徴</h4>
+          <ul>
+            <li>日本発</li>
+            <li>AI活用</li>
+            <li>ノーコード</li>
+          </ul>
+          <p class="fit">向いているもの：Webアプリ、スマホアプリ</p>
+          <blockquote>AI付きのノーコードテストツール</blockquote>
+        </article>
+      </div>
+
+      <div class="table-card">
+        <h3>MagicPod・mabl・Autify の違い</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>MagicPod</th>
+                <th>mabl</th>
+                <th>Autify</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>日本製</th>
+                <td>○</td>
+                <td>×</td>
+                <td>○</td>
+              </tr>
+              <tr>
+                <th>Web</th>
+                <td>○</td>
+                <td>○</td>
+                <td>○</td>
+              </tr>
+              <tr>
+                <th>スマホ</th>
+                <td>○</td>
+                <td>×</td>
+                <td>○</td>
+              </tr>
+              <tr>
+                <th>ノーコード</th>
+                <td>○</td>
+                <td>○</td>
+                <td>○</td>
+              </tr>
+              <tr>
+                <th>AI活用</th>
+                <td>一部あり</td>
+                <td>○</td>
+                <td>○</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="api-tools" class="section">
+      <div class="section-heading">
+        <p class="section-label">API Test</p>
+        <h2>APIテスト</h2>
+      </div>
+
+      <article class="tool-card tool-card--wide" id="postman">
+        <div class="tool-card__header">
+          <span class="tool-card__category">API</span>
+          <h3>Postman</h3>
+        </div>
+        <h4>何をするもの？</h4>
+        <p>APIを実行して動作確認を行うツールです。画面を操作するのではなく、APIへ直接リクエストを送ります。</p>
+        <div class="detail-grid">
+          <div>
+            <h4>できること</h4>
+            <ul>
+              <li>GET実行</li>
+              <li>POST実行</li>
+              <li>PUT実行</li>
+              <li>DELETE実行</li>
+              <li>レスポンス確認</li>
+              <li>ステータスコード確認</li>
+            </ul>
+          </div>
+          <div>
+            <h4>操作対象</h4>
+            <p>API</p>
+            <pre class="http-example"><code>GET /users
+POST /login
+PUT /books/1
+DELETE /books/1</code></pre>
+          </div>
+        </div>
+        <h4>特徴</h4>
+        <ul>
+          <li>API開発の定番ツール</li>
+          <li>開発者やテスターがよく利用する</li>
+          <li>自動実行（Newman）にも対応</li>
+        </ul>
+        <p class="fit">向いているもの：APIテスト、API開発</p>
+        <blockquote>API専用のテストツール</blockquote>
+      </article>
+    </section>
+
+    <section id="summary" class="section">
+      <div class="section-heading">
+        <p class="section-label">Summary</p>
+        <h2>まとめ</h2>
+      </div>
+
+      <div class="summary-grid">
+        <div class="table-card">
+          <h3>テスト対象別</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>ツール</th>
+                  <th>テスト対象</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Playwright</th>
+                  <td>Webブラウザ</td>
+                </tr>
+                <tr>
+                  <th>Selenium</th>
+                  <td>Webブラウザ</td>
+                </tr>
+                <tr>
+                  <th>Appium</th>
+                  <td>スマホアプリ</td>
+                </tr>
+                <tr>
+                  <th>WinAppDriver</th>
+                  <td>Windowsアプリ</td>
+                </tr>
+                <tr>
+                  <th>MagicPod</th>
+                  <td>Web・スマホ</td>
+                </tr>
+                <tr>
+                  <th>mabl</th>
+                  <td>Web</td>
+                </tr>
+                <tr>
+                  <th>Autify</th>
+                  <td>Web・スマホ</td>
+                </tr>
+                <tr>
+                  <th>Postman</th>
+                  <td>API</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h3>超ざっくり覚える</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>ツール</th>
+                  <th>一言で覚えるなら</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Playwright</th>
+                  <td>新しいWebテスト</td>
+                </tr>
+                <tr>
+                  <th>Selenium</th>
+                  <td>定番Webテスト</td>
+                </tr>
+                <tr>
+                  <th>Appium</th>
+                  <td>スマホアプリテスト</td>
+                </tr>
+                <tr>
+                  <th>WinAppDriver</th>
+                  <td>Windowsアプリテスト</td>
+                </tr>
+                <tr>
+                  <th>MagicPod</th>
+                  <td>ノーコードテスト</td>
+                </tr>
+                <tr>
+                  <th>mabl</th>
+                  <td>AI付きノーコードテスト</td>
+                </tr>
+                <tr>
+                  <th>Autify</th>
+                  <td>AI付きノーコードテスト</td>
+                </tr>
+                <tr>
+                  <th>Postman</th>
+                  <td>APIテスト</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+  </main>
+</body>
+
+</html>
