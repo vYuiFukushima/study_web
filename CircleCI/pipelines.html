@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pipelines画面</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pipelines.css">
+  <script src="pipelines.js" defer></script>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="M3 10.8 12 3l9 7.8v9.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5Z"/>
+      <path d="M8 22v-8h8v8"/>
+    </symbol>
+    <symbol id="icon-flow" viewBox="0 0 24 24">
+      <circle cx="6" cy="6" r="2.4"/>
+      <circle cx="18" cy="12" r="2.4"/>
+      <circle cx="6" cy="18" r="2.4"/>
+      <path d="M8.4 6h4.4a3.6 3.6 0 0 1 3.3 2.1"/>
+      <path d="M8.4 18h4.4a3.6 3.6 0 0 0 3.3-2.1"/>
+    </symbol>
+    <symbol id="icon-project" viewBox="0 0 24 24">
+      <path d="M6 4h12a1.5 1.5 0 0 1 1.5 1.5v15L12 17l-7.5 3.5v-15A1.5 1.5 0 0 1 6 4Z"/>
+      <path d="M9 8h6"/>
+    </symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="2"/>
+      <path d="M8 16V9"/>
+      <path d="M12 16v-4"/>
+      <path d="M16 16V8"/>
+    </symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 8v8"/>
+      <path d="M12 5.8v.1"/>
+    </symbol>
+    <symbol id="icon-bell" viewBox="0 0 24 24">
+      <path d="M18 10a6 6 0 0 0-12 0c0 6.6-2.4 7-2.4 7h16.8S18 16.6 18 10Z"/>
+      <path d="M10 20a2.2 2.2 0 0 0 4 0"/>
+    </symbol>
+    <symbol id="icon-help" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M9.7 9.2a2.5 2.5 0 0 1 4.8.9c0 1.8-2.5 2-2.5 3.6"/>
+      <path d="M12 17.8v.1"/>
+    </symbol>
+    <symbol id="icon-terms" viewBox="0 0 24 24">
+      <path d="M5 4h10a4 4 0 0 1 4 4v12H8a3 3 0 0 1-3-3Z"/>
+      <path d="M8 4v13a3 3 0 0 0 3 3"/>
+      <path d="M9 8h6"/>
+      <path d="M9 12h5"/>
+    </symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="CircleCI navigation">
+      <a class="brand" href="index.html" aria-label="circleci">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">circleci</span>
+        <span class="brand__status" aria-hidden="true"></span>
+      </a>
+
+      <div class="org-avatar" aria-label="Organization icon">H</div>
+
+      <nav class="nav-list" aria-label="ページナビゲーション">
+        <a class="nav-item" href="index.html">
+          <span class="nav-icon"><svg><use href="#icon-home"></use></svg></span>
+          <span>Home</span>
+        </a>
+        <a class="nav-item is-active" href="pipelines.html" aria-current="page">
+          <span class="nav-icon"><svg><use href="#icon-flow"></use></svg></span>
+          <span>Pipelines</span>
+        </a>
+        <a class="nav-item" href="index.html#projects">
+          <span class="nav-icon"><svg><use href="#icon-project"></use></svg></span>
+          <span>Projects</span>
+        </a>
+        <a class="nav-item" href="index.html#insights">
+          <span class="nav-icon nav-icon--dots" aria-hidden="true">・・・</span>
+          <span>More</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar" aria-label="画面上部の操作">
+        <div class="topbar__spacer"></div>
+        <button class="icon-button" type="button" aria-label="情報">
+          <svg><use href="#icon-info"></use></svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="通知">
+          <svg><use href="#icon-bell"></use></svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="ヘルプ">
+          <svg><use href="#icon-help"></use></svg>
+        </button>
+        <button class="account-button" type="button" aria-label="アカウント">H</button>
+      </header>
+
+      <main class="dashboard-frame">
+        <div class="dashboard pipelines-dashboard">
+          <section class="pipeline-main" aria-labelledby="pipeline-title">
+            <div class="section-heading pipeline-heading">
+              <div>
+                <p class="eyebrow">CircleCI Pipelines</p>
+                <h1 id="pipeline-title">Pipelines画面</h1>
+              </div>
+              <button class="trigger-button" type="button">Trigger Pipeline</button>
+            </div>
+
+            <article class="content-card intro-card">
+              <h2>Pipelinesとは</h2>
+              <p>CircleCIで実行されたPipeline（パイプライン）の履歴を確認する画面。</p>
+              <p>Pipelineとは、CircleCIが実行した一連の処理の単位を指す。</p>
+              <p class="example-label">例：</p>
+              <pre><code>GitHubへPush
+↓
+CircleCI起動
+↓
+テスト実行
+↓
+結果表示</code></pre>
+              <p>この一連の流れが1つのPipelineとなる。</p>
+            </article>
+
+            <section class="pipeline-panel" aria-labelledby="pipeline-list-title">
+              <div class="panel-top">
+                <div>
+                  <h2 id="pipeline-list-title">Pipeline一覧</h2>
+                  <p>Pipeline一覧は表形式で表示される。</p>
+                </div>
+                <div class="beta-switch" aria-label="New Pipeline View Beta">
+                  <span>New Pipeline View (Beta)</span>
+                  <button class="switch is-on" type="button" aria-pressed="true"><span></span></button>
+                </div>
+              </div>
+
+              <div class="tab-row" aria-label="Pipeline表示フィルター">
+                <button class="tab-button is-active" type="button">All followed projects</button>
+                <button class="tab-button" type="button">My pipelines</button>
+                <button class="tab-button" type="button">Default branch</button>
+                <button class="tab-button" type="button">Pull requests</button>
+              </div>
+
+              <div class="filter-bar" aria-label="Pipeline検索フィルター">
+                <div class="filter-chip">
+                  <span>Project</span>
+                  <strong>is any of</strong>
+                  <em>circleci-practice, fukushima-postman-cicd</em>
+                </div>
+                <div class="filter-chip">
+                  <span>Created</span>
+                  <strong>after</strong>
+                  <em>Last 2 weeks</em>
+                </div>
+                <button class="add-filter-button" type="button">Add filter</button>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Pipeline</th>
+                      <th>Project</th>
+                      <th>Branch</th>
+                      <th>Trigger</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="table-status table-status--success">Success</span></td>
+                      <td><strong>#3017</strong><span>Commit bce7810</span></td>
+                      <td>circleci-practice</td>
+                      <td>main</td>
+                      <td>GitHub Push</td>
+                      <td><strong>16m ago</strong><span>41s</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="table-status table-status--failed">Failed</span></td>
+                      <td><strong>#3016</strong><span>Commit bce7810</span></td>
+                      <td>fukushima-postman-cicd</td>
+                      <td>develop</td>
+                      <td>Pull Request</td>
+                      <td><strong>42m ago</strong><span>38s</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="table-status table-status--running">Running</span></td>
+                      <td><strong>#3015</strong><span>Commit bce7810</span></td>
+                      <td>circleci-practice</td>
+                      <td>feature/login</td>
+                      <td>Manual Trigger</td>
+                      <td><strong>1h ago</strong><span>running</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="content-card">
+              <h2>Pipelines画面で確認できること</h2>
+              <ul class="check-list">
+                <li>Pipelineの実行履歴</li>
+                <li>実行結果（成功・失敗）</li>
+                <li>実行対象プロジェクト</li>
+                <li>実行対象ブランチ</li>
+                <li>実行日時</li>
+                <li>実行時間</li>
+                <li>実行のきっかけ</li>
+              </ul>
+            </section>
+
+            <section class="content-card">
+              <h2>Trigger Pipeline</h2>
+              <p>Pipelineを手動で実行する機能。</p>
+              <p>通常はGitHubへのPushなどで自動実行されるが、</p>
+              <pre><code>Trigger Pipeline</code></pre>
+              <p>を利用すると任意のタイミングで実行できる。</p>
+              <p>利用例：</p>
+              <ul>
+                <li>再実行したい</li>
+                <li>特定ブランチで実行したい</li>
+                <li>Pushせずに実行したい</li>
+              </ul>
+            </section>
+
+            <section class="content-card">
+              <h2>Pipeline一覧</h2>
+              <div class="definition-grid">
+                <article>
+                  <h3>Status</h3>
+                  <p>Pipelineの実行結果。</p>
+                  <p class="example-label">例：</p>
+                  <pre><code>Success
+Failed
+Running</code></pre>
+                </article>
+                <article>
+                  <h3>Pipeline</h3>
+                  <p>Pipeline番号やコミット情報。</p>
+                  <p class="example-label">例：</p>
+                  <pre><code>#3017
+Commit bce7810</code></pre>
+                </article>
+                <article>
+                  <h3>Project</h3>
+                  <p>実行対象プロジェクト名。</p>
+                  <p class="example-label">例：</p>
+                  <pre><code>circleci-practice</code></pre>
+                </article>
+                <article>
+                  <h3>Branch</h3>
+                  <p>実行対象ブランチ。</p>
+                  <p class="example-label">例：</p>
+                  <pre><code>main
+develop
+feature/login</code></pre>
+                </article>
+                <article>
+                  <h3>Trigger</h3>
+                  <p>Pipelineが実行されたきっかけ。</p>
+                  <p class="example-label">例：</p>
+                  <pre><code>GitHub Push
+Pull Request
+Manual Trigger</code></pre>
+                </article>
+                <article>
+                  <h3>Time</h3>
+                  <p>実行日時または実行時間。</p>
+                  <p class="example-label">例：</p>
+                  <pre><code>16m ago</code></pre>
+                  <p class="arrow">↓</p>
+                  <pre><code>16分前に実行</code></pre>
+                  <p class="example-label">例：</p>
+                  <pre><code>41s</code></pre>
+                  <p class="arrow">↓</p>
+                  <pre><code>実行時間41秒</code></pre>
+                </article>
+              </div>
+            </section>
+          </section>
+
+          <aside class="pipeline-side" aria-label="Pipelinesの説明">
+            <section class="summary-card">
+              <h2>New Pipeline View (Beta)</h2>
+              <p>新しいPipelines画面を利用するための機能。</p>
+              <h3>ON</h3>
+              <pre><code>New Pipeline View (Beta)</code></pre>
+              <p>を使用する。</p>
+              <p>現在表示されている新しいPipelines画面。</p>
+              <p>特徴：</p>
+              <ul>
+                <li>新しいデザイン</li>
+                <li>検索・フィルタ機能の強化</li>
+                <li>今後の標準画面</li>
+              </ul>
+              <h3>OFF</h3>
+              <pre><code>Legacy View</code></pre>
+              <p>と呼ばれる従来のPipelines画面を使用する。</p>
+              <h3>Betaとは</h3>
+              <p>正式リリース前の試験運用版。</p>
+              <p>利用者からのフィードバックをもとに改善される。</p>
+              <h3>Share feedback</h3>
+              <p>CircleCIへ意見や要望を送信する機能。</p>
+            </section>
+
+            <section class="summary-card">
+              <h2>Pipeline表示フィルター</h2>
+              <p>Pipeline一覧の表示対象を絞り込む機能。</p>
+              <h3>All followed projects</h3>
+              <p>フォローしているすべてのプロジェクトのPipelineを表示する。</p>
+              <h3>My pipelines</h3>
+              <p>自分が関係したPipelineのみ表示する。</p>
+              <h3>Default branch</h3>
+              <p>デフォルトブランチ（main など）のPipelineのみ表示する。</p>
+              <h3>Pull requests</h3>
+              <p>Pull Requestに関連するPipelineのみ表示する。</p>
+              <h3>Pull Requestとは</h3>
+              <p>変更内容をレビューしてもらい、対象ブランチへ取り込むための申請。</p>
+            </section>
+
+            <section class="summary-card">
+              <h2>Pipeline検索フィルター</h2>
+              <p>Pipeline一覧を条件で絞り込む機能。</p>
+              <h3>Project</h3>
+              <p>対象プロジェクトで絞り込む。</p>
+              <p class="example-label">例：</p>
+              <pre><code>circleci-practice
+fukushima-postman-cicd</code></pre>
+              <h3>is any of</h3>
+              <p>指定したいずれかの条件に一致するものを表示する。</p>
+              <h3>Created</h3>
+              <p>作成日時で絞り込む。</p>
+              <h3>after</h3>
+              <p>指定日時以降を対象とする。</p>
+              <h3>Last 2 weeks</h3>
+              <p>過去2週間以内に作成されたPipelineを表示する。</p>
+              <h3>Add filter</h3>
+              <p>新しい検索条件を追加する。</p>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

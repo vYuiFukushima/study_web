@@ -170,11 +170,13 @@ svg {
   font-weight: 700;
   line-height: 1.2;
   padding: 0;
+  text-decoration: none;
 }
 
 .nav-item:hover,
 .nav-item.is-active {
   color: var(--base);
+  text-decoration: none;
 }
 
 .nav-icon {
@@ -194,6 +196,12 @@ svg {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2.1;
+}
+
+.nav-icon--dots {
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
 .nav-item.is-active .nav-icon {
