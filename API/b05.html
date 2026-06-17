@@ -31,16 +31,467 @@
       </div>
     </header>
 
-    <section class="content-section placeholder-panel" aria-labelledby="placeholder-title">
+    <section class="content-section" aria-labelledby="json-title">
+      <div class="section-heading">
+        <span class="section-marker">01</span>
+        <h2 id="json-title">JSONについて</h2>
+      </div>
+      <ul class="check-list">
+        <li><code>JSON</code> = <code>JavaScript Object Notation</code> の略称</li>
+        <li>元々はJavaScript向けのデータ形式として作られた</li>
+        <li>現在は <code>Python</code> をはじめ様々なプログラミング言語で利用されている</li>
+        <li>REST APIにおけるデータのやり取りで最もよく使われる形式</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="what-json-title">
+      <div class="section-heading">
+        <span class="section-marker">02</span>
+        <h2 id="what-json-title">JSONとは</h2>
+      </div>
+      <p>APIでは</p>
+      <pre class="flow-text"><code>リクエスト
+↓
+レスポンス</code></pre>
+      <p>のやり取りを行う。</p>
+      <p>そのとき、</p>
+      <pre class="flow-text"><code>どのような形式でデータを送るか</code></pre>
+      <p>を決める必要がある。</p>
+      <p>JSONはそのための標準的なデータ形式である。</p>
+
+      <article class="example-block">
+        <h3>イメージ</h3>
+        <p>例えば</p>
+        <pre class="flow-text"><code>ユーザー情報</code></pre>
+        <p>を表現したい場合、</p>
+        <p>JSONでは</p>
+        <pre class="code-block"><code>{
+    "name": "Taro",
+    "age": 20
+}</code></pre>
+        <p>のように記述する。</p>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="feature-title">
+      <div class="section-heading">
+        <span class="section-marker">03</span>
+        <h2 id="feature-title">JSONの特徴</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>概要</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><strong>シンプル</strong></th>
+              <td>人間にも読みやすく、書きやすい</td>
+            </tr>
+            <tr>
+              <th><strong>軽量</strong></th>
+              <td>データ量が少なく、通信や保存が効率的</td>
+            </tr>
+            <tr>
+              <th><strong>テキスト形式</strong></th>
+              <td>特別な変換処理が不要</td>
+            </tr>
+            <tr>
+              <th><strong>言語依存の少なさ</strong></th>
+              <td>Python・Java・JavaScriptなど様々な言語で利用できる</td>
+            </tr>
+            <tr>
+              <th><strong>オープンスタンダード</strong></th>
+              <td>誰でも利用できる公開仕様</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="structure-title">
+      <div class="section-heading">
+        <span class="section-marker">04</span>
+        <h2 id="structure-title">JSONの基本構造</h2>
+      </div>
+      <ul class="basic-list">
+        <li>各値は <strong>key（識別子）</strong> と <strong>value（値）</strong> のペア</li>
+        <li>keyとvalueの区切りは <code>:</code>（コロン）</li>
+        <li>項目同士の区切りは <code>,</code>（カンマ）</li>
+        <li>オブジェクトは <code>{}</code> で囲む</li>
+        <li><strong>引用符は必ずダブルクォーテーション <code>"</code> を使用する</strong></li>
+      </ul>
+
+      <article class="example-block">
+        <h3>基本例</h3>
+        <aside class="note-box">
+          <p>下記は説明のためにJavaScript形式で記載されている</p>
+          <p>JSON自体にはコメント記法は存在しない</p>
+        </aside>
+        <pre class="code-block"><code>// JSONの例
+{
+    "name": "Sam",
+    "age": 17
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>key と value</h3>
+        <p>例：</p>
+        <pre class="code-block"><code>{
+    "name": "Sam"
+}</code></pre>
+
+        <h3>key</h3>
+        <pre class="flow-text"><code>"name"</code></pre>
+        <p>項目名</p>
+
+        <h3>value</h3>
+        <pre class="flow-text"><code>"Sam"</code></pre>
+        <p>実際の値</p>
+      </article>
+
+      <article class="example-block">
+        <h3>JSONの見方</h3>
+        <pre class="code-block"><code>{
+    "name": "Sam",
+    "age": 17
+}</code></pre>
+        <p>↓</p>
+        <pre class="flow-text"><code>name → Sam
+age → 17</code></pre>
+        <p>という意味になる。</p>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="type-title">
       <div class="section-heading">
         <span class="section-marker">05</span>
-        <h2 id="placeholder-title">作成予定</h2>
+        <h2 id="type-title">JSONで使用できるデータ型</h2>
       </div>
-      <p>この章の内容は次に追加します。</p>
+      <p>JSONでは主に以下のデータ型を利用できる。</p>
+      <ul class="basic-list term-list">
+        <li>数値（Number）</li>
+        <li>文字列（String）</li>
+        <li>オブジェクト（Object）</li>
+        <li>配列（Array）</li>
+        <li>真偽値（Boolean）</li>
+        <li>null値</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="number-title">
+      <div class="section-heading">
+        <span class="section-marker">06</span>
+        <h2 id="number-title">数値（Number）</h2>
+      </div>
       <pre class="code-block"><code>{
-    "name": "Taro",
-    "email": "taro@example.com"
+    "age": 22
 }</code></pre>
+
+      <article class="example-block">
+        <h3>数値の例</h3>
+        <pre class="flow-text"><code>1
+100
+9999</code></pre>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="string-title">
+      <div class="section-heading">
+        <span class="section-marker">07</span>
+        <h2 id="string-title">文字列（String）</h2>
+      </div>
+      <pre class="code-block"><code>{
+    "name": "Sam"
+}</code></pre>
+
+      <article class="example-block">
+        <h3>文字列の例</h3>
+        <pre class="flow-text"><code>"Taro"
+"Tokyo"
+"student"</code></pre>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="object-title">
+      <div class="section-heading">
+        <span class="section-marker">08</span>
+        <h2 id="object-title">オブジェクト（Object）</h2>
+      </div>
+      <p>オブジェクトとは、</p>
+      <pre class="flow-text"><code>複数のkey:valueをまとめたもの</code></pre>
+      <p>である。</p>
+
+      <article class="example-block">
+        <h3>オブジェクトの例</h3>
+        <pre class="code-block"><code>{
+    "user_id": 123,
+    "property": {
+        "name": "Sam",
+        "age": 22,
+        "category": "student",
+        "student_id": 12345
+    }
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>イメージ</h3>
+        <pre class="flow-text"><code>user_id
+└ 123
+
+property
+├ name
+├ age
+├ category
+└ student_id</code></pre>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="array-title">
+      <div class="section-heading">
+        <span class="section-marker">09</span>
+        <h2 id="array-title">配列（Array）</h2>
+      </div>
+      <p>配列とは、</p>
+      <pre class="flow-text"><code>複数のデータを順番に並べたもの</code></pre>
+      <p>である。</p>
+
+      <article class="example-block">
+        <h3>配列の例</h3>
+        <pre class="code-block"><code>{
+    "members": [
+        {
+            "name": "Sam",
+            "member_id": 1
+        },
+        {
+            "name": "Alex",
+            "member_id": 2
+        }
+    ]
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>イメージ</h3>
+        <pre class="flow-text"><code>members
+├ Sam
+└ Alex</code></pre>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="boolean-title">
+      <div class="section-heading">
+        <span class="section-marker">10</span>
+        <h2 id="boolean-title">真偽値（Boolean）</h2>
+      </div>
+      <p>真偽値は</p>
+      <pre class="flow-text"><code>true
+false</code></pre>
+      <p>の2種類。</p>
+
+      <article class="example-block">
+        <h3>真偽値の例</h3>
+        <pre class="code-block"><code>{
+    "api_status": {
+        "get": true,
+        "post": true,
+        "patch": false
+    }
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>意味</h3>
+        <pre class="flow-text"><code>get → 利用可能
+post → 利用可能
+patch → 利用不可</code></pre>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="null-title">
+      <div class="section-heading">
+        <span class="section-marker">11</span>
+        <h2 id="null-title">null値</h2>
+      </div>
+      <p>null は</p>
+      <pre class="flow-text"><code>値が存在しない</code></pre>
+      <p>ことを表す。</p>
+
+      <article class="example-block">
+        <h3>nullの例</h3>
+        <pre class="code-block"><code>{
+    "user_id": 123,
+    "property": {
+        "name": "Michael",
+        "age": 50,
+        "category": "teacher",
+        "student_id": null
+    }
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>意味</h3>
+        <pre class="flow-text"><code>student_id は存在しない</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>{} と null の違い</h3>
+        <h3>{}</h3>
+        <pre class="code-block"><code>{}</code></pre>
+        <p>↓</p>
+        <pre class="flow-text"><code>空の箱</code></pre>
+
+        <h3>null</h3>
+        <pre class="code-block"><code>null</code></pre>
+        <p>↓</p>
+        <pre class="flow-text"><code>箱そのものが無い</code></pre>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="rule-title">
+      <div class="section-heading">
+        <span class="section-marker">12</span>
+        <h2 id="rule-title">JSONの書き方ルール</h2>
+      </div>
+
+      <article class="example-block">
+        <h3>1. オブジェクトは <code>{}</code> で囲む</h3>
+        <p>JSON全体は通常 <code>{}</code> で囲む。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>2. key（項目名）は必ずダブルクォーテーション <code>"</code> で囲む</h3>
+        <p>JSONでは key を省略できない。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>3. 文字列は必ずダブルクォーテーション <code>"</code> で囲む</h3>
+        <p>シングルクォーテーション <code>'</code> は使用しない。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>4. key と value は <code>:</code>（コロン）で区切る</h3>
+        <pre class="flow-text"><code>key : value</code></pre>
+        <p>の形式で記述する。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>5. 項目同士は <code>,</code>（カンマ）で区切る</h3>
+        <p>複数の項目がある場合はカンマで区切る。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>6. 最後の項目の後ろにカンマを付けない</h3>
+        <p>JSONでは末尾カンマは使用しない。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>7. 配列は <code>[]</code> で囲む</h3>
+        <p>複数の値を並べる場合に使用する。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>8. 使用できる主なデータ型</h3>
+        <ul class="basic-list term-list">
+          <li>文字列（String）</li>
+          <li>数値（Number）</li>
+          <li>真偽値（Boolean）</li>
+          <li>null</li>
+          <li>オブジェクト（Object）</li>
+          <li>配列（Array）</li>
+        </ul>
+      </article>
+
+      <article class="example-block">
+        <h3>9. JSONにはコメントを書けない</h3>
+        <p>以下のようなコメント記法は使用できない。</p>
+        <pre class="flow-text"><code>//
+/* */</code></pre>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="checklist-title">
+      <div class="section-heading">
+        <span class="section-marker">13</span>
+        <h2 id="checklist-title">JSON作成時のチェックリスト</h2>
+      </div>
+      <ul class="check-list">
+        <li><code>{}</code> で囲まれている</li>
+        <li>key がダブルクォーテーションで囲まれている</li>
+        <li>文字列がダブルクォーテーションで囲まれている</li>
+        <li>key と value が <code>:</code> で区切られている</li>
+        <li>項目同士が <code>,</code> で区切られている</li>
+        <li>最後の項目に余分なカンマがない</li>
+        <li>コメントを書いていない</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="example-title">
+      <div class="section-heading">
+        <span class="section-marker">14</span>
+        <h2 id="example-title">JSON記述例</h2>
+      </div>
+
+      <article class="example-block">
+        <h3>基本例</h3>
+        <pre class="code-block"><code>{
+    "name": "Taro",
+    "age": 20
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>オブジェクトの例</h3>
+        <pre class="code-block"><code>{
+    "user": {
+        "name": "Taro",
+        "age": 20
+    }
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>配列の例</h3>
+        <pre class="code-block"><code>{
+    "members": [
+        "Taro",
+        "Jiro",
+        "Hanako"
+    ]
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>真偽値の例</h3>
+        <pre class="code-block"><code>{
+    "active": true
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>nullの例</h3>
+        <pre class="code-block"><code>{
+    "student_id": null
+}</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>複数のデータ型を含む例</h3>
+        <pre class="code-block"><code>{
+    "name": "Taro Yamada",
+    "age": 15,
+    "region": "Tokyo",
+    "active": true,
+    "student_id": null
+}</code></pre>
+      </article>
     </section>
 
     <nav class="pager" aria-label="前後のページ">
