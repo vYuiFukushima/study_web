@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playwright</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="tool-detail-page">
+  <a class="study-home-link" href="../index.html">学習コンテンツへ戻る</a>
+
+  <header class="hero hero--detail">
+    <div class="hero__inner">
+      <a class="back-link" href="index.html">ツールまとめへ戻る</a>
+      <p class="eyebrow">Programming / Browser Test</p>
+      <h1>Playwright</h1>
+      <p class="lead">Webブラウザをプログラムで自動操作し、テストや繰り返し作業を効率化するためのツールです。</p>
+
+      <div class="hero-highlights" aria-label="Playwrightの概要">
+        <div class="highlight-card">
+          <span>対象</span>
+          <strong>Webブラウザ</strong>
+        </div>
+        <div class="highlight-card">
+          <span>操作</span>
+          <strong>クリック・入力・遷移</strong>
+        </div>
+        <div class="highlight-card">
+          <span>特徴</span>
+          <strong>自動待機が得意</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <nav class="toc" aria-label="Playwrightページ内メニュー">
+      <a href="#about">Playwrightとは</a>
+      <a href="#can-cannot">できること</a>
+      <a href="#syntax">基本文法</a>
+      <a href="#flow">よく使う流れ</a>
+    </nav>
+
+    <div class="content-column">
+      <section id="about" class="section">
+        <div class="section-heading">
+          <p class="section-label">About</p>
+          <h2>Playwrightとは</h2>
+        </div>
+
+        <article class="content-card">
+          <p>Playwright（プレイライト）は、<strong>Webブラウザを自動で操作できるツール</strong>です。</p>
+          <p>人がブラウザで行う操作（クリック、文字入力、画面遷移など）をプログラムで自動実行できます。</p>
+
+          <h3>主な用途</h3>
+          <ul class="check-list">
+            <li>Webアプリケーションのテスト</li>
+            <li>繰り返し作業の自動化</li>
+            <li>動作確認の効率化</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="can-cannot" class="section">
+        <div class="section-heading">
+          <p class="section-label">Scope</p>
+          <h2>できること・できないこと</h2>
+        </div>
+
+        <div class="split-grid">
+          <article class="content-card">
+            <div class="card-heading">
+              <span class="status-badge status-badge--ok">できること</span>
+              <h3>ブラウザ操作を自動化する</h3>
+            </div>
+
+            <div class="capability-grid">
+              <section class="capability-card">
+                <h4>ブラウザの基本操作</h4>
+                <ul>
+                  <li>クリック</li>
+                  <li>文字入力</li>
+                  <li>チェックボックス選択</li>
+                  <li>プルダウン選択</li>
+                  <li>ページ遷移</li>
+                </ul>
+              </section>
+
+              <section class="capability-card">
+                <h4>画面内容の取得</h4>
+                <ul>
+                  <li>文字列の取得</li>
+                  <li>ページタイトルの取得</li>
+                  <li>URLの取得</li>
+                </ul>
+              </section>
+
+              <section class="capability-card capability-card--wide">
+                <h4>その他</h4>
+                <ul>
+                  <li>自動的な待機処理</li>
+                  <li>スクリーンショットの取得</li>
+                  <li>動画の取得</li>
+                  <li>実際のブラウザ操作をスクリプトに変換（Codegen）</li>
+                  <li>Chrome、Edge、Firefox、Safariでの実行</li>
+                </ul>
+              </section>
+            </div>
+
+            <div class="note-panel">
+              <p>「画面に○○が表示されるまで待つ」「ボタンが押せる状態になるまで待つ」といった待機処理も扱えます。</p>
+            </div>
+          </article>
+
+          <article class="content-card">
+            <div class="card-heading">
+              <span class="status-badge status-badge--ng">できないこと</span>
+              <h3>ブラウザ以外は基本的に対象外</h3>
+            </div>
+
+            <section class="limitation-card">
+              <h4>テストスクリプトの自動修復</h4>
+              <p>画面変更によってテストが失敗した場合、セレクタの変更をPlaywrightが自動で直すことは基本的にできません。</p>
+              <div class="flow-panel" aria-label="自動修復できない例">
+                <span>ボタン名が変わった</span>
+                <span>セレクタが変わった</span>
+                <span>自動で修正</span>
+              </div>
+            </section>
+
+            <section class="limitation-card">
+              <h4>ブラウザ外の操作</h4>
+              <p>Playwrightは主にブラウザ操作用のツールです。以下のような操作は対象外です。</p>
+              <ul>
+                <li>Excel操作</li>
+                <li>メモ帳操作</li>
+                <li>Windowsアプリ操作</li>
+                <li>ファイルエクスプローラー操作</li>
+              </ul>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section id="syntax" class="section">
+        <div class="section-heading">
+          <p class="section-label">Syntax</p>
+          <h2>Playwrightの基本文法</h2>
+          <p>よく使う操作を、文法と例で確認します。</p>
+        </div>
+
+        <div class="syntax-grid">
+          <article class="syntax-card">
+            <h3>Webページを開く</h3>
+            <pre><code>page.goto("URL")</code></pre>
+            <p>例</p>
+            <pre><code>page.goto("https://example.com")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>文字入力</h3>
+            <pre><code>page.fill("セレクタ", "入力したい文字")</code></pre>
+            <p>例</p>
+            <pre><code>page.fill("#username", "テスト太郎")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>クリック</h3>
+            <pre><code>page.click("セレクタ")</code></pre>
+            <p>例</p>
+            <pre><code>page.click("#submit-button")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>チェックボックスを選択</h3>
+            <pre><code>page.check("セレクタ")</code></pre>
+            <p>例</p>
+            <pre><code>page.check("#sightseeing")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>プルダウンを選択</h3>
+            <pre><code>page.select_option("セレクタ", "選択する値")</code></pre>
+            <p>例</p>
+            <pre><code>page.select_option("#contact", "no")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>キーボード操作</h3>
+            <pre><code>page.press("セレクタ", "キー")</code></pre>
+            <p>例</p>
+            <pre><code>page.press("#date", "Tab")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>スクリーンショットを保存</h3>
+            <pre><code>page.screenshot(path="保存先")</code></pre>
+            <p>例</p>
+            <pre><code>page.screenshot(path="sample.png")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>現在のURLを取得</h3>
+            <pre><code>page.url</code></pre>
+            <p>例</p>
+            <pre><code>current_url = page.url</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>ページタイトルを取得</h3>
+            <pre><code>page.title()</code></pre>
+            <p>例</p>
+            <pre><code>title = page.title()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>テキストを取得</h3>
+            <pre><code>page.text_content("セレクタ")</code></pre>
+            <p>例</p>
+            <pre><code>message = page.text_content("#message")</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="flow" class="section">
+        <div class="section-heading">
+          <p class="section-label">Flow</p>
+          <h2>よく使う流れ</h2>
+        </div>
+
+        <article class="content-card flow-summary">
+          <pre><code># ページを開く
+page.goto("URL")
+
+# 入力する
+page.fill("セレクタ", "値")
+
+# ボタンを押す
+page.click("セレクタ")
+
+# 結果を確認する
+page.text_content("セレクタ")
+
+# スクリーンショットを取得する
+page.screenshot(path="sample.png")</code></pre>
+
+          <div>
+            <h3>基本の考え方</h3>
+            <p>Playwrightのテストは基本的に、次の流れで記述します。</p>
+            <ol class="step-list">
+              <li>開く</li>
+              <li>入力する</li>
+              <li>操作する</li>
+              <li>確認する</li>
+            </ol>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
