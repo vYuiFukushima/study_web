@@ -303,7 +303,7 @@ driver.find_element(MobileBy.XPATH, "...")
 driver.find_element(MobileBy.CLASS_NAME, "...")</code></pre>
         </article>
 
-        <div class="table-card">
+        <div class="table-card table-card--locator-methods">
           <h3>識別方法の考え方</h3>
           <div class="table-scroll">
             <table>
@@ -317,17 +317,17 @@ driver.find_element(MobileBy.CLASS_NAME, "...")</code></pre>
               <tbody>
                 <tr>
                   <th>1</th>
-                  <td>AccessibilityId（いちばん安定）</td>
+                  <td>AccessibilityId</td>
                   <td><code>self.driver.find_element(MobileBy.ACCESSIBILITY_ID, "AutomationId").click()</code></td>
                 </tr>
                 <tr>
                   <th>2</th>
-                  <td>Name（表示文字で探す）</td>
+                  <td>Name</td>
                   <td><code>self.driver.find_element(MobileBy.NAME, "表示されている文字")</code></td>
                 </tr>
                 <tr>
                   <th>3</th>
-                  <td>XPath（最後の手段）</td>
+                  <td>XPath</td>
                   <td><code>self.driver.find_element(MobileBy.XPATH, "//Button[@Name='2']").click()</code></td>
                 </tr>
               </tbody>

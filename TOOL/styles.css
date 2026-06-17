@@ -785,6 +785,27 @@ tbody th {
   background: rgba(230, 232, 241, 0.58);
 }
 
+.table-card--locator-methods table {
+  min-width: 680px;
+}
+
+.table-card--locator-methods thead th:first-child,
+.table-card--locator-methods tbody th {
+  width: 5.5rem;
+  white-space: nowrap;
+}
+
+.table-card--locator-methods thead th:nth-child(2),
+.table-card--locator-methods tbody td:nth-child(2) {
+  width: 12rem;
+  white-space: nowrap;
+}
+
+.table-card--locator-methods thead th:nth-child(3),
+.table-card--locator-methods tbody td:nth-child(3) {
+  width: auto;
+}
+
 tbody tr:last-child th,
 tbody tr:last-child td {
   border-bottom: 0;
