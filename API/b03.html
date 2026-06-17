@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APIリクエストの構成要素について</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="site-nav" aria-label="ページナビゲーション">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="index.html">API学習</a>
+      <div class="site-nav__links">
+        <a href="index.html">ホーム</a>
+        <a href="b01.html">APIとは</a>
+        <a href="b02.html">APIリクエスト/レスポンスについて</a>
+        <a href="b03.html" aria-current="page">APIリクエストの構成要素について</a>
+        <a href="b04.html">APIレスポンスの構成要素について</a>
+        <a href="b05.html">JSONについて</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <header class="page-header">
+      <div class="page-header__inner">
+        <p class="chapter-label">APIリクエストの構成要素について</p>
+        <h1>APIリクエストの構成要素について</h1>
+      </div>
+    </header>
+
+    <section class="content-section goal-section" aria-labelledby="goal-title">
+      <div class="section-heading">
+        <span class="section-marker">01</span>
+        <h2 id="goal-title">この章の目標</h2>
+      </div>
+      <ul class="check-list">
+        <li>
+          下記の <strong>APIリクエストの構成要素</strong> について説明できるようになる
+          <ul class="inline-sublist">
+            <li>メソッド / URL / エンドポイント</li>
+            <li>ヘッダ</li>
+            <li>パスパラメータ / クエリパラメータ</li>
+            <li>リクエストボディ</li>
+          </ul>
+        </li>
+        <li>仕様書に記載されているパスパラメータやクエリパラメータから、どのようなURLが組み立てられるかを想像できるようになる</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <span class="section-marker">02</span>
+        <h2 id="overview-title">概要</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目名</th>
+              <th>概要</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><strong>メソッド</strong></th>
+              <td>そのリクエストで行う操作の種別</td>
+              <td><code>GET</code> / <code>POST</code> / <code>DELETE</code> など</td>
+            </tr>
+            <tr>
+              <th><strong>URL</strong></th>
+              <td>リクエストを送るリソース先</td>
+              <td><code>https://example.com/api/my/path/...</code></td>
+            </tr>
+            <tr>
+              <th><strong>ヘッダ</strong></th>
+              <td>リクエスト自体に関する情報</td>
+              <td><code>"Content-Type": "Application-Json"</code></td>
+            </tr>
+            <tr>
+              <th><strong>パラメータ</strong></th>
+              <td>リクエスト先に関するオプション</td>
+              <td>パスパラメータ、クエリパラメータなど</td>
+            </tr>
+            <tr>
+              <th><strong>リクエストボディ</strong></th>
+              <td>リクエスト先に送信するデータ</td>
+              <td>JSON形式の記載が多い</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="method-title">
+      <div class="section-heading">
+        <span class="section-marker">03</span>
+        <h2 id="method-title">メソッド</h2>
+      </div>
+      <ul class="basic-list">
+        <li>そのリクエストで行う操作の種別</li>
+      </ul>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>メソッド名</th>
+              <th>操作</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><code>GET</code></th>
+              <td>リソースやデータの取得</td>
+              <td>ユーザIDを指定し、該当ユーザの詳細情報を取得するAPI</td>
+            </tr>
+            <tr>
+              <th><code>POST</code></th>
+              <td>リソースやデータの作成</td>
+              <td>ユーザ名やパスワードを指定し、新規ユーザを作成するAPI</td>
+            </tr>
+            <tr>
+              <th><code>DELETE</code></th>
+              <td>リソースやデータの削除</td>
+              <td>ユーザIDを指定し、該当ユーザを削除するAPI</td>
+            </tr>
+            <tr>
+              <th><code>PUT</code> / <code>PATCH</code></th>
+              <td>リソースやデータの更新</td>
+              <td>ユーザIDを指定し、該当ユーザの情報を変更するAPI</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="basic-list section-tail">
+        <li>動作確認的にAPIを触る場合は、既存データへの影響が少ない <code>GET</code> メソッドを優先して使用するとよい</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="url-title">
+      <div class="section-heading">
+        <span class="section-marker">04</span>
+        <h2 id="url-title">URL</h2>
+      </div>
+      <ul class="basic-list">
+        <li>リクエストを送るリソース先</li>
+      </ul>
+
+      <article class="example-block">
+        <h3>[備考] リクエストURLの読み方</h3>
+        <p><code>https://example.com/api/user/{id}</code> というURLを考える。</p>
+        <div class="table-wrap">
+          <table class="compact-table">
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>例</th>
+                <th>詳細</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th><strong>ドメイン</strong></th>
+                <td><code>https://example.com</code></td>
+                <td>APIの管理元</td>
+              </tr>
+              <tr>
+                <th><strong>パス</strong></th>
+                <td><code>/api/user/{id}</code></td>
+                <td>各機能の住所</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="endpoint-title">
+      <div class="section-heading">
+        <span class="section-marker">05</span>
+        <h2 id="endpoint-title">エンドポイント</h2>
+      </div>
+      <ul class="basic-list">
+        <li><strong>メソッド</strong> と <strong>URLのパス</strong> をまとめて <strong>エンドポイント</strong> と呼称する</li>
+        <li>どのAPIを操作しているかを述べたいときは <strong>エンドポイント</strong> 単位で呼称する</li>
+      </ul>
+      <ul class="plain-list">
+        <li>URLのパスだけでは機能を特定できないため</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="compact-table">
+          <thead>
+            <tr>
+              <th>機能</th>
+              <th>エンドポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><strong>ユーザ作成エンドポイント</strong></th>
+              <td><code>POST /api/user</code></td>
+            </tr>
+            <tr>
+              <th><strong>ユーザ削除エンドポイント</strong></th>
+              <td><code>DELETE /api/user/{id}</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="note-box">
+        <p><strong>補足</strong></p>
+        <p>ここは「<strong>URLのパスだけでは足りない</strong>」という点が大事です。</p>
+        <p>同じ <code>/api/user/{id}</code> でも、<code>GET</code> と <code>DELETE</code> では意味が違います。</p>
+      </aside>
+    </section>
+
+    <section class="content-section" aria-labelledby="header-title">
+      <div class="section-heading">
+        <span class="section-marker">06</span>
+        <h2 id="header-title">ヘッダ</h2>
+      </div>
+      <ul class="basic-list">
+        <li>
+          リクエストに関するタグ情報
+          <ul class="inline-sublist">
+            <li><code>key:value</code> のフォーマットで示される</li>
+          </ul>
+        </li>
+      </ul>
+
+      <article class="example-block">
+        <h3>主なヘッダの例</h3>
+        <aside class="reference-box">
+          <p><a href="https://www.echoapi.jp/blog/untitled-34/" target="_blank" rel="noopener noreferrer">https://www.echoapi.jp/blog/untitled-34/</a> も参照のこと</p>
+        </aside>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ヘッダ名</th>
+                <th>概要</th>
+                <th>例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th><code>Content-Type</code></th>
+                <td>リクエストボディのデータ様式</td>
+                <td><code>application/json</code> / <code>text/plain</code></td>
+              </tr>
+              <tr>
+                <th><code>Content-Length</code></th>
+                <td>リクエストデータの容量</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <th><code>Authorization</code></th>
+                <td>認証関連のヘッダ情報</td>
+                <td><code>Basic XXXXX</code></td>
+              </tr>
+              <tr>
+                <th><code>User-Agent</code></th>
+                <td>ユーザ（クライアント）側の情報</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <aside class="note-box">
+        <p><strong>補足</strong></p>
+        <p>ヘッダは「<strong>このリクエストはどんなものか</strong>」をサーバーに伝えるための情報です。</p>
+        <p>たとえば「JSONを送ります」「ログイン済みです」などを伝えます。</p>
+      </aside>
+    </section>
+
+    <section class="content-section" aria-labelledby="parameter-title">
+      <div class="section-heading">
+        <span class="section-marker">07</span>
+        <h2 id="parameter-title">パラメータ</h2>
+      </div>
+      <ul class="basic-list">
+        <li>リクエストに関するオプション</li>
+        <li><strong>パスパラメータ</strong> と <strong>クエリパラメータ</strong> の2種類がある</li>
+      </ul>
+
+      <article class="example-block">
+        <h3>パスパラメータ</h3>
+        <ul class="plain-list">
+          <li>URLのパスに含まれるパラメータ。下記で用いられることが多い</li>
+        </ul>
+        <ul class="basic-list compact-list">
+          <li>リソースの直接指定</li>
+          <li>必須パラメータ</li>
+        </ul>
+        <pre class="flow-text"><code>例：ユーザ検索API
+　https://example.com/user/{userId}
+　　- userIdを定めれば該当ユーザも一意に定まる
+　　- userIdがなければユーザ検索として機能しない = 必須パラメータ</code></pre>
+        <ul class="plain-list">
+          <li><strong>パス</strong> と <strong>パスパラメータ</strong> の違いについて</li>
+          <li>API仕様書で文字列が決まっているのが <strong>パス</strong></li>
+          <li>ユーザ側で値を決められるのが <strong>パスパラメータ</strong></li>
+        </ul>
+        <aside class="reference-box">
+          <p>例：<a href="https://qualityforward.github.io/api-spec/#tag/TestCycle" target="_blank" rel="noopener noreferrer">QualityForwardAPI / テストサイクル取得API</a></p>
+          <p><code>https://cloud.veriserve.co.jp/api/v2/test_phases/{test_phase[id]}/test_suite_assignments/{test_suite_assignments[id]}/test_cycles</code></p>
+          <ul class="plain-list">
+            <li><code>{...}</code> で括られているものがパスパラメータ</li>
+            <li>そうでないものはパスの一部</li>
+          </ul>
+        </aside>
+        <aside class="note-box">
+          <p><strong>補足</strong></p>
+          <p>パスパラメータは「<strong>場所そのものを指定する値</strong>」です。</p>
+          <p>たとえば「どのユーザか」をIDで決めるようなときに使います。</p>
+        </aside>
+      </article>
+
+      <article class="example-block">
+        <h3>クエリパラメータ</h3>
+        <ul class="plain-list">
+          <li>URLの末尾に <code>?{key}={value}</code> の形で含まれるパラメータ。下記で用いられることが多い</li>
+        </ul>
+        <ul class="basic-list compact-list">
+          <li>リソースの範囲指定 / 絞り込み</li>
+          <li>任意パラメータ</li>
+        </ul>
+        <pre class="flow-text"><code>例：ユーザ一覧返却API
+　https://example.com/userList?name=tanaka&lower_age=20
+    - tanaka の部分一致と20歳以上という検索範囲指定・絞り込みをかけている
+    - 各クエリパラメータがなくても一覧返却として機能する</code></pre>
+        <aside class="note-box">
+          <p><strong>補足</strong></p>
+          <p>クエリパラメータは「<strong>条件を追加する値</strong>」です。</p>
+          <p>たとえば「名前で絞る」「年齢で絞る」などの検索条件に使います。</p>
+        </aside>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="exercise-title">
+      <div class="section-heading">
+        <span class="section-marker">08</span>
+        <h2 id="exercise-title">演習問題</h2>
+      </div>
+
+      <article class="exercise-block">
+        <h3>01. メソッドについて</h3>
+        <pre class="flow-text"><code># 送信したリクエスト
+POST https://api.example.com/api/user/1234
+
+# 受信したレスポンス
+400
+{
+    message:"invalid method"
+}</code></pre>
+        <ul class="plain-list">
+          <li>上記のような症状に遭遇した場合、解消するためにあなたはどのようにリクエストを修正しますか？</li>
+        </ul>
+        <aside class="note-box">
+          <p><strong>ポイント</strong></p>
+          <p><code>invalid method</code> というメッセージから、HTTPメソッドが正しいかを確認する問題です。</p>
+        </aside>
+      </article>
+
+      <article class="exercise-block">
+        <h3>02. URL（ドメイン / パス）について</h3>
+        <pre class="flow-text"><code>@あなた さん
+
+お疲れさまです。
+テスト対象は下記となります。
+
+https://api.example.com/api/user/</code></pre>
+        <pre class="flow-text"><code>@あなた さん
+
+お疲れさまです、一点追記です！
+上記のURLは本番環境なのでユーザーに影響が出る場合があります。
+下記開発環境ドメインでの操作をお願いいたします
+
+https://api.example-develop.com</code></pre>
+        <ul class="plain-list">
+          <li>上記の指示を受けた場合、あなたはどのURLに対してAPIリクエストを送信しますか？</li>
+        </ul>
+        <aside class="note-box">
+          <p><strong>ポイント</strong></p>
+          <p>「本番環境」ではなく「開発環境」を使う、という指示を読み取る問題です。</p>
+        </aside>
+      </article>
+
+      <article class="exercise-block">
+        <h3>03. エンドポイントについて</h3>
+        <pre class="flow-text"><code># API仕様書
+GET /api/user/{id}
+POST /api/user
+DELETE /api/user/{id}</code></pre>
+        <pre class="flow-text"><code># メンバーからのチャット
+
+@あなた さん
+
+お疲れさまです。
+/api/user/{id}にリクエストを送信したのですがエラーになりました。
+ダブルチェックをお願いいたします。</code></pre>
+        <ul class="plain-list">
+          <li>上記のAPI仕様書を見る限り、メンバーがどのエンドポイントにリクエストを送信したのか特定できません。あなたはメンバーにどのように追加の質問をしますか？</li>
+        </ul>
+        <aside class="note-box">
+          <p><strong>ポイント</strong></p>
+          <p>URLのパスだけでは足りず、<strong>メソッドも必要</strong>です。</p>
+        </aside>
+      </article>
+
+      <article class="exercise-block">
+        <h3>04. クエリパラメータについて</h3>
+        <pre class="flow-text"><code># APIテスト仕様書
+
+GET https://api.example.com/api/user/search
+下記のクエリパラメータを指定して送信する
+region : Japan
+user_status : premium</code></pre>
+        <ul class="plain-list">
+          <li>上記の条件を満たすリクエスト先URLはどのような形になりますか？</li>
+        </ul>
+        <aside class="note-box">
+          <p><strong>ポイント</strong></p>
+          <p><code>?</code> と <code>&</code> を使ってクエリパラメータをURLの末尾に付けます。</p>
+        </aside>
+      </article>
+    </section>
+
+    <section class="content-section summary-section" aria-labelledby="summary-title">
+      <div class="section-heading">
+        <span class="section-marker">09</span>
+        <h2 id="summary-title">まとめ</h2>
+      </div>
+      <ul class="check-list">
+        <li><strong>メソッド</strong> は「何をするか」</li>
+        <li><strong>URL</strong> は「どこに送るか」</li>
+        <li><strong>エンドポイント</strong> は「メソッド + URLのパス」</li>
+        <li><strong>ヘッダ</strong> は「リクエストの説明情報」</li>
+        <li><strong>パラメータ</strong> は「条件や指定」</li>
+        <li><strong>パスパラメータ</strong> は「場所を指定する値」</li>
+        <li><strong>クエリパラメータ</strong> は「検索条件を追加する値」</li>
+        <li><strong>リクエストボディ</strong> は「送るデータ本体」</li>
+      </ul>
+    </section>
+
+    <nav class="pager" aria-label="前後のページ">
+      <a href="b02.html">前へ：APIリクエスト/レスポンスについて</a>
+      <a href="b04.html">次へ：APIレスポンスの構成要素について</a>
+    </nav>
+  </main>
+
+  <button class="page-top" type="button" aria-label="ページ上部へ戻る">↑</button>
+
+  <script src="site.js"></script>
+</body>
+</html>

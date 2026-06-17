@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APIの基礎知識</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="site-nav" aria-label="ページナビゲーション">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="index.html">API学習</a>
+      <div class="site-nav__links">
+        <a href="index.html">ホーム</a>
+        <a href="b01.html" aria-current="page">APIとは</a>
+        <a href="b02.html">APIリクエスト/レスポンスについて</a>
+        <a href="b03.html">APIリクエストの構成要素について</a>
+        <a href="b04.html">APIレスポンスの構成要素について</a>
+        <a href="b05.html">JSONについて</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <header class="page-header">
+      <div class="page-header__inner">
+        <p class="chapter-label">APIとは</p>
+        <h1>APIの基礎知識</h1>
+      </div>
+    </header>
+
+    <section class="content-section goal-section" aria-labelledby="goal-title">
+      <div class="section-heading">
+        <span class="section-marker">01</span>
+        <h2 id="goal-title">この章の目標</h2>
+      </div>
+      <ul class="check-list">
+        <li><strong>APIとは何か</strong>を説明できるようになる</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="api-title">
+      <div class="section-heading">
+        <span class="section-marker">02</span>
+        <h2 id="api-title">APIとは</h2>
+      </div>
+      <ul class="basic-list">
+        <li><strong>API</strong> = <code>Application Programming Interface</code></li>
+        <li>日本語で簡単に言うと <strong>「ソフトウェア同士がやり取りするための窓口」</strong></li>
+      </ul>
+      <p>例えば、</p>
+      <pre class="flow-text"><code>天気アプリ
+↓
+API
+↓
+天気情報サービス</code></pre>
+      <p>のように、ソフトウェア同士が情報をやり取りするときに利用される。</p>
+      <figure class="image-frame">
+        <img src="images/スクリーンショット 2026-05-14 125859.png" alt="APIとクライアントがリクエストとレスポンスでやり取りする図">
+      </figure>
+    </section>
+
+    <section class="content-section" aria-labelledby="api-kind-title">
+      <div class="section-heading">
+        <span class="section-marker">03</span>
+        <h2 id="api-kind-title">APIの種類</h2>
+      </div>
+      <p>APIには様々な種類がある。</p>
+      <p>自動テスト業務では、主に <strong>Web API</strong> をテスト対象とすることが多い。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>名称</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><strong>Web API</strong></th>
+              <td>Webサービスを利用するためのAPI。例：Google API</td>
+            </tr>
+            <tr>
+              <th>ネイティブAPI</th>
+              <td>OS（Windows、Linuxなど）が提供するAPI</td>
+            </tr>
+            <tr>
+              <th>ライブラリAPI</th>
+              <td>開発用ライブラリが提供するAPI。例：Java Spring Framework</td>
+            </tr>
+            <tr>
+              <th>ランタイムAPI</th>
+              <td>プログラム実行環境が提供するAPI。例：Java SE API</td>
+            </tr>
+            <tr>
+              <th>データベースAPI</th>
+              <td>データベースへアクセスするためのAPI。例：ODBC API</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="web-api-title">
+      <div class="section-heading">
+        <span class="section-marker">04</span>
+        <h2 id="web-api-title">Web APIとは</h2>
+      </div>
+      <ul class="basic-list">
+        <li><strong>インターネット経由でWebサービスを利用するためのAPI</strong></li>
+        <li><code>HTTP</code> または <code>HTTPS</code> 通信を利用してデータのやり取りを行う</li>
+      </ul>
+    </section>
+
+    <section class="content-section" aria-labelledby="http-title">
+      <div class="section-heading">
+        <span class="section-marker">05</span>
+        <h2 id="http-title">HTTP / HTTPSとは</h2>
+      </div>
+      <p>Webブラウザやアプリがサーバーと通信するためのルール。</p>
+      <p>例：</p>
+      <pre class="flow-text"><code>アプリ
+↓
+HTTP/HTTPS通信
+↓
+サーバー</code></pre>
+    </section>
+
+    <section class="content-section" aria-labelledby="example-title">
+      <div class="section-heading">
+        <span class="section-marker">06</span>
+        <h2 id="example-title">身近な利用例</h2>
+      </div>
+
+      <article class="example-block">
+        <h3>Google Mapの埋め込み</h3>
+        <p>店舗のホームページにGoogle Mapが表示されている場合、</p>
+        <p>店舗側が地図機能を自作しているわけではなく、</p>
+        <pre class="flow-text"><code>店舗サイト
+↓
+Google Map API
+↓
+Google Map</code></pre>
+        <p>を利用している。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>SNSアカウントでログイン</h3>
+        <p>例：</p>
+        <pre class="flow-text"><code>Googleアカウントでログイン
+X（旧Twitter）でログイン
+Facebookでログイン</code></pre>
+      </article>
+
+      <article class="example-block">
+        <h3>Amazonアカウントで決済</h3>
+        <p>オンラインショップで</p>
+        <pre class="flow-text"><code>Amazon Pay</code></pre>
+        <p>を利用する場合もWeb APIが利用されている。</p>
+      </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="test-purpose-title">
+      <div class="section-heading">
+        <span class="section-marker">07</span>
+        <h2 id="test-purpose-title">Web APIに対するテストの目的</h2>
+      </div>
+      <p>Web APIは様々なシステムから利用されるため、品質を確認することが重要である。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>概要</th>
+              <th>詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><strong>機能の検証</strong></th>
+              <td>想定どおりに動作することを確認し、予期しないエラーや不具合を防止する</td>
+            </tr>
+            <tr>
+              <th><strong>セキュリティの確保</strong></th>
+              <td>脆弱性を発見・改善し、不正アクセスや情報漏洩を防止する</td>
+            </tr>
+            <tr>
+              <th><strong>信頼性の向上</strong></th>
+              <td>安定した動作を確認し、利用者や他システムからの信頼性を高める</td>
+            </tr>
+            <tr>
+              <th><strong>パフォーマンスの測定</strong></th>
+              <td>大量アクセスや高負荷状態でも正常に動作するか確認する</td>
+            </tr>
+            <tr>
+              <th><strong>インターフェース契約の確認</strong></th>
+              <td>システム間で決められた通信ルールが守られているか確認する</td>
+            </tr>
+            <tr>
+              <th><strong>アップデートの影響評価</strong></th>
+              <td>新機能追加や改修によって既存機能に影響が出ていないか確認する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="contract-title">
+      <div class="section-heading">
+        <span class="section-marker">08</span>
+        <h2 id="contract-title">補足：インターフェース契約とは</h2>
+      </div>
+      <p>システム同士が通信する際の約束事。</p>
+      <p>例：</p>
+      <pre class="flow-text"><code>このURLにアクセスする
+↓
+この形式のデータを送る
+↓
+この形式のデータが返る</code></pre>
+      <p>というルールを決めておくこと。</p>
+      <p>APIテストでは、この約束事が守られているかを確認する。</p>
+    </section>
+
+    <section class="content-section summary-section" aria-labelledby="summary-title">
+      <div class="section-heading">
+        <span class="section-marker">09</span>
+        <h2 id="summary-title">まとめ</h2>
+      </div>
+      <ul class="check-list">
+        <li>APIは <strong>ソフトウェア同士がやり取りするための窓口</strong></li>
+        <li>自動テストでは主に <strong>Web API</strong> を対象とする</li>
+        <li>Web APIは <strong>HTTP/HTTPS通信</strong> を利用してデータをやり取りする</li>
+        <li>Google MapやSNSログインなど、身近なサービスでも利用されている</li>
+        <li>APIテストでは、機能・セキュリティ・性能・互換性などを確認する</li>
+      </ul>
+    </section>
+
+    <nav class="pager" aria-label="前後のページ">
+      <a href="index.html">ホームへ</a>
+      <a href="b02.html">次へ：APIリクエスト/レスポンスについて</a>
+    </nav>
+  </main>
+
+  <button class="page-top" type="button" aria-label="ページ上部へ戻る">↑</button>
+
+  <script src="site.js"></script>
+</body>
+</html>

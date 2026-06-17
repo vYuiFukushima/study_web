@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API学習 ホーム</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="site-nav" aria-label="ページナビゲーション">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="index.html" aria-current="page">API学習</a>
+      <div class="site-nav__links">
+        <a href="index.html" aria-current="page">ホーム</a>
+        <a href="b01.html">APIとは</a>
+        <a href="b02.html">APIリクエスト/レスポンスについて</a>
+        <a href="b03.html">APIリクエストの構成要素について</a>
+        <a href="b04.html">APIレスポンスの構成要素について</a>
+        <a href="b05.html">JSONについて</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <header class="page-header">
+      <div class="page-header__inner">
+        <p class="chapter-label">APIの基礎学習</p>
+        <h1>API学習 ホーム</h1>
+      </div>
+    </header>
+
+    <section class="content-section" aria-labelledby="home-title">
+      <div class="section-heading">
+        <span class="section-marker">00</span>
+        <h2 id="home-title">学習ページ</h2>
+      </div>
+      <div class="home-grid">
+        <a class="chapter-card" href="b01.html">
+          <h2>APIとは</h2>
+          <p>APIの意味、Web API、身近な利用例を確認する。</p>
+        </a>
+        <a class="chapter-card" href="b02.html">
+          <h2>APIリクエスト/レスポンスについて</h2>
+          <p>リクエストとレスポンスの流れを確認する。</p>
+        </a>
+        <a class="chapter-card" href="b03.html">
+          <h2>APIリクエストの構成要素について</h2>
+          <p>メソッド、URL、ヘッダ、リクエストボディを学ぶ。</p>
+        </a>
+        <a class="chapter-card" href="b04.html">
+          <h2>APIレスポンスの構成要素について</h2>
+          <p>ステータスコード、レスポンスボディなどを学ぶ。</p>
+        </a>
+        <a class="chapter-card" href="b05.html">
+          <h2>JSONについて</h2>
+          <p>JSONの形式とAPIでの使われ方を学ぶ。</p>
+        </a>
+      </div>
+      <figure class="image-frame home-visual">
+        <img src="images/スクリーンショット 2026-05-14 125859.png" alt="APIとクライアントがリクエストとレスポンスでやり取りする図">
+      </figure>
+    </section>
+  </main>
+
+  <button class="page-top" type="button" aria-label="ページ上部へ戻る">↑</button>
+
+  <script src="site.js"></script>
+</body>
+</html>
