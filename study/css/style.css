@@ -165,6 +165,28 @@ code {
   background: var(--strong);
 }
 
+.study-home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 18px;
+  padding: 10px 12px;
+  color: #FFFFFF;
+  background: var(--strong);
+  border-radius: var(--radius);
+  font-size: 0.94rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.study-home-button:hover,
+.study-home-button:focus-visible {
+  background: #A95F68;
+  outline: none;
+}
+
 .sidebar-note {
   margin-top: 28px;
   padding: 16px;
