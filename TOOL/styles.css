@@ -806,6 +806,27 @@ tbody th {
   width: auto;
 }
 
+.table-card--special-keys table {
+  min-width: 760px;
+}
+
+.table-card--special-keys thead th:first-child,
+.table-card--special-keys tbody th {
+  width: 7rem;
+  white-space: nowrap;
+}
+
+.table-card--special-keys thead th:nth-child(2),
+.table-card--special-keys tbody td:nth-child(2) {
+  width: 34%;
+  min-width: 18rem;
+}
+
+.table-card--special-keys thead th:nth-child(3),
+.table-card--special-keys tbody td:nth-child(3) {
+  width: auto;
+}
+
 tbody tr:last-child th,
 tbody tr:last-child td {
   border-bottom: 0;
@@ -1169,6 +1190,18 @@ tbody tr:last-child td {
   color: #FFFFFF;
   background: var(--cool-text);
   font-size: 0.9rem;
+}
+
+#start .assert-intro-grid,
+#start .compare-code-grid,
+#imports .assert-summary-grid,
+#structure .compare-code-grid,
+#mouse .assert-grid,
+#keyboard .compare-code-grid,
+#screenshot-wait .compare-code-grid,
+#screenshot-wait .assert-grid,
+#assert-log .assert-grid {
+  grid-template-columns: 1fr;
 }
 
 .role-panel {
