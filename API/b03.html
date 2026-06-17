@@ -373,11 +373,11 @@
     <section class="content-section" aria-labelledby="exercise-title">
       <div class="section-heading">
         <span class="section-marker">08</span>
-        <h2 id="exercise-title">演習問題</h2>
+        <h2 id="exercise-title">リクエスト確認の補足</h2>
       </div>
 
       <article class="exercise-block">
-        <h3>01. メソッドについて</h3>
+        <h3>メソッドエラーの例</h3>
         <pre class="flow-text"><code># 送信したリクエスト
 POST https://api.example.com/api/user/1234
 
@@ -386,17 +386,16 @@ POST https://api.example.com/api/user/1234
 {
     message:"invalid method"
 }</code></pre>
-        <ul class="plain-list">
-          <li>上記のような症状に遭遇した場合、解消するためにあなたはどのようにリクエストを修正しますか？</li>
-        </ul>
+        <p><code>POST https://api.example.com/api/user/1234</code> に対して <code>invalid method</code> が返却された場合、HTTPメソッドがAPI仕様と一致していない可能性がある。</p>
+        <p>このような場合は、API仕様書で対象エンドポイントに指定されているメソッドを確認し、<code>GET</code> / <code>POST</code> / <code>PUT</code> / <code>DELETE</code> などの指定を見直す必要がある。</p>
         <aside class="note-box">
-          <p><strong>ポイント</strong></p>
-          <p><code>invalid method</code> というメッセージから、HTTPメソッドが正しいかを確認する問題です。</p>
+          <p><strong>補足</strong></p>
+          <p>URLが正しく見えても、メソッドが違うだけでエラーになることがある。APIテストでは「どこに送るか」だけでなく「何の操作として送るか」も確認する。</p>
         </aside>
       </article>
 
       <article class="exercise-block">
-        <h3>02. URL（ドメイン / パス）について</h3>
+        <h3>URL（ドメイン / パス）の指定例</h3>
         <pre class="flow-text"><code>@あなた さん
 
 お疲れさまです。
@@ -410,17 +409,17 @@ https://api.example.com/api/user/</code></pre>
 下記開発環境ドメインでの操作をお願いいたします
 
 https://api.example-develop.com</code></pre>
-        <ul class="plain-list">
-          <li>上記の指示を受けた場合、あなたはどのURLに対してAPIリクエストを送信しますか？</li>
-        </ul>
+        <p>最初に提示された <code>https://api.example.com/api/user/</code> は本番環境のURLである。</p>
+        <p>あとから開発環境ドメインとして <code>https://api.example-develop.com</code> が指定された場合、ドメイン部分を開発環境に置き換え、パス部分は維持してリクエスト先を組み立てる。</p>
+        <pre class="flow-text"><code>https://api.example-develop.com/api/user/</code></pre>
         <aside class="note-box">
-          <p><strong>ポイント</strong></p>
-          <p>「本番環境」ではなく「開発環境」を使う、という指示を読み取る問題です。</p>
+          <p><strong>補足</strong></p>
+          <p>URLは「ドメイン」と「パス」に分けて考えると確認しやすい。本番環境と開発環境を取り違えると、実データに影響する可能性があるため注意が必要である。</p>
         </aside>
       </article>
 
       <article class="exercise-block">
-        <h3>03. エンドポイントについて</h3>
+        <h3>エンドポイント確認の例</h3>
         <pre class="flow-text"><code># API仕様書
 GET /api/user/{id}
 POST /api/user
@@ -432,29 +431,29 @@ DELETE /api/user/{id}</code></pre>
 お疲れさまです。
 /api/user/{id}にリクエストを送信したのですがエラーになりました。
 ダブルチェックをお願いいたします。</code></pre>
-        <ul class="plain-list">
-          <li>上記のAPI仕様書を見る限り、メンバーがどのエンドポイントにリクエストを送信したのか特定できません。あなたはメンバーにどのように追加の質問をしますか？</li>
-        </ul>
+        <p>この例では、メンバーから <code>/api/user/{id}</code> というパスだけが共有されている。</p>
+        <p>しかしAPI仕様書には、同じパスを使う <code>GET /api/user/{id}</code> と <code>DELETE /api/user/{id}</code> が存在するため、パスだけではどの操作を行ったのか特定できない。</p>
+        <p>エラーを確認する場合は、送信したHTTPメソッド、実際に指定したURL、パスパラメータに入れた値、ヘッダやボディの有無も合わせて確認する。</p>
         <aside class="note-box">
-          <p><strong>ポイント</strong></p>
-          <p>URLのパスだけでは足りず、<strong>メソッドも必要</strong>です。</p>
+          <p><strong>補足</strong></p>
+          <p>エンドポイントは <strong>メソッド + URLのパス</strong> で判断する。同じパスでも、<code>GET</code> と <code>DELETE</code> では意味が大きく異なる。</p>
         </aside>
       </article>
 
       <article class="exercise-block">
-        <h3>04. クエリパラメータについて</h3>
+        <h3>クエリパラメータを含むURLの例</h3>
         <pre class="flow-text"><code># APIテスト仕様書
 
 GET https://api.example.com/api/user/search
 下記のクエリパラメータを指定して送信する
 region : Japan
 user_status : premium</code></pre>
-        <ul class="plain-list">
-          <li>上記の条件を満たすリクエスト先URLはどのような形になりますか？</li>
-        </ul>
+        <p>クエリパラメータはURLの末尾に <code>?</code> を付け、その後に <code>key=value</code> の形で指定する。</p>
+        <p>複数のクエリパラメータを指定する場合は、2つ目以降を <code>&</code> でつなぐ。</p>
+        <pre class="flow-text"><code>https://api.example.com/api/user/search?region=Japan&user_status=premium</code></pre>
         <aside class="note-box">
-          <p><strong>ポイント</strong></p>
-          <p><code>?</code> と <code>&</code> を使ってクエリパラメータをURLの末尾に付けます。</p>
+          <p><strong>補足</strong></p>
+          <p><code>?</code> はクエリパラメータの開始位置、<code>&</code> は複数条件の区切りを表す。検索条件や絞り込み条件を指定するときによく使われる。</p>
         </aside>
       </article>
     </section>

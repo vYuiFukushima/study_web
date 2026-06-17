@@ -404,6 +404,30 @@ table {
   min-width: 420px;
 }
 
+.status-example-table {
+  min-width: 940px;
+}
+
+.status-example-table th:first-child,
+.status-example-table td:first-child {
+  width: 44%;
+  min-width: 360px;
+  white-space: nowrap;
+}
+
+.status-example-table th:nth-child(2),
+.status-example-table td:nth-child(2) {
+  width: 170px;
+  min-width: 170px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.status-example-table th:nth-child(3),
+.status-example-table td:nth-child(3) {
+  min-width: 300px;
+}
+
 th,
 td {
   padding: 14px 16px;

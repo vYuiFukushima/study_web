@@ -332,13 +332,13 @@ API処理
     <section class="content-section" aria-labelledby="exercise-title">
       <div class="section-heading">
         <span class="section-marker">06</span>
-        <h2 id="exercise-title">演習問題</h2>
+        <h2 id="exercise-title">レスポンス確認の補足</h2>
       </div>
 
       <article class="exercise-block">
-        <h3>01. HTTPステータスコードについて</h3>
-        <p>下記のようなリクエストを送信した場合、</p>
-        <p>それぞれどのようなステータスコードが想定されるか、理由も添えて考える。</p>
+        <h3>HTTPステータスコードの判断例</h3>
+        <p>APIテストでは、リクエスト内容と返却されるステータスコードの関係を理解しておくことが重要である。</p>
+        <p>以下のようなリクエストでは、状況に応じて返却されるステータスコードが変わる。</p>
         <pre class="flow-text"><code>1. 誤ったパスワードでAPIリクエストを送信
 
 2. URLに誤字が含まれる状態でAPIリクエストを送信
@@ -346,15 +346,48 @@ API処理
 3. リクエストボディの要素が欠損した状態でリクエストを送信
 
 4. 管理者権限が必要なAPIに一般アカウントでリクエストを送信</code></pre>
+        <div class="table-wrap">
+          <table class="status-example-table">
+            <thead>
+              <tr>
+                <th>状況</th>
+                <th>想定されるコード</th>
+                <th>理由</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>誤ったパスワードでAPIリクエストを送信</td>
+                <td><code>401</code></td>
+                <td>認証に失敗しているため</td>
+              </tr>
+              <tr>
+                <td>URLに誤字が含まれる状態でAPIリクエストを送信</td>
+                <td><code>404</code></td>
+                <td>指定されたリソースが見つからないため</td>
+              </tr>
+              <tr>
+                <td>リクエストボディの要素が欠損した状態でリクエストを送信</td>
+                <td><code>400</code></td>
+                <td>リクエスト内容がAPI仕様を満たしていないため</td>
+              </tr>
+              <tr>
+                <td>管理者権限が必要なAPIに一般アカウントでリクエストを送信</td>
+                <td><code>403</code></td>
+                <td>認証はできていても、操作する権限が不足しているため</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </article>
 
       <article class="exercise-block">
-        <h3>この問題で確認したいこと</h3>
+        <h3>ステータスコードから原因を推測する</h3>
         <p>APIテストでは、</p>
         <pre class="flow-text"><code>リクエスト内容
 ↓
 どのステータスコードが返るか</code></pre>
-        <p>を予測できることが重要である。</p>
+        <p>の関係を理解しておくことが重要である。</p>
         <p>例えば</p>
         <pre class="flow-text"><code>パスワード間違い
 ↓
@@ -364,7 +397,11 @@ API処理
 ↓
 404</code></pre>
         <p>のように、</p>
-        <p>状況から原因を推測できるようになることを目指す。</p>
+        <p>状況とステータスコードを結び付けることで、エラー原因をおおよそ推測できる。</p>
+        <aside class="note-box">
+          <p><strong>補足</strong></p>
+          <p><code>401</code> と <code>403</code> は混同しやすい。<code>401</code> は「ログイン情報やトークンが正しくない」、<code>403</code> は「認証はできているが権限が足りない」と考えると整理しやすい。</p>
+        </aside>
       </article>
     </section>
 

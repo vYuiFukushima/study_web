@@ -69,7 +69,7 @@
       </ul>
     </section>
 
-    <section class="content-section image-section" aria-labelledby="request-response-title">
+    <section class="content-section" aria-labelledby="request-response-title">
       <div class="section-heading">
         <span class="section-marker">02</span>
         <h2 id="request-response-title">リクエストとレスポンス</h2>
@@ -77,24 +77,22 @@
       <figure class="image-frame">
         <img src="images/スクリーンショット 2026-05-14 125859.png" alt="APIとクライアントがリクエストとレスポンスでやり取りする図">
       </figure>
-    </section>
-
-    <section class="content-section" aria-labelledby="what-title">
-      <div class="section-heading">
-        <span class="section-marker">03</span>
-        <h2 id="what-title">リクエストとレスポンスとは</h2>
-      </div>
-      <p>APIを利用するときは、</p>
-      <pre class="flow-text"><code>リクエスト
-↓
-レスポンス</code></pre>
-      <p>の流れで通信が行われる。</p>
 
       <article class="example-block">
-        <h3>リクエスト（Request）</h3>
-        <p>APIに対して</p>
-        <pre class="flow-text"><code>○○をしてください</code></pre>
-        <p>とお願いすること。</p>
+        <h3>リクエストとレスポンスとは</h3>
+        <p>APIでは、</p>
+        <pre class="flow-text"><code>リクエスト
+↓
+レスポンス</code></pre>
+        <p>という流れでデータのやり取りを行う。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>(HTTP/HTTPS)リクエストとは</h3>
+        <ul class="basic-list">
+          <li>APIに対して「○○をしてほしい」と依頼すること</li>
+          <li>クライアント（ブラウザやアプリ）からAPIへ送信する</li>
+        </ul>
         <p>例：</p>
         <pre class="flow-text"><code>ユーザー情報を取得してください
 
@@ -104,8 +102,20 @@
       </article>
 
       <article class="example-block">
-        <h3>レスポンス（Response）</h3>
-        <p>APIがリクエストを受け取った後に返す結果。</p>
+        <h3>HTTP / HTTPSとは</h3>
+        <p>リクエストを送る際に利用される通信ルール（プロトコル）。</p>
+        <p>Web APIでは主に</p>
+        <pre class="flow-text"><code>HTTP
+HTTPS</code></pre>
+        <p>が利用される。</p>
+      </article>
+
+      <article class="example-block">
+        <h3>(API)レスポンスとは</h3>
+        <ul class="basic-list">
+          <li>APIがリクエストを受け取った後に返却する情報</li>
+          <li>APIからの「返事」</li>
+        </ul>
         <p>例：</p>
         <pre class="flow-text"><code>ユーザー情報
 
@@ -114,14 +124,10 @@
 登録結果</code></pre>
         <p>など。</p>
       </article>
-    </section>
 
-    <section class="content-section" aria-labelledby="flow-image-title">
-      <div class="section-heading">
-        <span class="section-marker">04</span>
-        <h2 id="flow-image-title">イメージ</h2>
-      </div>
-      <pre class="flow-text"><code>アプリ
+      <article class="example-block">
+        <h3>イメージ</h3>
+        <pre class="flow-text"><code>アプリ
 ↓
 リクエスト
 「ユーザー情報を取得してください」
@@ -130,38 +136,20 @@ API
 ↓
 レスポンス
 「ユーザー情報はこちらです」</code></pre>
+        <figure class="image-frame">
+          <img src="images/スクリーンショット 2026-05-14 142023.png" alt="レストランの注文を例にリクエストとレスポンスを説明する図">
+        </figure>
+      </article>
     </section>
 
-    <section class="content-section" aria-labelledby="http-title">
+    <section class="content-section" aria-labelledby="api-test-basic-title">
       <div class="section-heading">
-        <span class="section-marker">05</span>
-        <h2 id="http-title">HTTP / HTTPSとは</h2>
+        <span class="section-marker">03</span>
+        <h2 id="api-test-basic-title">APIテストの基本的な考え方</h2>
       </div>
-      <p>リクエストやレスポンスをやり取りするための通信ルール（プロトコル）。</p>
-      <p>Web APIでは主に</p>
-      <pre class="flow-text"><code>HTTP
-HTTPS</code></pre>
-      <p>が利用される。</p>
-    </section>
-
-    <section class="content-section image-section" aria-labelledby="diagram-title">
-      <div class="section-heading">
-        <span class="section-marker">06</span>
-        <h2 id="diagram-title">リクエストとレスポンスのイメージ図</h2>
-      </div>
-      <figure class="image-frame">
-        <img src="images/スクリーンショット 2026-05-14 142023.png" alt="レストランの注文を例にリクエストとレスポンスを説明する図">
-      </figure>
-    </section>
-
-    <section class="content-section aside-section" aria-labelledby="test-image-title">
-      <div class="section-heading">
-        <span class="section-marker">07</span>
-        <h2 id="test-image-title">[余談] APIテストの実装イメージ</h2>
-      </div>
-      <p>極論を言うと、APIテストは次の内容を確認している。</p>
+      <p>APIテストは非常にシンプルに表現すると、</p>
       <div class="table-wrap">
-        <table>
+        <table class="compact-table">
           <thead>
             <tr>
               <th>事前操作</th>
@@ -176,93 +164,51 @@ HTTPS</code></pre>
           </tbody>
         </table>
       </div>
-    </section>
-
-    <section class="content-section" aria-labelledby="test-thinking-title">
-      <div class="section-heading">
-        <span class="section-marker">08</span>
-        <h2 id="test-thinking-title">APIテストの考え方</h2>
-      </div>
-      <p>APIテストは</p>
-      <pre class="flow-text"><code>正しいリクエスト
+      <article class="example-block">
+        <h3>APIテストとは</h3>
+        <p>つまり、</p>
+        <pre class="flow-text"><code>正しいリクエスト
 ↓
 正しいレスポンス</code></pre>
-      <p>を確認する作業である。</p>
+        <p>になっていることを確認する作業である。</p>
+      </article>
     </section>
 
     <section class="content-section" aria-labelledby="request-spec-title">
       <div class="section-heading">
-        <span class="section-marker">09</span>
-        <h2 id="request-spec-title">「仕様書通りのリクエスト」とは？</h2>
+        <span class="section-marker">04</span>
+        <h2 id="request-spec-title">仕様書通りのリクエストとは</h2>
       </div>
-      <p>例えば以下のような内容を確認する。</p>
+      <p>リクエストには様々な構成要素がある。</p>
+      <p>例えば、</p>
       <ul class="basic-list">
         <li>メソッドに○○を指定する</li>
         <li>URLに○○を指定する</li>
         <li>ヘッダに <code>Authorization: ○○</code> を指定する</li>
         <li>リクエストボディに○○を記述する</li>
+        <li>その他必要な情報を設定する</li>
       </ul>
       <p>など。</p>
 
       <article class="example-block">
-        <h3>補足：メソッドとは</h3>
-        <p>APIに対してどのような操作を行うかを表す。</p>
-        <p>例：</p>
-        <div class="table-wrap">
-          <table class="compact-table">
-            <thead>
-              <tr>
-                <th>メソッド</th>
-                <th>内容</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>GET</td>
-                <td>取得</td>
-              </tr>
-              <tr>
-                <td>POST</td>
-                <td>作成</td>
-              </tr>
-              <tr>
-                <td>PUT / PATCH</td>
-                <td>更新</td>
-              </tr>
-              <tr>
-                <td>DELETE</td>
-                <td>削除</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
-
-      <article class="example-block">
-        <h3>補足：Authorizationヘッダとは</h3>
-        <p>認証情報を送るためのヘッダ。</p>
-        <p>例：</p>
-        <pre class="flow-text"><code>Authorization: Bearer xxxxx</code></pre>
-        <p>ログイン済みユーザーであることをAPIへ伝える。</p>
-      </article>
-
-      <article class="example-block">
-        <h3>補足：リクエストボディとは</h3>
-        <p>APIへ送るデータ本体。</p>
-        <p>例：</p>
-        <pre class="code-block"><code>{
-    "name": "Taro",
-    "email": "taro@example.com"
-}</code></pre>
+        <h3>例</h3>
+        <pre class="flow-text"><code>GET
+https://api.example.com/user/123</code></pre>
+        <p>なら</p>
+        <pre class="flow-text"><code>GET</code></pre>
+        <p>も</p>
+        <pre class="flow-text"><code>https://api.example.com/user/123</code></pre>
+        <p>も仕様書通りである必要がある。</p>
       </article>
     </section>
 
     <section class="content-section" aria-labelledby="response-spec-title">
       <div class="section-heading">
-        <span class="section-marker">10</span>
-        <h2 id="response-spec-title">「仕様書通りのレスポンス」とは？</h2>
+        <span class="section-marker">05</span>
+        <h2 id="response-spec-title">仕様書通りのレスポンスとは</h2>
       </div>
-      <p>例えば以下のような内容を確認する。</p>
+      <p>レスポンスについても様々な確認を行う。</p>
+      <p>例えば、</p>
       <ul class="basic-list">
         <li>ステータスコードが○○である</li>
         <li>レスポンスボディが仕様書通りの構造である</li>
@@ -272,87 +218,54 @@ HTTPS</code></pre>
       <p>など。</p>
 
       <article class="example-block">
-        <h3>補足：ステータスコードとは</h3>
-        <p>API処理結果を表す番号。</p>
-        <p>例：</p>
-        <div class="table-wrap">
-          <table class="compact-table">
-            <thead>
-              <tr>
-                <th>コード</th>
-                <th>意味</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>200</td>
-                <td>成功</td>
-              </tr>
-              <tr>
-                <td>400</td>
-                <td>リクエスト不正</td>
-              </tr>
-              <tr>
-                <td>401</td>
-                <td>認証失敗</td>
-              </tr>
-              <tr>
-                <td>403</td>
-                <td>権限不足</td>
-              </tr>
-              <tr>
-                <td>404</td>
-                <td>リソースが存在しない</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
-
-      <article class="example-block">
-        <h3>補足：レスポンスボディとは</h3>
-        <p>APIから返ってくるデータ本体。</p>
-        <p>例：</p>
+        <h3>例</h3>
+        <p>リクエスト</p>
         <pre class="code-block"><code>{
-    "name": "Taro",
-    "email": "taro@example.com"
+    "name": "Taro"
 }</code></pre>
+        <p>を送信した場合、</p>
+        <p>レスポンスも</p>
+        <pre class="code-block"><code>{
+    "name": "Taro"
+}</code></pre>
+        <p>のように仕様通りであることを確認する。</p>
       </article>
 
       <article class="example-block">
-        <h3>補足：データ型とは</h3>
-        <p>値の種類のこと。</p>
-        <p>例：</p>
-        <div class="table-wrap">
-          <table class="compact-table">
-            <thead>
-              <tr>
-                <th>型</th>
-                <th>例</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>文字列（string）</td>
-                <td><code>"Taro"</code></td>
-              </tr>
-              <tr>
-                <td>数値（integer）</td>
-                <td><code>100</code></td>
-              </tr>
-              <tr>
-                <td>真偽値（boolean）</td>
-                <td><code>true</code> / <code>false</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <h3>ステータスコードの確認例</h3>
+        <pre class="flow-text"><code>200</code></pre>
+        <p>↓</p>
+        <pre class="flow-text"><code>成功</code></pre>
+        <pre class="flow-text"><code>404</code></pre>
+        <p>↓</p>
+        <pre class="flow-text"><code>対象が存在しない</code></pre>
       </article>
+    </section>
+
+    <section class="content-section" aria-labelledby="detail-title">
+      <div class="section-heading">
+        <span class="section-marker">06</span>
+        <h2 id="detail-title">APIテストを細かく見ると</h2>
+      </div>
+      <p>実際のテストケースでは、</p>
+      <pre class="flow-text"><code>仕様書通りのリクエスト</code></pre>
+      <p>と</p>
+      <pre class="flow-text"><code>仕様書通りのレスポンス</code></pre>
+      <p>をさらに細かく分解して確認している。</p>
+      <p>例えば、</p>
+      <pre class="flow-text"><code>URLは正しいか
+
+認証情報は正しいか
+
+パラメータは正しいか
+
+レスポンス内容は正しいか</code></pre>
+      <p>などを1つずつ確認する。</p>
     </section>
 
     <section class="content-section summary-section" aria-labelledby="summary-title">
       <div class="section-heading">
-        <span class="section-marker">11</span>
+        <span class="section-marker">07</span>
         <h2 id="summary-title">まとめ</h2>
       </div>
       <ul class="check-list">
@@ -360,10 +273,9 @@ HTTPS</code></pre>
         <li>リクエストは「APIへのお願い」</li>
         <li>レスポンスは「APIからの返事」</li>
         <li>APIテストは「仕様書通りのリクエストを送った時に、仕様書通りのレスポンスが返るか」を確認する</li>
-        <li>今後はリクエストやレスポンスを構成する各要素を学んでいく</li>
+        <li>実際のテストではリクエストとレスポンスを細かい要素に分解して確認する</li>
       </ul>
     </section>
-
     <nav class="pager" aria-label="前後のページ">
       <a href="b01.html">前へ：APIとは</a>
       <a href="b03.html">次へ：APIリクエストの構成要素について</a>
