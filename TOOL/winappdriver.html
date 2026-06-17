@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WinAppDriver</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="tool-detail-page">
+  <a class="study-home-link" href="../index.html">学習コンテンツへ戻る</a>
+
+  <header class="hero hero--detail">
+    <div class="hero__inner">
+      <a class="back-link" href="index.html">ツールまとめへ戻る</a>
+      <p class="eyebrow">Desktop App Test</p>
+      <h1>WinAppDriver</h1>
+      <p class="lead">Windowsアプリを自動操作するためのテストツールです。Excel、メモ帳、電卓、社内ツールなどの操作確認に使います。</p>
+
+      <div class="hero-highlights" aria-label="WinAppDriverの概要">
+        <div class="highlight-card">
+          <span>対象</span>
+          <strong>Windowsアプリ</strong>
+        </div>
+        <div class="highlight-card">
+          <span>操作</span>
+          <strong>クリック・入力・待機</strong>
+        </div>
+        <div class="highlight-card">
+          <span>テスト</span>
+          <strong>unittestで実行</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <nav class="toc" aria-label="WinAppDriverページ内メニュー">
+      <a href="#start">使い始め</a>
+      <a href="#imports">読み込み</a>
+      <a href="#structure">基本構造</a>
+      <a href="#locator">要素の取得</a>
+      <a href="#mouse">マウス操作</a>
+      <a href="#keyboard">キーボード</a>
+      <a href="#screenshot-wait">スクショ・待機</a>
+      <a href="#assert-log">アサート・ログ</a>
+    </nav>
+
+    <div class="content-column">
+      <section id="start" class="section">
+        <div class="section-heading">
+          <p class="section-label">Start</p>
+          <h2>使い始めにやること</h2>
+        </div>
+
+        <div class="assert-intro-grid">
+          <article class="content-card">
+            <h3>1. WinAppDriverを起動</h3>
+            <p>WinAppDriverを管理者として起動します。</p>
+          </article>
+
+          <article class="content-card">
+            <h3>2. cmdを起動してvenvを有効化</h3>
+            <pre class="tool-tree"><code>C:\Users\yui.fukushima\Documents\venv_winapp\Scripts\activate.bat</code></pre>
+          </article>
+        </div>
+
+        <div class="compare-code-grid">
+          <article class="syntax-card">
+            <h3>バージョン固定</h3>
+            <pre><code>python -m pip install selenium==4.0.0
+python -m pip install Appium-Python-Client==1.3.0</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>テスト実行</h3>
+            <p>コマンドでファイルのある場所へ移動してから実行します。</p>
+            <pre><code>cd "C:\Users\yui.fukushima\Documents\WinAppDriver"
+python -m unittest -v ファイル名（拡張子なし）</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="imports" class="section">
+        <div class="section-heading">
+          <p class="section-label">Import</p>
+          <h2>読み込み</h2>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>必須</h3>
+          <pre><code>import unittest
+from appium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait</code></pre>
+        </article>
+
+        <div class="assert-summary-grid">
+          <article class="content-card">
+            <h3>unittest</h3>
+            <p>Pythonに最初から入っている、テストを自動で実行して合否を判定してくれる仕組みです。</p>
+          </article>
+
+          <article class="content-card">
+            <h3>webdriver</h3>
+            <p>WinAppDriverに接続するために使います。</p>
+          </article>
+        </div>
+
+        <div class="table-card">
+          <h3>条件付きで使うもの</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>import</th>
+                  <th>使う場面</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><code>import time</code></th>
+                  <td><code>time.sleep()</code> や待機ループを書くとき</td>
+                </tr>
+                <tr>
+                  <th><code>import os</code></th>
+                  <td>スクショ保存、フォルダ作成、ファイル保存、パス操作</td>
+                </tr>
+                <tr>
+                  <th><code>from selenium.webdriver.common.action_chains import ActionChains</code></th>
+                  <td>右クリック、ダブルクリック、ドラッグ、長押し</td>
+                </tr>
+                <tr>
+                  <th><code>from selenium.webdriver.common.keys import Keys</code></th>
+                  <td>Enter、Tab、Backspaceなどの特殊キー入力</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="structure" class="section">
+        <div class="section-heading">
+          <p class="section-label">Structure</p>
+          <h2>基本構造</h2>
+        </div>
+
+        <article class="content-card">
+          <h3>unittest のルール</h3>
+          <p>インポートしてクラスで指定します。下記の順番で自動的に実行されます。</p>
+          <ol class="step-list">
+            <li><code>setUp()</code> を呼ぶ：テストの準備</li>
+            <li><code>test_...()</code> を呼ぶ：実際のテスト</li>
+            <li><code>tearDown()</code> を呼ぶ：後片付け</li>
+          </ol>
+        </article>
+
+        <div class="compare-code-grid">
+          <article class="syntax-card">
+            <h3>Classの基本形</h3>
+            <pre><code>class クラス名:
+    def メソッド名(self):
+        処理</code></pre>
+            <p class="code-note">メソッドの最初の引数は、ほぼ必ず <code>self</code> です。</p>
+          </article>
+
+          <article class="syntax-card">
+            <h3>unittestでのクラスの書き方</h3>
+            <pre><code>class クラス名(unittest.TestCase):
+    ...</code></pre>
+          </article>
+        </div>
+
+        <div class="file-role-grid file-role-grid--stacked">
+          <article class="syntax-card">
+            <h3>setUp</h3>
+            <pre><code>def setUp(self):
+    desired_caps = {}
+    desired_caps["app"] = "アプリの指定"
+    self.driver = webdriver.Remote(
+        command_executor="http://localhost:4723",
+        desired_capabilities=desired_caps
+    )</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>アプリの指定</h3>
+            <pre><code># Microsoft Store アプリ
+desired_caps["app"] = "【アプリのAUMID】"
+
+# PowerShellで調べる
+Get-StartApps | Where-Object Name -like "*●●*"
+
+# 社内ツール、メモ帳などデスクトップアプリ
+desired_caps["app"] = r"【exeのフルパス】"</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>tearDown</h3>
+            <pre><code>def tearDown(self):
+    # アプリケーションを閉じる
+    self.driver.quit()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>test_ 操作内容</h3>
+            <pre><code>def test_〇〇(self):
+    # ① 操作
+    要素を取得して操作する（click / send_keys など）
+
+    # ② 結果を取得
+    result = 結果表示の要素を取得
+
+    # ③ 確認（assert）
+    self.assertEqual(期待値, 実際の値)</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="locator" class="section">
+        <div class="section-heading">
+          <p class="section-label">Locator</p>
+          <h2>要素の取得</h2>
+        </div>
+
+        <div class="table-card">
+          <h3>2.0.0以降の書き方</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>検索対象</th>
+                  <th>旧（非推奨・削除）</th>
+                  <th>新（推奨）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <td><code>find_element_by_name("...")</code></td>
+                  <td><code>find_element(AppiumBy.NAME, "...")</code></td>
+                </tr>
+                <tr>
+                  <th>XPath</th>
+                  <td><code>find_element_by_xpath("...")</code></td>
+                  <td><code>find_element(AppiumBy.XPATH, "...")</code></td>
+                </tr>
+                <tr>
+                  <th>ClassName</th>
+                  <td><code>find_element_by_class_name("...")</code></td>
+                  <td><code>find_element(AppiumBy.CLASS_NAME, "...")</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>Appium-Python-Client 1.3.0 の例</h3>
+          <pre><code>from appium.webdriver.common.mobileby import MobileBy
+
+# Accessibility ID の場合
+driver.find_element(MobileBy.ACCESSIBILITY_ID, "...")
+
+# Name の場合
+driver.find_element(MobileBy.NAME, "...")
+
+# XPath の場合
+driver.find_element(MobileBy.XPATH, "...")
+
+# Class Name の場合
+driver.find_element(MobileBy.CLASS_NAME, "...")</code></pre>
+        </article>
+
+        <div class="table-card">
+          <h3>識別方法の考え方</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>優先度</th>
+                  <th>方法</th>
+                  <th>例</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td>AccessibilityId（いちばん安定）</td>
+                  <td><code>self.driver.find_element(MobileBy.ACCESSIBILITY_ID, "AutomationId").click()</code></td>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <td>Name（表示文字で探す）</td>
+                  <td><code>self.driver.find_element(MobileBy.NAME, "表示されている文字")</code></td>
+                </tr>
+                <tr>
+                  <th>3</th>
+                  <td>XPath（最後の手段）</td>
+                  <td><code>self.driver.find_element(MobileBy.XPATH, "//Button[@Name='2']").click()</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">AutomationIdはInspectで確認します。</p>
+        </div>
+      </section>
+
+      <section id="mouse" class="section">
+        <div class="section-heading">
+          <p class="section-label">Mouse</p>
+          <h2>マウス操作</h2>
+        </div>
+
+        <div class="assert-grid">
+          <article class="syntax-card">
+            <h4>左クリック</h4>
+            <pre><code>element = self.driver.find_element(MobileBy.ACCESSIBILITY_ID, "num2Button")
+element.click()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>右クリック</h4>
+            <pre><code>from selenium.webdriver.common.action_chains import ActionChains
+
+element = self.driver.find_element_by_識別方法("識別値")
+ActionChains(self.driver).context_click(element).perform()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>右クリック後のメニューをクリック</h4>
+            <pre><code>target = self.driver.find_element_by_識別方法("右クリック対象の識別値")
+ActionChains(self.driver).context_click(target).perform()
+
+menu = WebDriverWait(self.driver, 最大待機秒).until(
+    lambda driver: driver.find_element_by_識別方法("メニュー項目の識別値")
+)
+menu.click()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>ダブルクリック</h4>
+            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+ActionChains(self.driver).double_click(element).perform()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>ドラッグ＆ドロップ</h4>
+            <pre><code>start = self.driver.find_element_by_識別方法("開始側の識別値")
+end = self.driver.find_element_by_識別方法("終了側の識別値")
+ActionChains(self.driver).drag_and_drop(start, end).perform()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>長押し</h4>
+            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+ActionChains(self.driver).click_and_hold(element).perform()
+ActionChains(self.driver).release().perform()</code></pre>
+          </article>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>線を描く</h3>
+          <pre><code>canvas = self.driver.find_element_by_識別方法("キャンバスの識別値")
+ActionChains(self.driver).click_and_hold(canvas).move_by_offset(移動X, 移動Y).release().perform()</code></pre>
+          <p>終了地点が右に30の場合の例です。</p>
+          <pre><code>start_point = self.driver.find_element_by_accessibility_id("ListViewItem-15")
+ActionChains(self.driver)\
+    .click_and_hold(start_point)\
+    .move_by_offset(30, 0)\
+    .release()\
+    .perform()</code></pre>
+        </article>
+      </section>
+
+      <section id="keyboard" class="section">
+        <div class="section-heading">
+          <p class="section-label">Keyboard</p>
+          <h2>キーボード入力</h2>
+        </div>
+
+        <div class="compare-code-grid">
+          <article class="syntax-card">
+            <h3>文字入力</h3>
+            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+element.send_keys("入力したい文字")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>クリアしてから入力</h3>
+            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+element.clear()
+element.send_keys("入力したい文字")</code></pre>
+            <p class="code-note">入力欄に既に何か入っている可能性があるなら、まずクリアします。</p>
+          </article>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>特殊キー</h3>
+          <pre><code>from selenium.webdriver.common.keys import Keys
+
+element = self.driver.find_element_by_識別方法("識別値")
+element.send_keys("abc", Keys.ENTER)
+
+# Backspaceを3回押す例
+element.send_keys(Keys.BACKSPACE * 3)</code></pre>
+        </article>
+
+        <div class="table-card">
+          <h3>特殊キーの一覧</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>種類</th>
+                  <th>キー</th>
+                  <th>書き方</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>基本キー</th>
+                  <td>Enter / Tab / Esc / Backspace / Delete / Space</td>
+                  <td><code>Keys.ENTER</code> / <code>Keys.TAB</code> / <code>Keys.ESCAPE</code> / <code>Keys.BACKSPACE</code> / <code>Keys.DELETE</code> / <code>Keys.SPACE</code></td>
+                </tr>
+                <tr>
+                  <th>矢印キー</th>
+                  <td>↑ / ↓ / ← / →</td>
+                  <td><code>Keys.UP</code> / <code>Keys.DOWN</code> / <code>Keys.LEFT</code> / <code>Keys.RIGHT</code></td>
+                </tr>
+                <tr>
+                  <th>編集系キー</th>
+                  <td>Home / End / PageUp / PageDown</td>
+                  <td><code>Keys.HOME</code> / <code>Keys.END</code> / <code>Keys.PAGE_UP</code> / <code>Keys.PAGE_DOWN</code></td>
+                </tr>
+                <tr>
+                  <th>修飾キー</th>
+                  <td>Ctrl / Shift / Alt</td>
+                  <td><code>Keys.CONTROL</code> / <code>Keys.SHIFT</code> / <code>Keys.ALT</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>要素を指定せずにEnter</h3>
+          <pre><code>element = excel_driver.switch_to.active_element
+element.send_keys(Keys.ENTER)</code></pre>
+        </article>
+      </section>
+
+      <section id="screenshot-wait" class="section">
+        <div class="section-heading">
+          <p class="section-label">Screenshot / Wait</p>
+          <h2>スクリーンショットと待機</h2>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>スクリーンショットを撮る</h3>
+          <pre><code>import os
+from datetime import datetime
+
+def take_screenshot(self, label):
+    daytext = datetime.now().strftime("%Y%m%d")
+    time_text = datetime.now().strftime("%H%M%S")
+    folder = r"C:\Users\yui.fukushima\Documents"
+    folder_path = os.path.join(folder, f"●●_{daytext}")
+    os.makedirs(folder_path, exist_ok=True)
+    file_path = os.path.join(folder_path, f"{time_text}_{label}.png")
+    self.driver.save_screenshot(file_path)</code></pre>
+          <p>使い方</p>
+          <pre><code>self.take_screenshot("before")
+# 操作
+self.take_screenshot("after")</code></pre>
+          <p class="code-note">ラベルは <code>before</code> や <code>after</code> など、自分で付ける名前です。</p>
+        </article>
+
+        <article class="content-card">
+          <h3>待機が必要なタイミング</h3>
+          <ul class="check-list">
+            <li>アプリ起動直後</li>
+            <li>画面切り替え直後</li>
+            <li>メニューを開いた直後</li>
+            <li>計算結果の反映直後</li>
+          </ul>
+        </article>
+
+        <div class="compare-code-grid">
+          <article class="syntax-card">
+            <h3>固定待ち</h3>
+            <pre><code>time.sleep(1)
+time.sleep(1.5)</code></pre>
+            <p class="code-note"><code>1</code> は1秒、<code>1.5</code> は1.5秒です。</p>
+          </article>
+
+          <article class="syntax-card">
+            <h3>要素が見つかるまで待つ</h3>
+            <pre><code>element = None
+timeout = 10
+poll_frequency = 0.5
+end_time = time.time() + timeout
+
+while time.time() < end_time:
+    try:
+        element = self.driver.find_element_by_識別方法("識別値")
+        break
+    except Exception:
+        time.sleep(poll_frequency)
+
+self.assertIsNotNone(element, "最大待機時間内に要素が見つかること")</code></pre>
+          </article>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>テキストが期待値になるまで待つ</h3>
+          <pre><code>actual_text = ""
+timeout = 10
+poll_frequency = 0.5
+end_time = time.time() + timeout
+
+while time.time() < end_time:
+    element = self.driver.find_element_by_識別方法("テキスト確認対象の識別値")
+    actual_text = str(element.text)
+    if actual_text == "期待するテキスト（完全一致）":
+        break
+    time.sleep(poll_frequency)
+
+self.assertEqual("期待するテキスト（完全一致）", actual_text, "指定時間内に期待テキストになること")</code></pre>
+        </article>
+
+        <div class="assert-grid">
+          <article class="syntax-card">
+            <h4>WebDriverWait：要素が出るまで待つ</h4>
+            <pre><code>element = WebDriverWait(self.driver, 最大待機秒).until(
+    lambda driver: driver.find_element_by_識別方法("識別値")
+)</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>WebDriverWait：完全一致</h4>
+            <pre><code>WebDriverWait(self.driver, 最大待機秒).until(
+    lambda driver: driver.find_element_by_識別方法("テキスト確認対象の識別値").text == "期待するテキスト"
+)</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>WebDriverWait：部分一致</h4>
+            <pre><code>WebDriverWait(self.driver, 最大待機秒).until(
+    lambda driver: "期待する部分文字列" in driver.find_element_by_識別方法("テキスト確認対象の識別値").text
+)</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>上書き確認ダイアログ</h4>
+            <pre><code>try:
+    overwrite = WebDriverWait(self.driver, 5).until(
+        lambda driver: driver.find_element_by_accessibility_id("1")
+    )
+    overwrite.click()
+except Exception:
+    pass</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section id="assert-log" class="section">
+        <div class="section-heading">
+          <p class="section-label">Assert / Log</p>
+          <h2>アサートとログ表示</h2>
+        </div>
+
+        <div class="assert-grid">
+          <article class="syntax-card">
+            <h4>含まれているか確認（部分一致）</h4>
+            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+self.assertIn("期待する文字列", str(element.text), "失敗時のメッセージ")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>True / False の確認</h4>
+            <pre><code>self.assertTrue(条件式, "失敗時メッセージ")
+self.assertFalse(条件式, "失敗時メッセージ")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>要素が存在することを確認</h4>
+            <pre><code>self.assertIsNotNone(element, "要素が取得できること")</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h4>実際の値を取得</h4>
+            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+actual = str(element.text)</code></pre>
+          </article>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>ログ表示</h3>
+          <pre><code>import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s"
+)
+
+logger = logging.getLogger(__name__)
+
+logger.info("メッセージ")
+logger.debug("メッセージ")
+logger.info("文字列 %s 文字列", 値)</code></pre>
+          <p class="code-note">安定したら <code>INFO</code>、調査したいときは <code>DEBUG</code> にすると細かいログも出せます。</p>
+        </article>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>要素が見つからない場合に失敗させる</h3>
+          <pre><code>from selenium.common.exceptions import NoSuchElementException
+
+try:
+    element = self.driver.find_element_by_識別方法("識別値")
+except NoSuchElementException:
+    self.fail("ここに自分で書きたいエラーメッセージ")</code></pre>
+        </article>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>

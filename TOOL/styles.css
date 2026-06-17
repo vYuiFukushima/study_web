@@ -357,6 +357,10 @@ h1 {
   margin-bottom: 0;
 }
 
+.section > :not(.section-heading) + :not(.section-heading) {
+  margin-top: 16px;
+}
+
 .overview-layout {
   max-width: 680px;
 }

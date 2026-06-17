@@ -22,7 +22,13 @@
   <main class="page-shell">
     <nav class="toc" aria-label="ページ内メニュー">
       <a href="#overview">主なツール</a>
-      <a href="#code-tools">プログラミング</a>
+      <details class="toc-group">
+        <summary>プログラミング</summary>
+        <div class="toc-submenu">
+          <a href="playwright.html">Playwright</a>
+          <a href="winappdriver.html">WinAppDriver</a>
+        </div>
+      </details>
       <a href="#nocode-tools">ノーコード</a>
       <a href="#api-tools">APIテスト</a>
       <a href="#summary">まとめ</a>
@@ -252,10 +258,13 @@ APIテスト
             <ul>
               <li>Microsoft製</li>
               <li>Windowsアプリ専用</li>
-            </ul>
-            <p class="fit">向いているもの：デスクトップアプリ</p>
-            <blockquote>Windowsアプリ版のSelenium</blockquote>
-          </article>
+          </ul>
+          <p class="fit">向いているもの：デスクトップアプリ</p>
+          <blockquote>Windowsアプリ版のSelenium</blockquote>
+          <div class="tool-card__actions">
+            <a class="detail-link" href="winappdriver.html">詳しく見る</a>
+          </div>
+        </article>
         </div>
 
         <div class="table-card">
@@ -266,7 +275,7 @@ APIテスト
                 <tr>
                   <th>項目</th>
                   <th>Appium</th>
-                  <th>WinAppDriver</th>
+                  <th><a href="winappdriver.html">WinAppDriver</a></th>
                 </tr>
               </thead>
               <tbody>
@@ -503,11 +512,11 @@ DELETE /books/1</code></pre>
                   <tr>
                     <th>Appium</th>
                     <td>スマホアプリ</td>
-                  </tr>
-                  <tr>
-                    <th>WinAppDriver</th>
-                    <td>Windowsアプリ</td>
-                  </tr>
+                </tr>
+                <tr>
+                  <th><a href="winappdriver.html">WinAppDriver</a></th>
+                  <td>Windowsアプリ</td>
+                </tr>
                   <tr>
                     <th>MagicPod</th>
                     <td>Web・スマホ</td>
@@ -551,11 +560,11 @@ DELETE /books/1</code></pre>
                   <tr>
                     <th>Appium</th>
                     <td>スマホアプリテスト</td>
-                  </tr>
-                  <tr>
-                    <th>WinAppDriver</th>
-                    <td>Windowsアプリテスト</td>
-                  </tr>
+                </tr>
+                <tr>
+                  <th><a href="winappdriver.html">WinAppDriver</a></th>
+                  <td>Windowsアプリテスト</td>
+                </tr>
                   <tr>
                     <th>MagicPod</th>
                     <td>ノーコードテスト</td>
