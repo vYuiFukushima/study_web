@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 関数まとめ</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Python 関数まとめ</h1>
+        <p>Function 学習ノート</p>
+    </header>
+
+    <div class="container">
+
+        <nav class="toc">
+            <h2>目次</h2>
+
+            <ul>
+                <li><a href="#func">関数とは</a></li>
+                <li><a href="#define">関数を定義する</a></li>
+                <li><a href="#call">関数を呼び出す</a></li>
+                <li><a href="#argument">引数を使う</a></li>
+                <li><a href="#return">戻り値を返す</a></li>
+                <li><a href="#multiarg">複数の引数を使う</a></li>
+                <li><a href="#defaultarg">デフォルト引数</a></li>
+                <li><a href="#keywordarg">キーワード引数</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+
+            <section id="func" class="card">
+                <h2>関数とは</h2>
+
+                <p>
+                    関数とは、処理をひとまとめにして
+                    名前を付けたものです。
+                </p>
+
+                <p>
+                    同じ処理を何度も実行したい場合に利用します。
+                </p>
+            </section>
+            <section id="define" class="card">
+
+                <h2>
+                    関数を定義する
+                    <span>def 関数名():</span>
+                </h2>
+
+                <pre><code>def hello():
+    print("こんにちは")</code></pre>
+
+                <p>
+                    <code>def</code> を使って関数を定義します。
+                </p>
+
+            </section>
+            <section id="call" class="card">
+
+                <h2>
+                    関数を呼び出す
+                    <span>関数名()</span>
+                </h2>
+
+                <pre><code>def hello():
+    print("こんにちは")
+
+hello()</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    こんにちは
+                </div>
+
+            </section>
+            <section id="argument" class="card">
+
+                <h2>
+                    引数を使う
+                    <span>def 関数名(引数):</span>
+                </h2>
+
+                <pre><code>def hello(name):
+    print("こんにちは", name)
+
+hello("太郎")</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    こんにちは 太郎
+                </div>
+
+            </section>
+            <section id="return" class="card">
+
+                <h2>
+                    戻り値を返す
+                    <span>return</span>
+                </h2>
+
+                <pre><code>def add(x, y):
+    return x + y
+
+result = add(10, 20)
+
+print(result)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    30
+                </div>
+
+            </section>
+            <section id="multiarg" class="card">
+
+                <h2>
+                    複数の引数を使う
+                    <span>def 関数名(引数1, 引数2)</span>
+                </h2>
+
+                <p>
+                    引数はカンマ区切りで複数指定できます。
+                </p>
+
+                <pre><code>def add(x, y):
+    print(x + y)
+
+add(10, 20)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    30
+                </div>
+
+            </section>
+            <section id="defaultarg" class="card">
+
+                <h2>
+                    デフォルト引数
+                    <span>引数 = 初期値</span>
+                </h2>
+
+                <p>
+                    引数に値が渡されなかった場合に使用する値を設定できます。
+                </p>
+
+                <pre><code>def hello(name="ゲスト"):
+    print("こんにちは", name)
+
+hello()
+hello("太郎")</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    こんにちは ゲスト<br>
+                    こんにちは 太郎
+                </div>
+
+            </section>
+            <section id="keywordarg" class="card">
+
+                <h2>
+                    キーワード引数
+                    <span>引数名 = 値</span>
+                </h2>
+
+                <p>
+                    引数名を指定して値を渡せます。
+                </p>
+
+                <pre><code>def profile(name, age):
+    print(name, age)
+
+profile(age=20, name="太郎")</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    太郎 20
+                </div>
+
+            </section>
+        </main>
+
+    </div>
+
+</body>
+
+</html>

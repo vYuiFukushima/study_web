@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 辞書まとめ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Python 辞書まとめ</h1>
+        <p>Dictionary 学習ノート</p>
+    </header>
+
+    <div class="container">
+
+        <nav class="toc">
+            <h2>目次</h2>
+
+            <ul>
+                <li><a href="#dictionary">辞書とは</a></li>
+                <li><a href="#create">辞書の作り方</a></li>
+                <li><a href="#empty">空の辞書</a></li>
+                <li><a href="#getvalue">値の取得</a></li>
+                <li><a href="#getmethod">getメソッド</a></li>
+                <li><a href="#update">値を変更する(代入)</a></li>
+                <li><a href="#add">新しい要素を追加する</a></li>
+                <li><a href="#keys">辞書に含まれるすべてのキーを取得する</a></li>
+                <li><a href="#values">辞書に含まれるすべての値を取得する</a></li>
+                <li><a href="#items">辞書に含まれるすべてのキーと値を取得する</a></li>
+                <li><a href="#del">del文を使って要素を削除する</a></li>
+                <li><a href="#pop">指定したキーの要素を削除する</a></li>
+                <li><a href="#popitem">最後に追加された要素を取得した上で削除する</a></li>
+                <li><a href="#clear">すべての要素を削除する</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+
+            <section id="dictionary" class="card">
+                <h2>辞書とは</h2>
+
+                <p>
+                    辞書（Dictionary）は、
+                    キー（Key）と値（Value）をセットで管理するデータ型です。
+                </p>
+
+                <pre><code>dct = {
+    "id": "0001",
+    "name": "guest"
+}</code></pre>
+            </section>
+
+            <section id="create" class="card">
+                <h2>
+                    辞書の作り方
+                    <span>{キー1:値1, キー2:値2, ...}</span>
+                </h2>
+                <pre><code>fruits = {
+    1: "Orange",
+    2: "Lemon",
+    3: "Peach"
+}</code></pre>
+
+                <pre><code>colors = {
+    "red": "赤色",
+    "blue": "青色",
+    "yellow": "黄色"
+}</code></pre>
+
+                <pre><code>user = {
+    "old": 28,
+    "address": "Tokyo"
+}</code></pre>
+            </section>
+
+
+
+            <section id="getvalue" class="card">
+                <h2>キーを指定して値を取得する
+                    <span>辞書[キー]</span>
+                </h2>
+
+                <pre><code>mydict = {
+    "JP": "Japan",
+    "DE": "Germany",
+    "FR": "France"
+}
+
+print(mydict["DE"])</code></pre>
+
+                <div class="result">
+                    実行結果：Germany
+                </div>
+            </section>
+
+            <section id="getmethod" class="card">
+                <h2>getメソッドで値を取得する
+                    <span>辞書.get(key[, default])</span>
+                </h2>
+
+                <pre><code>mydict = {
+    "JP": "Japan",
+    "DE": "Germany",
+    "FR": "France"
+}
+
+print(mydict.get("DE"))
+print(mydict.get("EN"))
+print(mydict.get("EN", "NotFound"))</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    Germany<br>
+                    None<br>
+                    NotFound
+                </div>
+            </section>
+
+            <section id="update" class="card">
+                <h2>辞書の要素の値を変更する<span>辞書[キー] = 値</span></h2>
+
+                <p>
+                    既に存在するキーに対して値を代入すると、
+                    そのキーの値を変更できます。
+                </p>
+
+                <pre><code>mydict = {
+    1: "Movie",
+    2: "Foods",
+    3: "Reading"
+}
+
+mydict[2] = "Sports"
+
+print(mydict)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    {1: 'Movie', 2: 'Sports', 3: 'Reading'}
+                </div>
+            </section>
+
+            <section id="add" class="card">
+                <h2>辞書に新しい要素を追加する
+                    <span>辞書[キー] = 値</span>
+                </h2>
+
+                <p>
+                    存在しないキーに対して値を代入すると、
+                    新しい要素が追加されます。
+                </p>
+
+                <pre><code>mydict = {
+    1: "Movie",
+    2: "Foods",
+    3: "Reading"
+}
+
+mydict[4] = "Sports"
+
+print(mydict)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    {1: 'Movie', 2: 'Foods', 3: 'Reading', 4: 'Sports'}
+                </div>
+            </section>
+            <section id="keys" class="card">
+                <h2>辞書に含まれるすべてのキーを取得する
+                    <span>辞書.keys()</span>
+                </h2>
+
+                <p>
+                    <code>keys()</code> を使うと、
+                    辞書に含まれるすべてのキーを取得できます。
+                </p>
+
+                <pre><code>mydict = {
+    "L": "Lemon",
+    "O": "Orange",
+    "G": "Grapes"
+}
+
+print(mydict.keys())</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    dict_keys(['L', 'O', 'G'])
+                </div>
+
+                <h3>for文でキーを順番に取り出す</h3>
+
+                <pre><code>mydict = {
+    "L": "Lemon",
+    "O": "Orange",
+    "G": "Grapes"
+}
+
+for mykey in mydict.keys():
+    print(mykey)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    L<br>
+                    O<br>
+                    G
+                </div>
+            </section>
+            <section id="values" class="card">
+                <h2>辞書に含まれるすべての値を取得する
+                    <span>辞書.values()</span>
+                </h2>
+
+                <p>
+                    <code>values()</code> を使うと、
+                    辞書に含まれるすべての値を取得できます。
+                </p>
+
+                <pre><code>mydict = {
+    "L": "Lemon",
+    "O": "Orange",
+    "G": "Grapes"
+}
+
+print(mydict.values())</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    dict_values(['Lemon', 'Orange', 'Grapes'])
+                </div>
+
+                <h3>for文で値を順番に取り出す</h3>
+
+                <pre><code>mydict = {
+    "L": "Lemon",
+    "O": "Orange",
+    "G": "Grapes"
+}
+
+for myvalue in mydict.values():
+    print(myvalue)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    Lemon<br>
+                    Orange<br>
+                    Grapes
+                </div>
+            </section>
+            <section id="items" class="card">
+                <h2>辞書に含まれるすべてのキーと値を取得する
+                    <span>辞書.items()</span>
+                </h2>
+
+                <p>
+                    <code>items()</code> を使うと、
+                    キーと値の組み合わせを取得できます。
+                </p>
+
+                <pre><code>mydict = {
+    "L": "Lemon",
+    "O": "Orange",
+    "G": "Grapes"
+}
+
+print(mydict.items())</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    dict_items([('L', 'Lemon'), ('O', 'Orange'), ('G', 'Grapes')])
+                </div>
+
+                <h3>for文でキーと値を順番に取り出す</h3>
+
+                <pre><code>mydict = {
+    "L": "Lemon",
+    "O": "Orange",
+    "G": "Grapes"
+}
+
+for mykey, myvalue in mydict.items():
+    print("key:" + mykey + ", value:" + myvalue)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    key:L, value:Lemon<br>
+                    key:O, value:Orange<br>
+                    key:G, value:Grapes
+                </div>
+            </section>
+            <section id="del" class="card">
+                <h2>del文を使って要素を削除する
+                    <span>del 辞書[キー]</span>
+                </h2>
+
+                <p>
+                    <code>del</code> を使うと、
+                    指定したキーの要素を削除できます。
+                </p>
+
+                <pre><code>mydict = {
+    "A": "Apple",
+    "L": "Lemon",
+    "O": "Orange"
+}
+
+del mydict["L"]
+
+print(mydict)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    {'A': 'Apple', 'O': 'Orange'}
+                </div>
+            </section>
+            <section id="pop" class="card">
+                <h2>指定したキーの要素を削除する
+                    <span>辞書.pop(key[, default])</span>
+                </h2>
+
+                <p>
+                    <code>pop()</code> は要素を削除すると同時に、
+                    削除した値を取得できます。
+                </p>
+
+                <pre><code>mydict = {
+    "A": "Apple",
+    "L": "Lemon",
+    "O": "Orange"
+}
+
+val = mydict.pop("L")
+
+print(val)
+print(mydict)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    Lemon<br><br>
+                    {'A': 'Apple', 'O': 'Orange'}
+                </div>
+            </section>
+            <section id="popitem" class="card">
+                <h2>最後に追加された要素を取得して削除する
+                    <span>辞書.popitem()</span>
+                </h2>
+
+                <p>
+                    <code>popitem()</code> は、
+                    最後に追加されたキーと値を取得しながら削除します。
+                </p>
+
+                <pre><code>mydict = {
+    "A": "Apple",
+    "L": "Lemon",
+    "O": "Orange"
+}
+
+val = mydict.popitem()
+
+print(val)
+print(mydict)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    ('O', 'Orange')<br><br>
+                    {'A': 'Apple', 'L': 'Lemon'}
+                </div>
+
+                <h3>続けて実行した場合</h3>
+
+                <pre><code>val = mydict.popitem()
+print(val)
+
+val = mydict.popitem()
+print(val)
+
+print(mydict)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    ('L', 'Lemon')<br>
+                    ('A', 'Apple')<br><br>
+                    {}
+                </div>
+            </section>
+
+            <section id="clear" class="card">
+                <h2>すべての要素を削除する
+                    <span>辞書.clear()</span>
+                </h2>
+
+                <p>
+                    <code>clear()</code> を使うと、
+                    辞書のすべての要素を削除できます。
+                </p>
+
+                <pre><code>mydict = {
+    "A": "Apple",
+    "L": "Lemon",
+    "O": "Orange"
+}
+
+mydict.clear()
+
+print(mydict)</code></pre>
+
+                <div class="result">
+                    実行結果<br>
+                    {}
+                </div>
+            </section>
+
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

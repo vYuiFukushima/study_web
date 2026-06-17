@@ -1,0 +1,223 @@
+/* --------------------
+   共通
+-------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F8F6F5;
+    color: #333333;
+    font-family: "Yu Gothic", sans-serif;
+    line-height: 1.8;
+}
+
+/* --------------------
+   ヘッダー
+-------------------- */
+
+header {
+    background-color: #b498b1;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* --------------------
+   レイアウト
+-------------------- */
+
+.container {
+    display: flex;
+    gap: 30px;
+
+    max-width: 1400px;
+    margin: 30px auto;
+
+    padding: 0 20px;
+}
+
+/* --------------------
+   目次
+-------------------- */
+
+.toc {
+    width: 240px;
+
+    background-color: #FFFFFF;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    position: sticky;
+    top: 20px;
+
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    box-shadow: 0 2px 8px rgba(180, 154, 152, 0.15);
+}
+
+.toc h2 {
+    margin-bottom: 15px;
+    color: #8D6D6D;
+}
+
+.toc ul {
+    list-style: none;
+}
+
+.toc li {
+    margin-bottom: 10px;
+}
+
+.toc a {
+    display: block;
+
+    text-decoration: none;
+
+    color: #555555;
+
+    background-color: #efe2eb;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+.toc a:hover {
+    background-color: #C77D7D;
+    color: #FFFFFF;
+}
+
+/* --------------------
+   スクロールバー
+-------------------- */
+
+.toc::-webkit-scrollbar {
+    width: 8px;
+}
+
+.toc::-webkit-scrollbar-track {
+    background: #F1ECEB;
+    border-radius: 4px;
+}
+
+.toc::-webkit-scrollbar-thumb {
+    background: #B68A9A;
+    border-radius: 4px;
+}
+
+.toc::-webkit-scrollbar-thumb:hover {
+    background: #C77D7D;
+}
+
+/* --------------------
+   コンテンツ
+-------------------- */
+
+.content {
+    flex: 1;
+}
+
+/* --------------------
+   カード
+-------------------- */
+
+.card {
+    background-color: #FFFFFF;
+
+    margin-bottom: 25px;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 3px 10px rgba(180, 154, 152, 0.12);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+
+    padding-left: 12px;
+
+    border-left: 6px solid #B68A9A;
+
+    color: #8D6D6D;
+}
+
+.card p {
+    margin-bottom: 15px;
+}
+
+.card h2 span {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 0.8em;
+
+    font-weight: normal;
+
+    color: #A68585;
+}
+
+/* --------------------
+   コード
+-------------------- */
+
+pre {
+    background-color: #B68A9A;
+
+    color: #FFFFFF;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    overflow-x: auto;
+
+    margin-bottom: 15px;
+}
+
+code {
+    font-family: Consolas, monospace;
+}
+
+/* --------------------
+   実行結果
+-------------------- */
+
+.result {
+    background-color: #F2DFDF;
+
+    color: #333333;
+
+    border-left: 6px solid #C77D7D;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+/* --------------------
+   見出し位置調整
+-------------------- */
+
+section {
+    scroll-margin-top: 20px;
+}

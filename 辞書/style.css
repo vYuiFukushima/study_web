@@ -1,0 +1,207 @@
+/* --------------------
+   共通
+-------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #C3D5C7;
+    color: #000000;
+    font-family: "Yu Gothic", sans-serif;
+    line-height: 1.8;
+}
+
+/* --------------------
+   ヘッダー
+-------------------- */
+
+header {
+    background-color: #6D7975;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* --------------------
+   レイアウト
+-------------------- */
+
+.container {
+    display: flex;
+    gap: 30px;
+
+    max-width: 1400px;
+    margin: 30px auto;
+
+    padding: 0 20px;
+}
+
+/* --------------------
+   目次
+-------------------- */
+
+.toc {
+    width: 240px;
+
+    background-color: #B2BEB5;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    position: sticky;
+    top: 20px;
+
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+}
+
+.toc h2 {
+    margin-bottom: 15px;
+}
+
+.toc ul {
+    list-style: none;
+}
+
+.toc li {
+    margin-bottom: 10px;
+}
+
+.toc a {
+    display: block;
+
+    text-decoration: none;
+
+    color: #000000;
+
+    background-color: #BCC3B0;
+
+    padding: 10px;
+
+    border-radius: 6px;
+
+    transition: 0.3s;
+}
+
+.toc a:hover {
+    background-color: #98AB6F;
+    color: #FFFFFF;
+}
+
+/* スクロールバー */
+
+.toc::-webkit-scrollbar {
+    width: 8px;
+}
+
+.toc::-webkit-scrollbar-track {
+    background: #BCC3B0;
+    border-radius: 4px;
+}
+
+.toc::-webkit-scrollbar-thumb {
+    background: #98AB6F;
+    border-radius: 4px;
+}
+
+.toc::-webkit-scrollbar-thumb:hover {
+    background: #6D7975;
+}
+
+/* --------------------
+   コンテンツ
+-------------------- */
+
+.content {
+    flex: 1;
+}
+
+/* --------------------
+   カード
+-------------------- */
+
+.card {
+    background-color: #FFFFFF;
+
+    margin-bottom: 25px;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 2px 6px rgba(109, 121, 117, 0.2);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+
+    padding-left: 10px;
+
+    border-left: 6px solid #98AB6F;
+
+    color: #6D7975;
+}
+
+.card p {
+    margin-bottom: 15px;
+}
+
+/* --------------------
+   コード
+-------------------- */
+
+pre {
+    background-color: #6D7975;
+
+    color: #FFFFFF;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    overflow-x: auto;
+
+    margin-bottom: 15px;
+}
+
+code {
+    font-family: Consolas, monospace;
+}
+
+/* --------------------
+   実行結果
+-------------------- */
+
+.result {
+    background-color: #B2D3A5;
+
+    color: #000000;
+
+    border-left: 6px solid #98AB6F;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+.card h2 span {
+    display: block;
+    margin-top: 5px;
+
+    font-size: 0.8em;
+    font-weight: normal;
+
+    color: #6D7975;
+}
