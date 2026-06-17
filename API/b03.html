@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APIリクエストの構成要素について</title>
   <link rel="stylesheet" href="site.css">
   <style id="study-home-link-style">
-  .study-home-link {
-    position: fixed;
-    left: 24px;
-    bottom: 24px;
-    z-index: 999;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    border: 1px solid #E97F12;
-    background: #E97F12;
-    color: #FBFCFD;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1;
-    text-decoration: none;
-    box-shadow: 0 12px 28px rgba(233, 127, 18, 0.24);
-    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
-  }
-  .study-home-link::before {
-    content: "←";
-    font-size: 15px;
-  }
-  .study-home-link:hover {
-    background: #4D4535;
-    color: #FBFCFD;
-    transform: translateY(-1px);
-  }
-  .study-home-link:focus-visible {
-    outline: 3px solid rgba(233, 127, 18, 0.28);
-    outline-offset: 3px;
-  }
-  @media (max-width: 720px) {
     .study-home-link {
-      left: 12px;
-      bottom: 12px;
-      padding: 11px 14px;
-      font-size: 13px;
+      position: fixed;
+      left: 24px;
+      bottom: 24px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid #E97F12;
+      background: #E97F12;
+      color: #FBFCFD;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(233, 127, 18, 0.24);
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
     }
-  }
-</style>
+
+    .study-home-link::before {
+      content: "←";
+      font-size: 15px;
+    }
+
+    .study-home-link:hover {
+      background: #4D4535;
+      color: #FBFCFD;
+      transform: translateY(-1px);
+    }
+
+    .study-home-link:focus-visible {
+      outline: 3px solid rgba(233, 127, 18, 0.28);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 720px) {
+      .study-home-link {
+        left: 12px;
+        bottom: 12px;
+        padding: 11px 14px;
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <a class="study-home-link" href="../index.html">学習コンテンツ一覧へ</a>
   <div class="scroll-progress" aria-hidden="true"></div>
@@ -72,7 +78,7 @@
     <header class="page-header">
       <div class="page-header__inner">
         <p class="chapter-label">APIリクエストの構成要素について</p>
-        <h1>APIリクエストの構成要素について</h1>
+        <h1>リクエスト</h1>
       </div>
     </header>
 
@@ -280,7 +286,8 @@
       <article class="example-block">
         <h3>主なヘッダの例</h3>
         <aside class="reference-box">
-          <p><a href="https://www.echoapi.jp/blog/untitled-34/" target="_blank" rel="noopener noreferrer">https://www.echoapi.jp/blog/untitled-34/</a> も参照のこと</p>
+          <p><a href="https://www.echoapi.jp/blog/untitled-34/" target="_blank"
+              rel="noopener noreferrer">https://www.echoapi.jp/blog/untitled-34/</a> も参照のこと</p>
         </aside>
         <div class="table-wrap">
           <table>
@@ -352,8 +359,11 @@
           <li>ユーザ側で値を決められるのが <strong>パスパラメータ</strong></li>
         </ul>
         <aside class="reference-box">
-          <p>例：<a href="https://qualityforward.github.io/api-spec/#tag/TestCycle" target="_blank" rel="noopener noreferrer">QualityForwardAPI / テストサイクル取得API</a></p>
-          <p><code>https://cloud.veriserve.co.jp/api/v2/test_phases/{test_phase[id]}/test_suite_assignments/{test_suite_assignments[id]}/test_cycles</code></p>
+          <p>例：<a href="https://qualityforward.github.io/api-spec/#tag/TestCycle" target="_blank"
+              rel="noopener noreferrer">QualityForwardAPI / テストサイクル取得API</a></p>
+          <p>
+            <code>https://cloud.veriserve.co.jp/api/v2/test_phases/{test_phase[id]}/test_suite_assignments/{test_suite_assignments[id]}/test_cycles</code>
+          </p>
           <ul class="plain-list">
             <li><code>{...}</code> で括られているものがパスパラメータ</li>
             <li>そうでないものはパスの一部</li>
@@ -403,8 +413,10 @@ POST https://api.example.com/api/user/1234
 {
     message:"invalid method"
 }</code></pre>
-        <p><code>POST https://api.example.com/api/user/1234</code> に対して <code>invalid method</code> が返却された場合、HTTPメソッドがAPI仕様と一致していない可能性がある。</p>
-        <p>このような場合は、API仕様書で対象エンドポイントに指定されているメソッドを確認し、<code>GET</code> / <code>POST</code> / <code>PUT</code> / <code>DELETE</code> などの指定を見直す必要がある。</p>
+        <p><code>POST https://api.example.com/api/user/1234</code> に対して <code>invalid method</code>
+          が返却された場合、HTTPメソッドがAPI仕様と一致していない可能性がある。</p>
+        <p>このような場合は、API仕様書で対象エンドポイントに指定されているメソッドを確認し、<code>GET</code> / <code>POST</code> / <code>PUT</code> /
+          <code>DELETE</code> などの指定を見直す必要がある。</p>
         <aside class="note-box">
           <p><strong>補足</strong></p>
           <p>URLが正しく見えても、メソッドが違うだけでエラーになることがある。APIテストでは「どこに送るか」だけでなく「何の操作として送るか」も確認する。</p>
@@ -427,7 +439,8 @@ https://api.example.com/api/user/</code></pre>
 
 https://api.example-develop.com</code></pre>
         <p>最初に提示された <code>https://api.example.com/api/user/</code> は本番環境のURLである。</p>
-        <p>あとから開発環境ドメインとして <code>https://api.example-develop.com</code> が指定された場合、ドメイン部分を開発環境に置き換え、パス部分は維持してリクエスト先を組み立てる。</p>
+        <p>あとから開発環境ドメインとして <code>https://api.example-develop.com</code> が指定された場合、ドメイン部分を開発環境に置き換え、パス部分は維持してリクエスト先を組み立てる。
+        </p>
         <pre class="flow-text"><code>https://api.example-develop.com/api/user/</code></pre>
         <aside class="note-box">
           <p><strong>補足</strong></p>
@@ -449,11 +462,13 @@ DELETE /api/user/{id}</code></pre>
 /api/user/{id}にリクエストを送信したのですがエラーになりました。
 ダブルチェックをお願いいたします。</code></pre>
         <p>この例では、メンバーから <code>/api/user/{id}</code> というパスだけが共有されている。</p>
-        <p>しかしAPI仕様書には、同じパスを使う <code>GET /api/user/{id}</code> と <code>DELETE /api/user/{id}</code> が存在するため、パスだけではどの操作を行ったのか特定できない。</p>
+        <p>しかしAPI仕様書には、同じパスを使う <code>GET /api/user/{id}</code> と <code>DELETE /api/user/{id}</code>
+          が存在するため、パスだけではどの操作を行ったのか特定できない。</p>
         <p>エラーを確認する場合は、送信したHTTPメソッド、実際に指定したURL、パスパラメータに入れた値、ヘッダやボディの有無も合わせて確認する。</p>
         <aside class="note-box">
           <p><strong>補足</strong></p>
-          <p>エンドポイントは <strong>メソッド + URLのパス</strong> で判断する。同じパスでも、<code>GET</code> と <code>DELETE</code> では意味が大きく異なる。</p>
+          <p>エンドポイントは <strong>メソッド + URLのパス</strong> で判断する。同じパスでも、<code>GET</code> と <code>DELETE</code> では意味が大きく異なる。
+          </p>
         </aside>
       </article>
 
@@ -467,7 +482,8 @@ region : Japan
 user_status : premium</code></pre>
         <p>クエリパラメータはURLの末尾に <code>?</code> を付け、その後に <code>key=value</code> の形で指定する。</p>
         <p>複数のクエリパラメータを指定する場合は、2つ目以降を <code>&</code> でつなぐ。</p>
-        <pre class="flow-text"><code>https://api.example.com/api/user/search?region=Japan&user_status=premium</code></pre>
+        <pre
+          class="flow-text"><code>https://api.example.com/api/user/search?region=Japan&user_status=premium</code></pre>
         <aside class="note-box">
           <p><strong>補足</strong></p>
           <p><code>?</code> はクエリパラメータの開始位置、<code>&</code> は複数条件の区切りを表す。検索条件や絞り込み条件を指定するときによく使われる。</p>
@@ -502,4 +518,5 @@ user_status : premium</code></pre>
 
   <script src="site.js"></script>
 </body>
+
 </html>

@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APIにおけるリクエストとレスポンス</title>
   <link rel="stylesheet" href="site.css">
   <style id="study-home-link-style">
-  .study-home-link {
-    position: fixed;
-    left: 24px;
-    bottom: 24px;
-    z-index: 999;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    border: 1px solid #E97F12;
-    background: #E97F12;
-    color: #FBFCFD;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1;
-    text-decoration: none;
-    box-shadow: 0 12px 28px rgba(233, 127, 18, 0.24);
-    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
-  }
-  .study-home-link::before {
-    content: "←";
-    font-size: 15px;
-  }
-  .study-home-link:hover {
-    background: #4D4535;
-    color: #FBFCFD;
-    transform: translateY(-1px);
-  }
-  .study-home-link:focus-visible {
-    outline: 3px solid rgba(233, 127, 18, 0.28);
-    outline-offset: 3px;
-  }
-  @media (max-width: 720px) {
     .study-home-link {
-      left: 12px;
-      bottom: 12px;
-      padding: 11px 14px;
-      font-size: 13px;
+      position: fixed;
+      left: 24px;
+      bottom: 24px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid #E97F12;
+      background: #E97F12;
+      color: #FBFCFD;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(233, 127, 18, 0.24);
+      transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
     }
-  }
-</style>
+
+    .study-home-link::before {
+      content: "←";
+      font-size: 15px;
+    }
+
+    .study-home-link:hover {
+      background: #4D4535;
+      color: #FBFCFD;
+      transform: translateY(-1px);
+    }
+
+    .study-home-link:focus-visible {
+      outline: 3px solid rgba(233, 127, 18, 0.28);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 720px) {
+      .study-home-link {
+        left: 12px;
+        bottom: 12px;
+        padding: 11px 14px;
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <a class="study-home-link" href="../index.html">学習コンテンツ一覧へ</a>
   <div class="scroll-progress" aria-hidden="true"></div>
@@ -72,7 +78,7 @@
     <header class="page-header">
       <div class="page-header__inner">
         <p class="chapter-label">APIリクエスト/レスポンスについて</p>
-        <h1>APIにおけるリクエストとレスポンス</h1>
+        <h1>リクエストとレスポンス</h1>
       </div>
     </header>
 
@@ -303,4 +309,5 @@ https://api.example.com/user/123</code></pre>
 
   <script src="site.js"></script>
 </body>
+
 </html>

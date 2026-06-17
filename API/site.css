@@ -60,8 +60,8 @@ body {
   width: fit-content;
   padding-left: 12px;
   color: var(--text);
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 650;
   text-decoration: none;
   letter-spacing: 0;
   border-left: 5px solid var(--accent);
@@ -120,7 +120,7 @@ body {
 
 .page-header {
   margin-bottom: 24px;
-  padding: 28px;
+  padding: 15px 28px;
   color: var(--base);
   background:
     linear-gradient(135deg, rgba(77, 69, 53, 0.96), rgba(77, 69, 53, 0.82)),
@@ -150,7 +150,7 @@ p {
 
 h1 {
   margin-bottom: 0;
-  font-size: clamp(1.9rem, 4.8vw, 3.4rem);
+  font-size: clamp(1.3rem, 3.2vw, 2.3rem);
   line-height: 1.15;
   letter-spacing: 0;
 }
@@ -180,6 +180,7 @@ h1 {
   position: sticky;
   top: 132px;
   max-height: calc(100vh - 152px);
+  width: 250px;
   overflow: auto;
   margin-top: 18px;
   padding: 16px;
@@ -305,8 +306,8 @@ code {
   list-style: none;
 }
 
-.basic-list > li,
-.check-list > li {
+.basic-list>li,
+.check-list>li {
   position: relative;
   padding: 12px 14px 12px 38px;
   background: rgba(248, 239, 229, 0.72);
@@ -314,8 +315,8 @@ code {
   border-radius: 8px;
 }
 
-.basic-list > li::before,
-.check-list > li::before {
+.basic-list>li::before,
+.check-list>li::before {
   content: "";
   position: absolute;
   top: 1.15em;
@@ -681,6 +682,7 @@ tbody tr:last-child td {
 }
 
 @media (max-width: 700px) {
+
   .site-nav__inner,
   .page-shell {
     width: min(100% - 20px, 1240px);
