@@ -89,8 +89,10 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  width: max-content;
   color: var(--base);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .brand:hover {
@@ -99,6 +101,7 @@ svg {
 
 .brand__mark {
   position: relative;
+  flex: 0 0 auto;
   width: 29px;
   height: 29px;
   border: 6px solid var(--base);
@@ -119,12 +122,15 @@ svg {
 }
 
 .brand__name {
+  flex: 0 0 auto;
   font-size: 1.6rem;
   font-weight: 650;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .brand__status {
+  flex: 0 0 auto;
   width: 9px;
   height: 9px;
   margin-left: 4px;
