@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CircleCI Organization Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path d="M3 10.8 12 3l9 7.8v9.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5Z"/>
+      <path d="M8 22v-8h8v8"/>
+    </symbol>
+    <symbol id="icon-pipeline" viewBox="0 0 24 24">
+      <circle cx="6" cy="6" r="2.5"/>
+      <circle cx="18" cy="12" r="2.5"/>
+      <circle cx="6" cy="18" r="2.5"/>
+      <path d="M8.4 6h4.2a3.4 3.4 0 0 1 3.1 2"/>
+      <path d="M8.4 18h4.2a3.4 3.4 0 0 0 3.1-2"/>
+    </symbol>
+    <symbol id="icon-bookmark" viewBox="0 0 24 24">
+      <path d="M7 4.5h10a1 1 0 0 1 1 1v15l-6-3-6 3v-15a1 1 0 0 1 1-1Z"/>
+      <path d="M10 8h4"/>
+    </symbol>
+    <symbol id="icon-dots" viewBox="0 0 24 24">
+      <circle cx="5" cy="12" r="1.3"/>
+      <circle cx="12" cy="12" r="1.3"/>
+      <circle cx="19" cy="12" r="1.3"/>
+    </symbol>
+    <symbol id="icon-cube" viewBox="0 0 24 24">
+      <path d="m12 2.8 8 4.4v9.6l-8 4.4-8-4.4V7.2Z"/>
+      <path d="m4 7.2 8 4.4 8-4.4"/>
+      <path d="M12 11.6v9.6"/>
+    </symbol>
+    <symbol id="icon-terminal" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="3"/>
+      <path d="m8 9 3 3-3 3"/>
+      <path d="M13 15h3"/>
+    </symbol>
+    <symbol id="icon-insights" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="2"/>
+      <path d="M8 16V9"/>
+      <path d="M12 16v-4"/>
+      <path d="M16 16v-8"/>
+    </symbol>
+    <symbol id="icon-people" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3"/>
+      <path d="M3.8 18a5.2 5.2 0 0 1 10.4 0"/>
+      <circle cx="17" cy="9" r="2.4"/>
+      <path d="M15 14.1a4.4 4.4 0 0 1 5.2 3.9"/>
+    </symbol>
+    <symbol id="icon-plan" viewBox="0 0 24 24">
+      <rect x="4" y="3.5" width="16" height="17" rx="2"/>
+      <path d="M9 8h6"/>
+      <path d="M12 7v10"/>
+      <path d="M9.5 15.5c.6.8 1.4 1.2 2.5 1.2 1.5 0 2.5-.8 2.5-2 0-1.1-.8-1.7-2.5-2.1-1.6-.4-2.5-1-2.5-2.2 0-1.2 1-2.1 2.5-2.1 1 0 1.8.4 2.3 1"/>
+    </symbol>
+    <symbol id="icon-github" viewBox="0 0 24 24">
+      <path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.3-.3-4.7-1.2-4.7-5.2 0-1.1.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.8 0 4-2.4 4.9-4.7 5.2.4.3.8 1 .8 2v2.5c0 .3.2.6.8.5A9.2 9.2 0 0 0 12 2.8Z"/>
+    </symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 8v8"/>
+      <path d="M12 5.8v.1"/>
+    </symbol>
+    <symbol id="icon-bell" viewBox="0 0 24 24">
+      <path d="M18 9.8a6 6 0 0 0-12 0c0 7-2.5 7.2-2.5 7.2h17S18 16.8 18 9.8Z"/>
+      <path d="M10 20a2.2 2.2 0 0 0 4 0"/>
+    </symbol>
+    <symbol id="icon-help" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M9.7 9.2a2.5 2.5 0 0 1 4.8.9c0 1.8-2.5 2-2.5 3.6"/>
+      <path d="M12 17.8v.1"/>
+    </symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#" aria-label="circleci">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">circleci</span>
+        <span class="brand__status" aria-hidden="true"></span>
+      </a>
+
+      <div class="org-avatar" aria-label="Organization avatar">H</div>
+
+      <nav class="nav-list" aria-label="Main">
+        <button class="nav-item is-active" type="button">
+          <span class="nav-icon"><svg><use href="#icon-home"></use></svg></span>
+          <span>Home</span>
+        </button>
+        <button class="nav-item" type="button">
+          <span class="nav-icon"><svg><use href="#icon-pipeline"></use></svg></span>
+          <span>Pipelines</span>
+        </button>
+        <button class="nav-item" type="button">
+          <span class="nav-icon"><svg><use href="#icon-bookmark"></use></svg></span>
+          <span>Projects</span>
+        </button>
+        <button class="nav-item" type="button">
+          <span class="nav-icon"><svg><use href="#icon-dots"></use></svg></span>
+          <span>More</span>
+        </button>
+      </nav>
+
+      <nav class="nav-list nav-list--bottom" aria-label="Preview">
+        <button class="nav-item nav-item--small" type="button">
+          <span class="preview-badge">PREVIEW</span>
+          <span class="nav-icon"><svg><use href="#icon-cube"></use></svg></span>
+          <span>Chunk<br>sidecars</span>
+        </button>
+        <button class="nav-item nav-item--small nav-item--chunk" type="button">
+          <span class="nav-icon"><svg><use href="#icon-terminal"></use></svg></span>
+          <span>Chunk</span>
+        </button>
+      </nav>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar" aria-label="Account tools">
+        <div class="topbar__spacer"></div>
+        <button class="icon-button" type="button" aria-label="Theme">
+          <svg><use href="#icon-info"></use></svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="Notifications">
+          <svg><use href="#icon-bell"></use></svg>
+        </button>
+        <button class="icon-button" type="button" aria-label="Help">
+          <svg><use href="#icon-help"></use></svg>
+        </button>
+        <button class="account-button" type="button" aria-label="Account">H</button>
+      </header>
+
+      <main class="dashboard-frame">
+        <div class="dashboard">
+          <section class="projects-area" aria-labelledby="organization-title">
+            <div class="section-heading">
+              <h1 id="organization-title">Organization Home</h1>
+              <button id="seeAllProjects" class="pill-button" type="button">See all projects</button>
+            </div>
+
+            <div class="project-grid" id="projects">
+              <article class="project-card" tabindex="0">
+                <h2>circleci-practice</h2>
+                <div class="project-links" aria-label="circleci-practice links">
+                  <a href="#">Overview</a>
+                  <a href="#">Pipelines</a>
+                </div>
+
+                <dl class="run-meta">
+                  <div>
+                    <dt>LAST RUN</dt>
+                    <dd>
+                      <span>7 minutes ago</span>
+                      <span class="status status--failed" aria-label="failed"></span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>LAST TRIGGERED BY</dt>
+                    <dd class="branch">
+                      <svg><use href="#icon-github"></use></svg>
+                      <span>main</span>
+                    </dd>
+                  </div>
+                </dl>
+              </article>
+
+              <article class="project-card" tabindex="0">
+                <h2>fukushima-postman-cicd</h2>
+                <div class="project-links" aria-label="fukushima-postman-cicd links">
+                  <a href="#">Overview</a>
+                  <a href="#">Pipelines</a>
+                </div>
+
+                <dl class="run-meta">
+                  <div>
+                    <dt>LAST RUN</dt>
+                    <dd>
+                      <span>16 hours ago</span>
+                      <span class="status status--passed" aria-label="passed"></span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>LAST TRIGGERED BY</dt>
+                    <dd class="branch">
+                      <svg><use href="#icon-github"></use></svg>
+                      <span>circleci-project-setup</span>
+                    </dd>
+                  </div>
+                </dl>
+              </article>
+            </div>
+          </section>
+
+          <aside class="summary-column" aria-label="Organization summary">
+            <article class="summary-card">
+              <div class="summary-title">
+                <svg><use href="#icon-insights"></use></svg>
+                <h2>Insights</h2>
+              </div>
+              <p class="label">THROUGHPUT</p>
+              <p>The average number of workflow runs per day over the last 30 days.</p>
+              <p class="metric">24</p>
+              <p><a href="#">Learn more <span aria-hidden="true">&#8599;</span></a> about improving throughput.</p>
+              <hr>
+              <a class="card-link" href="#">See all insights <span aria-hidden="true">-&gt;</span></a>
+            </article>
+
+            <article class="summary-card">
+              <div class="summary-title">
+                <svg><use href="#icon-people"></use></svg>
+                <h2>People</h2>
+              </div>
+              <p class="label">ACTIVE USERS THIS BILLING PERIOD</p>
+              <p class="metric">0</p>
+              <hr>
+              <a class="card-link" href="#">Add more teammates <span aria-hidden="true">-&gt;</span></a>
+            </article>
+
+            <article class="summary-card">
+              <div class="summary-title">
+                <svg><use href="#icon-plan"></use></svg>
+                <h2>Plan</h2>
+              </div>
+              <p class="label">USAGE THIS BILLING PERIOD</p>
+              <span class="plan-badge">FREE</span>
+              <p class="label label--credits">CREDIT USAGE</p>
+              <div class="usage-bar" aria-label="Credit usage">
+                <span style="--usage: 2%"></span>
+              </div>
+            </article>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
