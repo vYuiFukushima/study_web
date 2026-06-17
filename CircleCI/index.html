@@ -1,240 +1,384 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CircleCI Organization Home</title>
+  <title>CircleCI Home画面</title>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
+
 <body>
   <svg class="icon-sprite" aria-hidden="true">
     <symbol id="icon-home" viewBox="0 0 24 24">
-      <path d="M3 10.8 12 3l9 7.8v9.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5Z"/>
-      <path d="M8 22v-8h8v8"/>
+      <path d="M3 10.8 12 3l9 7.8v9.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5Z" />
+      <path d="M8 22v-8h8v8" />
     </symbol>
-    <symbol id="icon-pipeline" viewBox="0 0 24 24">
-      <circle cx="6" cy="6" r="2.5"/>
-      <circle cx="18" cy="12" r="2.5"/>
-      <circle cx="6" cy="18" r="2.5"/>
-      <path d="M8.4 6h4.2a3.4 3.4 0 0 1 3.1 2"/>
-      <path d="M8.4 18h4.2a3.4 3.4 0 0 0 3.1-2"/>
+    <symbol id="icon-flow" viewBox="0 0 24 24">
+      <circle cx="6" cy="6" r="2.4" />
+      <circle cx="18" cy="12" r="2.4" />
+      <circle cx="6" cy="18" r="2.4" />
+      <path d="M8.4 6h4.4a3.6 3.6 0 0 1 3.3 2.1" />
+      <path d="M8.4 18h4.4a3.6 3.6 0 0 0 3.3-2.1" />
     </symbol>
-    <symbol id="icon-bookmark" viewBox="0 0 24 24">
-      <path d="M7 4.5h10a1 1 0 0 1 1 1v15l-6-3-6 3v-15a1 1 0 0 1 1-1Z"/>
-      <path d="M10 8h4"/>
+    <symbol id="icon-project" viewBox="0 0 24 24">
+      <path d="M6 4h12a1.5 1.5 0 0 1 1.5 1.5v15L12 17l-7.5 3.5v-15A1.5 1.5 0 0 1 6 4Z" />
+      <path d="M9 8h6" />
     </symbol>
-    <symbol id="icon-dots" viewBox="0 0 24 24">
-      <circle cx="5" cy="12" r="1.3"/>
-      <circle cx="12" cy="12" r="1.3"/>
-      <circle cx="19" cy="12" r="1.3"/>
-    </symbol>
-    <symbol id="icon-cube" viewBox="0 0 24 24">
-      <path d="m12 2.8 8 4.4v9.6l-8 4.4-8-4.4V7.2Z"/>
-      <path d="m4 7.2 8 4.4 8-4.4"/>
-      <path d="M12 11.6v9.6"/>
-    </symbol>
-    <symbol id="icon-terminal" viewBox="0 0 24 24">
-      <rect x="4" y="4" width="16" height="16" rx="3"/>
-      <path d="m8 9 3 3-3 3"/>
-      <path d="M13 15h3"/>
-    </symbol>
-    <symbol id="icon-insights" viewBox="0 0 24 24">
-      <rect x="4" y="4" width="16" height="16" rx="2"/>
-      <path d="M8 16V9"/>
-      <path d="M12 16v-4"/>
-      <path d="M16 16v-8"/>
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <path d="M8 16V9" />
+      <path d="M12 16v-4" />
+      <path d="M16 16V8" />
     </symbol>
     <symbol id="icon-people" viewBox="0 0 24 24">
-      <circle cx="9" cy="8" r="3"/>
-      <path d="M3.8 18a5.2 5.2 0 0 1 10.4 0"/>
-      <circle cx="17" cy="9" r="2.4"/>
-      <path d="M15 14.1a4.4 4.4 0 0 1 5.2 3.9"/>
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3.8 18a5.2 5.2 0 0 1 10.4 0" />
+      <circle cx="17" cy="9" r="2.4" />
+      <path d="M15 14.1a4.4 4.4 0 0 1 5.2 3.9" />
     </symbol>
     <symbol id="icon-plan" viewBox="0 0 24 24">
-      <rect x="4" y="3.5" width="16" height="17" rx="2"/>
-      <path d="M9 8h6"/>
-      <path d="M12 7v10"/>
-      <path d="M9.5 15.5c.6.8 1.4 1.2 2.5 1.2 1.5 0 2.5-.8 2.5-2 0-1.1-.8-1.7-2.5-2.1-1.6-.4-2.5-1-2.5-2.2 0-1.2 1-2.1 2.5-2.1 1 0 1.8.4 2.3 1"/>
-    </symbol>
-    <symbol id="icon-github" viewBox="0 0 24 24">
-      <path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.3-.3-4.7-1.2-4.7-5.2 0-1.1.4-2.1 1.1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.7 1.1 1.7 1.1 2.8 0 4-2.4 4.9-4.7 5.2.4.3.8 1 .8 2v2.5c0 .3.2.6.8.5A9.2 9.2 0 0 0 12 2.8Z"/>
+      <rect x="4" y="3.5" width="16" height="17" rx="2" />
+      <path d="M9 8h6" />
+      <path d="M12 7v10" />
+      <path
+        d="M9.4 15.4c.6.8 1.5 1.2 2.6 1.2 1.5 0 2.6-.8 2.6-2 0-1.1-.9-1.7-2.6-2.1-1.6-.4-2.6-1-2.6-2.2 0-1.2 1-2.1 2.6-2.1 1 0 1.8.4 2.4 1" />
     </symbol>
     <symbol id="icon-info" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9"/>
-      <path d="M12 8v8"/>
-      <path d="M12 5.8v.1"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 8v8" />
+      <path d="M12 5.8v.1" />
     </symbol>
     <symbol id="icon-bell" viewBox="0 0 24 24">
-      <path d="M18 9.8a6 6 0 0 0-12 0c0 7-2.5 7.2-2.5 7.2h17S18 16.8 18 9.8Z"/>
-      <path d="M10 20a2.2 2.2 0 0 0 4 0"/>
+      <path d="M18 10a6 6 0 0 0-12 0c0 6.6-2.4 7-2.4 7h16.8S18 16.6 18 10Z" />
+      <path d="M10 20a2.2 2.2 0 0 0 4 0" />
     </symbol>
     <symbol id="icon-help" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9"/>
-      <path d="M9.7 9.2a2.5 2.5 0 0 1 4.8.9c0 1.8-2.5 2-2.5 3.6"/>
-      <path d="M12 17.8v.1"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.7 9.2a2.5 2.5 0 0 1 4.8.9c0 1.8-2.5 2-2.5 3.6" />
+      <path d="M12 17.8v.1" />
+    </symbol>
+    <symbol id="icon-terms" viewBox="0 0 24 24">
+      <path d="M5 4h10a4 4 0 0 1 4 4v12H8a3 3 0 0 1-3-3Z" />
+      <path d="M8 4v13a3 3 0 0 0 3 3" />
+      <path d="M9 8h6" />
+      <path d="M9 12h5" />
     </symbol>
   </svg>
 
   <div class="app-shell">
-    <aside class="sidebar" aria-label="Primary navigation">
-      <a class="brand" href="#" aria-label="circleci">
+    <aside class="sidebar" aria-label="CircleCI navigation">
+      <a class="brand" href="#home" aria-label="circleci">
         <span class="brand__mark" aria-hidden="true"></span>
         <span class="brand__name">circleci</span>
         <span class="brand__status" aria-hidden="true"></span>
       </a>
 
-      <div class="org-avatar" aria-label="Organization avatar">H</div>
+      <div class="org-avatar" aria-label="Organization icon">H</div>
 
-      <nav class="nav-list" aria-label="Main">
-        <button class="nav-item is-active" type="button">
-          <span class="nav-icon"><svg><use href="#icon-home"></use></svg></span>
+      <nav class="nav-list" aria-label="ページ内ナビゲーション">
+        <button class="nav-item is-active" type="button" data-target="home">
+          <span class="nav-icon"><svg>
+              <use href="#icon-home"></use>
+            </svg></span>
           <span>Home</span>
         </button>
-        <button class="nav-item" type="button">
-          <span class="nav-icon"><svg><use href="#icon-pipeline"></use></svg></span>
+        <button class="nav-item" type="button" data-target="pipelines">
+          <span class="nav-icon"><svg>
+              <use href="#icon-flow"></use>
+            </svg></span>
           <span>Pipelines</span>
         </button>
-        <button class="nav-item" type="button">
-          <span class="nav-icon"><svg><use href="#icon-bookmark"></use></svg></span>
+
+        <button class="nav-item" type="button" data-target="projects">
+          <span class="nav-icon"><svg>
+              <use href="#icon-project"></use>
+            </svg></span>
           <span>Projects</span>
         </button>
-        <button class="nav-item" type="button">
-          <span class="nav-icon"><svg><use href="#icon-dots"></use></svg></span>
+        <button class="nav-item" type="button" data-target="insights">
+          <span class="nav-icon"><svg>
+              <use href="#icon-chart"></use>
+            </svg></span>
           <span>More</span>
         </button>
-      </nav>
 
-      <nav class="nav-list nav-list--bottom" aria-label="Preview">
-        <button class="nav-item nav-item--small" type="button">
-          <span class="preview-badge">PREVIEW</span>
-          <span class="nav-icon"><svg><use href="#icon-cube"></use></svg></span>
-          <span>Chunk<br>sidecars</span>
-        </button>
-        <button class="nav-item nav-item--small nav-item--chunk" type="button">
-          <span class="nav-icon"><svg><use href="#icon-terminal"></use></svg></span>
-          <span>Chunk</span>
-        </button>
       </nav>
     </aside>
 
     <div class="workspace">
-      <header class="topbar" aria-label="Account tools">
+      <header class="topbar" aria-label="画面上部の操作">
         <div class="topbar__spacer"></div>
-        <button class="icon-button" type="button" aria-label="Theme">
-          <svg><use href="#icon-info"></use></svg>
+        <button class="icon-button" type="button" aria-label="情報">
+          <svg>
+            <use href="#icon-info"></use>
+          </svg>
         </button>
-        <button class="icon-button" type="button" aria-label="Notifications">
-          <svg><use href="#icon-bell"></use></svg>
+        <button class="icon-button" type="button" aria-label="通知">
+          <svg>
+            <use href="#icon-bell"></use>
+          </svg>
         </button>
-        <button class="icon-button" type="button" aria-label="Help">
-          <svg><use href="#icon-help"></use></svg>
+        <button class="icon-button" type="button" aria-label="ヘルプ">
+          <svg>
+            <use href="#icon-help"></use>
+          </svg>
         </button>
-        <button class="account-button" type="button" aria-label="Account">H</button>
+        <button class="account-button" type="button" aria-label="アカウント">H</button>
       </header>
 
-      <main class="dashboard-frame">
+      <main class="dashboard-frame" id="dashboardFrame">
         <div class="dashboard">
-          <section class="projects-area" aria-labelledby="organization-title">
+          <section class="main-column" id="home" data-nav-section>
             <div class="section-heading">
-              <h1 id="organization-title">Organization Home</h1>
-              <button id="seeAllProjects" class="pill-button" type="button">See all projects</button>
+              <div>
+                <p class="eyebrow">CircleCI Home</p>
+                <h1>CircleCI Home画面</h1>
+              </div>
+              <button class="pill-button" type="button" data-target="projects">See all projects</button>
             </div>
 
-            <div class="project-grid" id="projects">
-              <article class="project-card" tabindex="0">
-                <h2>circleci-practice</h2>
-                <div class="project-links" aria-label="circleci-practice links">
-                  <a href="#">Overview</a>
-                  <a href="#">Pipelines</a>
-                </div>
+            <article class="content-card">
+              <h2>Organization Homeとは</h2>
+              <p>組織（Organization）全体の状況を確認するトップページ。</p>
+              <p>CircleCIに登録されているプロジェクトの実行状況や利用状況を一覧で確認できる。</p>
+            </article>
 
-                <dl class="run-meta">
-                  <div>
-                    <dt>LAST RUN</dt>
-                    <dd>
-                      <span>7 minutes ago</span>
-                      <span class="status status--failed" aria-label="failed"></span>
-                    </dd>
+            <section class="content-card" id="projects" data-nav-section>
+              <div class="card-heading">
+                <h2>プロジェクト一覧</h2>
+              </div>
+              <p>Home画面中央には、登録されているプロジェクトが表示される。</p>
+              <p class="example-label">例：</p>
+              <pre><code>circleci-practice
+fukushima-postman-cicd</code></pre>
+              <p>各プロジェクトから以下の画面へ移動できる。</p>
+              <ul>
+                <li>Overview</li>
+                <li>Pipelines</li>
+              </ul>
+
+              <div class="project-grid" aria-label="プロジェクトカード">
+                <article class="project-card" tabindex="0">
+                  <h3>circleci-practice</h3>
+                  <div class="project-links">
+                    <a href="#overview">Overview</a>
+                    <a href="#pipelines">Pipelines</a>
                   </div>
-                  <div>
-                    <dt>LAST TRIGGERED BY</dt>
-                    <dd class="branch">
-                      <svg><use href="#icon-github"></use></svg>
-                      <span>main</span>
-                    </dd>
+                  <dl class="run-meta">
+                    <div>
+                      <dt>LAST RUN</dt>
+                      <dd><span>7 minutes ago</span><span class="status status--failed" aria-label="失敗"></span></dd>
+                    </div>
+                    <div>
+                      <dt>LAST TRIGGERED BY</dt>
+                      <dd><span class="branch-dot"></span><span>main</span></dd>
+                    </div>
+                  </dl>
+                </article>
+
+                <article class="project-card" tabindex="0">
+                  <h3>fukushima-postman-cicd</h3>
+                  <div class="project-links">
+                    <a href="#overview">Overview</a>
+                    <a href="#pipelines">Pipelines</a>
                   </div>
-                </dl>
+                  <dl class="run-meta">
+                    <div>
+                      <dt>LAST RUN</dt>
+                      <dd><span>17 hours ago</span><span class="status status--passed" aria-label="成功"></span></dd>
+                    </div>
+                    <div>
+                      <dt>LAST TRIGGERED BY</dt>
+                      <dd><span class="branch-dot"></span><span>circleci-project-setup</span></dd>
+                    </div>
+                  </dl>
+                </article>
+              </div>
+            </section>
+
+            <section class="split-grid">
+              <article class="content-card" id="overview" data-nav-section>
+                <h2>Overview</h2>
+                <p>プロジェクトの概要を確認する画面。</p>
+                <p>以下のような情報を確認できる。</p>
+                <ul>
+                  <li>プロジェクトの実行状況</li>
+                  <li>最近の成功・失敗状況</li>
+                  <li>利用状況</li>
+                </ul>
               </article>
 
-              <article class="project-card" tabindex="0">
-                <h2>fukushima-postman-cicd</h2>
-                <div class="project-links" aria-label="fukushima-postman-cicd links">
-                  <a href="#">Overview</a>
-                  <a href="#">Pipelines</a>
-                </div>
-
-                <dl class="run-meta">
-                  <div>
-                    <dt>LAST RUN</dt>
-                    <dd>
-                      <span>16 hours ago</span>
-                      <span class="status status--passed" aria-label="passed"></span>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>LAST TRIGGERED BY</dt>
-                    <dd class="branch">
-                      <svg><use href="#icon-github"></use></svg>
-                      <span>circleci-project-setup</span>
-                    </dd>
-                  </div>
-                </dl>
+              <article class="content-card" id="pipelines" data-nav-section>
+                <h2>Pipelines</h2>
+                <p>プロジェクトの実行履歴を確認する画面。</p>
+                <p>GitHubへのPushなどをきっかけに実行されたパイプラインの履歴が表示される。</p>
+                <p class="example-label">例：</p>
+                <pre><code>1回目の実行 → 成功
+2回目の実行 → 失敗
+3回目の実行 → 成功</code></pre>
               </article>
-            </div>
+            </section>
+
+            <section class="split-grid">
+              <article class="content-card">
+                <h2>Last Run</h2>
+                <p>最後にWorkflow（パイプライン）が実行された日時。</p>
+                <p class="example-label">例：</p>
+                <pre><code>7 minutes ago</code></pre>
+                <p class="arrow">↓</p>
+                <pre><code>7分前に最後の実行が行われた</code></pre>
+                <p>ことを表す。</p>
+              </article>
+
+              <article class="content-card">
+                <h2>Last Triggered By</h2>
+                <p>最後にWorkflowを実行したブランチ。</p>
+                <p class="example-label">例：</p>
+                <pre><code>main</code></pre>
+                <p class="arrow">↓</p>
+                <pre><code>mainブランチの変更によって実行された</code></pre>
+                <p>ことを表す。</p>
+                <h3>ブランチとは</h3>
+                <p>ソースコードの作業場所を分ける仕組み。</p>
+                <p class="example-label">例：</p>
+                <pre><code>main
+develop
+feature/login</code></pre>
+              </article>
+            </section>
+
+            <section class="content-card">
+              <h2>実行結果</h2>
+              <div class="result-grid">
+                <article class="result-block">
+                  <h3>成功</h3>
+                  <p>緑色のチェックマーク</p>
+                  <pre><code>✓</code></pre>
+                  <p>Workflowが正常終了したことを表す。</p>
+                </article>
+                <article class="result-block">
+                  <h3>失敗</h3>
+                  <p>赤色のマーク</p>
+                  <pre><code>✕</code></pre>
+                  <p>Workflowが失敗したことを表す。</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="content-card" id="terms" data-nav-section>
+              <h2>用語</h2>
+              <div class="term-grid">
+                <article class="term-block">
+                  <h3>Workflow</h3>
+                  <p>CircleCIで実行される一連の処理。</p>
+                  <p class="example-label">例：</p>
+                  <pre><code>GitHubへPush
+↓
+CircleCI起動
+↓
+テスト実行
+↓
+結果表示</code></pre>
+                </article>
+                <article class="term-block">
+                  <h3>Billing Period</h3>
+                  <p>利用状況を集計する請求期間。</p>
+                  <p>クレジット使用量やアクティブユーザー数の集計単位として利用される。</p>
+                </article>
+              </div>
+            </section>
           </section>
 
-          <aside class="summary-column" aria-label="Organization summary">
-            <article class="summary-card">
+          <aside class="summary-column" aria-label="利用状況">
+            <section class="summary-card" id="insights" data-nav-section>
               <div class="summary-title">
-                <svg><use href="#icon-insights"></use></svg>
+                <svg>
+                  <use href="#icon-chart"></use>
+                </svg>
                 <h2>Insights</h2>
               </div>
-              <p class="label">THROUGHPUT</p>
-              <p>The average number of workflow runs per day over the last 30 days.</p>
+              <p>CircleCIの利用状況や統計情報を確認する画面。</p>
+              <h3>Throughput</h3>
+              <p>過去30日間のWorkflow実行回数の1日平均。</p>
+              <p class="example-label">例：</p>
               <p class="metric">24</p>
-              <p><a href="#">Learn more <span aria-hidden="true">&#8599;</span></a> about improving throughput.</p>
+              <p class="arrow">↓</p>
+              <pre><code>過去30日間で1日平均24回Workflowが実行された</code></pre>
+              <p>ことを表す。</p>
               <hr>
-              <a class="card-link" href="#">See all insights <span aria-hidden="true">-&gt;</span></a>
-            </article>
+              <h3>See all insights</h3>
+              <p>利用状況や統計情報の詳細画面を表示する。</p>
+            </section>
 
-            <article class="summary-card">
+            <section class="summary-card" id="people" data-nav-section>
               <div class="summary-title">
-                <svg><use href="#icon-people"></use></svg>
+                <svg>
+                  <use href="#icon-people"></use>
+                </svg>
                 <h2>People</h2>
               </div>
-              <p class="label">ACTIVE USERS THIS BILLING PERIOD</p>
+              <p>CircleCIを利用しているユーザーやチームメンバーを管理する画面。</p>
+              <h3>Active users this billing period</h3>
+              <p>現在の請求期間中にCircleCIを利用したユーザー数。</p>
+              <p class="example-label">例：</p>
               <p class="metric">0</p>
+              <p class="arrow">↓</p>
+              <pre><code>現在の請求期間中に利用したユーザーは0人</code></pre>
+              <p>を表す。</p>
               <hr>
-              <a class="card-link" href="#">Add more teammates <span aria-hidden="true">-&gt;</span></a>
-            </article>
+              <h3>Add more teammates</h3>
+              <p>CircleCIへ新しいメンバーを招待する。</p>
+            </section>
 
-            <article class="summary-card">
+            <section class="summary-card" id="plan" data-nav-section>
               <div class="summary-title">
-                <svg><use href="#icon-plan"></use></svg>
+                <svg>
+                  <use href="#icon-plan"></use>
+                </svg>
                 <h2>Plan</h2>
               </div>
-              <p class="label">USAGE THIS BILLING PERIOD</p>
-              <span class="plan-badge">FREE</span>
-              <p class="label label--credits">CREDIT USAGE</p>
-              <div class="usage-bar" aria-label="Credit usage">
-                <span style="--usage: 2%"></span>
+              <p>契約プランと利用状況を確認する画面。</p>
+              <h3>Usage this billing period</h3>
+              <p>現在の請求期間における利用状況。</p>
+              <p class="example-label">例：</p>
+              <span class="plan-badge">Free</span>
+              <p class="arrow">↓</p>
+              <pre><code>無料プランを利用中</code></pre>
+              <p>を表す。</p>
+              <hr>
+              <h3>Credit Usage</h3>
+              <p>CircleCIで消費したクレジット数を表示する。</p>
+              <p class="example-label">例：</p>
+              <pre><code>420 used
+29,580 remaining</code></pre>
+              <p class="arrow">↓</p>
+              <pre><code>420クレジット使用済み
+29,580クレジット残り</code></pre>
+              <p>を表す。</p>
+              <div class="usage-bar" aria-label="Credit Usage">
+                <span style="--usage: 14%"></span>
               </div>
-            </article>
+              <h3>Creditとは</h3>
+              <p>CircleCIでジョブを実行する際に消費される利用ポイント。</p>
+              <p>実行時間や利用リソースに応じて消費される。</p>
+              <hr>
+              <h3>See more usage data</h3>
+              <p>利用状況の詳細画面を表示する。</p>
+              <p>確認できる内容：</p>
+              <ul>
+                <li>クレジット使用履歴</li>
+                <li>ジョブ実行履歴</li>
+                <li>利用状況の推移</li>
+                <li>プラン利用状況</li>
+              </ul>
+            </section>
           </aside>
         </div>
       </main>
     </div>
   </div>
 </body>
+
 </html>
