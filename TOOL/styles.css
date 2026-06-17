@@ -638,8 +638,16 @@ tbody tr:last-child td {
   gap: 18px;
 }
 
+.syntax-grid--single {
+  grid-template-columns: 1fr;
+}
+
 .syntax-card {
   padding: 20px;
+}
+
+.syntax-card--wide {
+  max-width: 100%;
 }
 
 .syntax-card h3 {
@@ -657,27 +665,41 @@ tbody tr:last-child td {
 .syntax-card pre,
 .flow-summary pre {
   margin: 0;
+  max-width: 100%;
   overflow-x: auto;
   color: #FFFFFF;
   background: var(--cool-text);
   border-radius: 8px;
   font-size: 0.92rem;
   line-height: 1.65;
+  tab-size: 4;
+}
+
+.syntax-card pre code,
+.flow-summary pre code,
+.tool-tree code,
+.http-example code {
+  display: block;
+  min-width: max-content;
 }
 
 .syntax-card pre {
-  padding: 14px;
+  padding: 18px;
 }
 
 .flow-summary {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
 }
 
 .flow-summary pre {
   padding: 20px;
+}
+
+.flow-summary > div {
+  max-width: 560px;
 }
 
 .flow-summary h3 {

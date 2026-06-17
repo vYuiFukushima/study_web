@@ -148,78 +148,59 @@
         <div class="section-heading">
           <p class="section-label">Syntax</p>
           <h2>Playwrightの基本文法</h2>
-          <p>よく使う操作を、文法と例で確認します。</p>
+          <p>pytestでPlaywrightを書くときの基本形です。</p>
         </div>
 
-        <div class="syntax-grid">
-          <article class="syntax-card">
-            <h3>Webページを開く</h3>
-            <pre><code>page.goto("URL")</code></pre>
-            <p>例</p>
-            <pre><code>page.goto("https://example.com")</code></pre>
-          </article>
+        <div class="syntax-grid syntax-grid--single">
+          <article class="syntax-card syntax-card--wide">
+            <h3>テストコードのひな型</h3>
+            <pre><code>from playwright.sync_api import Page
+import pytest
 
-          <article class="syntax-card">
-            <h3>文字入力</h3>
-            <pre><code>page.fill("セレクタ", "入力したい文字")</code></pre>
-            <p>例</p>
-            <pre><code>page.fill("#username", "テスト太郎")</code></pre>
-          </article>
+class テスト名(object):
 
-          <article class="syntax-card">
-            <h3>クリック</h3>
-            <pre><code>page.click("セレクタ")</code></pre>
-            <p>例</p>
-            <pre><code>page.click("#submit-button")</code></pre>
-          </article>
+    @pytest.fixture(scope="function", autouse=True)
+    def page_fixture(self, page: Page):
+        self.page = page
+        yield
+        self.page.close()
 
-          <article class="syntax-card">
-            <h3>チェックボックスを選択</h3>
-            <pre><code>page.check("セレクタ")</code></pre>
-            <p>例</p>
-            <pre><code>page.check("#sightseeing")</code></pre>
-          </article>
+    def test_change_all_params(self):
+        page = self.page
+        page.goto("URLをここに書く", wait_until="networkidle")
 
-          <article class="syntax-card">
-            <h3>プルダウンを選択</h3>
-            <pre><code>page.select_option("セレクタ", "選択する値")</code></pre>
-            <p>例</p>
-            <pre><code>page.select_option("#contact", "no")</code></pre>
-          </article>
+        # 操作内容をここに書いていく
 
-          <article class="syntax-card">
-            <h3>キーボード操作</h3>
-            <pre><code>page.press("セレクタ", "キー")</code></pre>
-            <p>例</p>
-            <pre><code>page.press("#date", "Tab")</code></pre>
-          </article>
+        # キーボード操作
+        page.press("セレクタ", "キー")
 
-          <article class="syntax-card">
-            <h3>スクリーンショットを保存</h3>
-            <pre><code>page.screenshot(path="保存先")</code></pre>
-            <p>例</p>
-            <pre><code>page.screenshot(path="sample.png")</code></pre>
-          </article>
+        # 文字入力
+        page.fill("セレクタ", "入力したい文字")
 
-          <article class="syntax-card">
-            <h3>現在のURLを取得</h3>
-            <pre><code>page.url</code></pre>
-            <p>例</p>
-            <pre><code>current_url = page.url</code></pre>
-          </article>
+        # クリック
+        page.click("セレクタ")
 
-          <article class="syntax-card">
-            <h3>ページタイトルを取得</h3>
-            <pre><code>page.title()</code></pre>
-            <p>例</p>
-            <pre><code>title = page.title()</code></pre>
-          </article>
+        # チェックボックスを選択
+        page.check("セレクタ")
 
-          <article class="syntax-card">
-            <h3>テキストを取得</h3>
-            <pre><code>page.text_content("セレクタ")</code></pre>
-            <p>例</p>
-            <pre><code>message = page.text_content("#message")</code></pre>
+        # プルダウンを選択
+        page.select_option("セレクタ", "値")
+
+        # スクリーンショットを保存
+        page.screenshot(path="保存先")
+
+        # Webページを開く
+        page.goto("URL")
+
+        # 現在のURLを取得
+        page.url
+
+        # ページタイトルを取得
+        page.title()
+
+        # テキストを取得
+        page.text_content("セレクタ")</code></pre>
+
           </article>
         </div>
       </section>
@@ -227,24 +208,51 @@
       <section id="flow" class="section">
         <div class="section-heading">
           <p class="section-label">Flow</p>
-          <h2>よく使う流れ</h2>
+          <h2>ホテルサイトのサンプルコード</h2>
         </div>
 
         <article class="content-card flow-summary">
-          <pre><code># ページを開く
-page.goto("URL")
+          <pre><code>from playwright.sync_api import Page
+import pytest
 
-# 入力する
-page.fill("セレクタ", "値")
+class TestHotelPlanisphere(object):
 
-# ボタンを押す
-page.click("セレクタ")
+    # 前後の処理
+    @pytest.fixture(scope="function", autouse=True)
+    def page_fixture(self, page: Page):
+        self.page = page
+        yield
+        self.page.close()
 
-# 結果を確認する
-page.text_content("セレクタ")
+    def test_change_all_params(self):
+        page = self.page
+        page.goto("https://hotel-example-site.takeyaqa.dev/ja/reserve.html?plan-id=0", wait_until="networkidle")
 
-# スクリーンショットを取得する
-page.screenshot(path="sample.png")</code></pre>
+        # 宿泊日を入力
+        page.fill("#date", "2021/12/06")
+        page.press("#date", "Tab")
+
+        # 宿泊日数を入力
+        page.fill("#term", "3")
+
+        # 人数を入力
+        page.fill("#head-count", "2")
+
+        # お得なプランを選択
+        page.check("#sightseeing")
+
+        # お名前を入力
+        page.fill("#username", "テスト太郎")
+
+        # 確認のご連絡を選択
+        page.select_option("#contact", "no")
+
+        # 予約内容を確認するボタンをクリック
+        page.click("#submit-button")
+
+        # スクリーンショットの保存
+        page.screenshot(path="スクリーンショットのパス")
+</code></pre>
 
           <div>
             <h3>基本の考え方</h3>
