@@ -83,8 +83,17 @@
             <h2>ローカルへクローン</h2>
           </div>
           <p>PowerShellで作業フォルダへ移動してから、GitLabのURLを使ってクローンします。</p>
+          <div class="clone-tool" aria-labelledby="clone-tool-title">
+            <div class="clone-tool__head">
+              <h3 id="clone-tool-title">URLからコマンドを作成</h3>
+            </div>
+            <label class="clone-tool__field" for="gitlabCloneUrl">
+              <span>GitLabのURL</span>
+              <input id="gitlabCloneUrl" type="text" inputmode="url" placeholder="https://gitlab.com/group/project.git" autocomplete="off">
+            </label>
+          </div>
           <div class="code-panel" data-language="PowerShell">
-            <pre><code>cd C:\work
+            <pre><code id="cloneCommandOutput">cd C:\work
 
 git clone &lt;GitLabのURL&gt;</code></pre>
           </div>

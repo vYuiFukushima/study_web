@@ -22,6 +22,19 @@ async function copyText(text) {
   textArea.remove();
 }
 
+const cloneUrlInput = document.querySelector("#gitlabCloneUrl");
+const cloneCommandOutput = document.querySelector("#cloneCommandOutput");
+
+if (cloneUrlInput && cloneCommandOutput) {
+  const updateCloneCommand = () => {
+    const gitlabUrl = cloneUrlInput.value.trim() || "<GitLabのURL>";
+    cloneCommandOutput.textContent = `cd C:\\work\n\ngit clone ${gitlabUrl}`;
+  };
+
+  cloneUrlInput.addEventListener("input", updateCloneCommand);
+  updateCloneCommand();
+}
+
 document.querySelectorAll(".code-panel").forEach((panel) => {
   const code = panel.querySelector("code");
   if (!code) return;
