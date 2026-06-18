@@ -406,6 +406,10 @@ pre code {
   padding: 1rem;
 }
 
+.step-list + .clone-tool {
+  margin-top: 1rem;
+}
+
 .clone-tool__head {
   display: flex;
   align-items: center;

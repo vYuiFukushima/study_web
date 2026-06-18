@@ -67,15 +67,26 @@
       <section class="chapter">
         <article class="topic topic--accent">
           <h2>ファイルの追加</h2>
-          <p>ディレクトリに移動している前提で実行します。</p>
           <ol class="step-list">
+            <li>ディレクトリーを移動する。</li>
             <li>Git管理対象に追加する。</li>
             <li>状態を確認する。</li>
             <li>コミットする。</li>
             <li>Pushする。</li>
           </ol>
+          <div class="clone-tool" aria-labelledby="workdir-tool-title">
+            <div class="clone-tool__head">
+              <h3 id="workdir-tool-title">パスからコマンドを作成</h3>
+            </div>
+            <label class="clone-tool__field" for="workdirPathInput">
+              <span>ディレクトリーのパス</span>
+              <input id="workdirPathInput" type="text" placeholder="C:\work\プロジェクト名" autocomplete="off">
+            </label>
+          </div>
           <div class="code-panel" data-language="PowerShell">
-            <pre><code>git add .
+            <pre><code id="workdirCommandOutput">cd &lt;ディレクトリーのパス&gt;
+
+git add .
 git status
 git commit -m "任意のコミットメッセージ"
 git push</code></pre>
@@ -96,12 +107,23 @@ git push</code></pre>
           <h2>パイプラインの実行</h2>
           <ol class="step-list">
             <li>VS Codeで新しいターミナルを開く。</li>
-            <li>フォルダを選ぶ。</li>
+            <li>ディレクトリーを移動する。</li>
             <li><code>.gitlab-ci.yml</code>を追加、コミット、Pushする。</li>
             <li>GitLabで確認する。</li>
           </ol>
+          <div class="clone-tool" aria-labelledby="pipeline-tool-title">
+            <div class="clone-tool__head">
+              <h3 id="pipeline-tool-title">パスからコマンドを作成</h3>
+            </div>
+            <label class="clone-tool__field" for="pipelinePathInput">
+              <span>ディレクトリーのパス</span>
+              <input id="pipelinePathInput" type="text" placeholder="C:\work\プロジェクト名" autocomplete="off">
+            </label>
+          </div>
           <div class="code-panel" data-language="PowerShell">
-            <pre><code>git add .gitlab-ci.yml
+            <pre><code id="pipelineCommandOutput">cd &lt;ディレクトリーのパス&gt;
+
+git add .gitlab-ci.yml
 git commit -m "Add first GitLab pipeline"
 git push</code></pre>
           </div>

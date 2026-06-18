@@ -35,6 +35,32 @@ if (cloneUrlInput && cloneCommandOutput) {
   updateCloneCommand();
 }
 
+const workdirPathInput = document.querySelector("#workdirPathInput");
+const workdirCommandOutput = document.querySelector("#workdirCommandOutput");
+
+if (workdirPathInput && workdirCommandOutput) {
+  const updateWorkdirCommand = () => {
+    const workdirPath = workdirPathInput.value.trim() || "<ディレクトリーのパス>";
+    workdirCommandOutput.textContent = `cd ${workdirPath}\n\ngit add .\ngit status\ngit commit -m "任意のコミットメッセージ"\ngit push`;
+  };
+
+  workdirPathInput.addEventListener("input", updateWorkdirCommand);
+  updateWorkdirCommand();
+}
+
+const pipelinePathInput = document.querySelector("#pipelinePathInput");
+const pipelineCommandOutput = document.querySelector("#pipelineCommandOutput");
+
+if (pipelinePathInput && pipelineCommandOutput) {
+  const updatePipelineCommand = () => {
+    const pipelinePath = pipelinePathInput.value.trim() || "<ディレクトリーのパス>";
+    pipelineCommandOutput.textContent = `cd ${pipelinePath}\n\ngit add .gitlab-ci.yml\ngit commit -m "Add first GitLab pipeline"\ngit push`;
+  };
+
+  pipelinePathInput.addEventListener("input", updatePipelineCommand);
+  updatePipelineCommand();
+}
+
 document.querySelectorAll(".code-panel").forEach((panel) => {
   const code = panel.querySelector("code");
   if (!code) return;
