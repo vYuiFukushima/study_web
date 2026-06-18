@@ -310,9 +310,6 @@ code {
 .check-list>li {
   position: relative;
   padding: 12px 14px 12px 38px;
-  background: rgba(248, 239, 229, 0.72);
-  border: 1px solid rgba(233, 127, 18, 0.18);
-  border-radius: 8px;
 }
 
 .basic-list>li::before,
@@ -340,10 +337,6 @@ code {
   font-size: 1.02rem;
   line-height: 1.75;
   white-space: pre;
-  background: var(--base);
-  border: 1px solid rgba(77, 69, 53, 0.14);
-  border-left: 5px solid var(--accent);
-  border-radius: 8px;
 }
 
 .flow-text code {
@@ -355,6 +348,57 @@ code {
   background: transparent;
   border: 0;
   border-radius: 0;
+}
+
+.flow-diagram {
+  --flow-gap: clamp(32px, 5vw, 56px);
+  --flow-arrow-space: clamp(16px, 2.5vw, 28px);
+  display: flex;
+  gap: var(--flow-gap);
+  align-items: center;
+  margin: 18px 0 22px;
+  padding: 10px 0;
+  width: 100%;
+  overflow-x: visible;
+  list-style: none;
+  white-space: normal;
+  background: transparent;
+  border: 0;
+}
+
+.flow-diagram li {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: clamp(86px, 10vw, 128px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px clamp(10px, 2vw, 22px);
+  color: var(--text);
+  font-weight: 800;
+  line-height: 1.45;
+  text-align: center;
+  overflow-wrap: anywhere;
+  background-color: #FBFCFD;
+  border: 2px solid var(--accent);
+}
+
+.flow-diagram li:not(:last-child)::after {
+  position: absolute;
+  left: calc(100% + var(--flow-arrow-space));
+  top: 50%;
+  color: var(--accent);
+  content: "→";
+  font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+
+.flow-diagram li span {
+  position: relative;
+  z-index: 1;
 }
 
 .code-block code {
@@ -719,6 +763,18 @@ tbody tr:last-child td {
   .flow-text,
   .code-block {
     font-size: 0.96rem;
+  }
+
+  .flow-diagram {
+    --flow-gap: 24px;
+    --flow-arrow-space: 12px;
+  }
+
+  .flow-diagram li {
+    min-height: 76px;
+    padding: 10px 6px;
+    font-size: 0.82rem;
+    border-width: 1px;
   }
 
   .image-frame {

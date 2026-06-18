@@ -98,15 +98,15 @@
         <h2 id="api-title">APIとは</h2>
       </div>
       <ul class="basic-list">
-        <li><strong>API = Application Programming Interface</strong></li>
+        <li><strong>API= Application Programming Interface</strong> </li>
         <li>日本語で簡単に言うと <strong>「ソフトウェア同士がやり取りするための窓口」</strong></li>
       </ul>
       <p>例えば、</p>
-      <pre class="flow-text"><code>天気アプリ
-↓
-API
-↓
-天気情報サービス</code></pre>
+      <ol class="flow-text flow-diagram" aria-label="API利用の流れ">
+        <li><span>天気アプリ</span></li>
+        <li><span>API</span></li>
+        <li><span>天気情報サービス</span></li>
+      </ol>
       <p>のように、ソフトウェア同士が情報をやり取りするときに利用される。</p>
       <figure class="image-frame">
         <img src="images/スクリーンショット 2026-05-14 125859.png" alt="APIとクライアントがリクエストとレスポンスでやり取りする図">
@@ -172,11 +172,11 @@ API
       </div>
       <p>Webブラウザやアプリがサーバーと通信するためのルール。</p>
       <p>例：</p>
-      <pre class="flow-text"><code>アプリ
-↓
-HTTP/HTTPS通信
-↓
-サーバー</code></pre>
+      <ol class="flow-text flow-diagram" aria-label="HTTP/HTTPS通信の流れ">
+        <li><span>アプリ</span></li>
+        <li><span>HTTP/HTTPS通信</span></li>
+        <li><span>サーバー</span></li>
+      </ol>
     </section>
 
     <section class="content-section" aria-labelledby="example-title">
@@ -189,11 +189,11 @@ HTTP/HTTPS通信
         <h3>Google Mapの埋め込み</h3>
         <p>店舗のホームページにGoogle Mapが表示されている場合、</p>
         <p>店舗側が地図機能を自作しているわけではなく、</p>
-        <pre class="flow-text"><code>店舗サイト
-↓
-Google Map API
-↓
-Google Map</code></pre>
+        <ol class="flow-text flow-diagram" aria-label="Google Map API利用の流れ">
+          <li><span>店舗サイト</span></li>
+          <li><span>Google Map API</span></li>
+          <li><span>Google Map</span></li>
+        </ol>
         <p>を利用している。</p>
       </article>
 
@@ -264,11 +264,11 @@ Facebookでログイン</code></pre>
       </div>
       <p>システム同士が通信する際の約束事。</p>
       <p>例：</p>
-      <pre class="flow-text"><code>このURLにアクセスする
-↓
-この形式のデータを送る
-↓
-この形式のデータが返る</code></pre>
+      <ol class="flow-text flow-diagram" aria-label="インターフェース契約の流れ">
+        <li><span>このURLにアクセスする</span></li>
+        <li><span>この形式のデータを送る</span></li>
+        <li><span>この形式のデータが返る</span></li>
+      </ol>
       <p>というルールを決めておくこと。</p>
       <p>APIテストでは、この約束事が守られているかを確認する。</p>
     </section>

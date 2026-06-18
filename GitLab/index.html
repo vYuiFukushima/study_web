@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitLab | プロジェクトを新規作成</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="study-home-link" href="../index.html">学習コンテンツ一覧へ</a>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="GitLab 学習ノート">
+      <span class="brand__mark" aria-hidden="true">GL</span>
+      <span class="brand__text">
+        <span class="brand__label">GitLab Notes</span>
+        <span class="brand__name">GitLab 使い方</span>
+      </span>
+    </a>
+    <nav class="topbar__links" aria-label="主要ページ">
+      <a class="topbar__link" href="yml.html">YAML</a>
+      <a class="topbar__link" href="run.html">実行</a>
+      <a class="topbar__link" href="artifacts.html">保存場所</a>
+    </nav>
+  </header>
+
+  <div class="page-shell">
+    <aside class="sidebar" aria-label="GitLabページ一覧">
+      <nav class="toc">
+        <a class="toc__link is-active" href="index.html">
+          <span class="toc__number">01</span>
+          <span class="toc__text">プロジェクト作成</span>
+        </a>
+        <a class="toc__link" href="yml.html">
+          <span class="toc__number">02</span>
+          <span class="toc__text">yml書き方</span>
+        </a>
+        <a class="toc__link" href="run.html">
+          <span class="toc__number">03</span>
+          <span class="toc__text">実行方法</span>
+        </a>
+        <a class="toc__link" href="errors.html">
+          <span class="toc__number">04</span>
+          <span class="toc__text">エラー対処</span>
+        </a>
+        <a class="toc__link" href="variables.html">
+          <span class="toc__number">05</span>
+          <span class="toc__text">環境変数</span>
+        </a>
+        <a class="toc__link" href="artifacts.html">
+          <span class="toc__number">06</span>
+          <span class="toc__text">生成ファイル保存場所</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="hero" aria-labelledby="page-title">
+        <span class="page-kicker">01 / 06</span>
+        <h1 id="page-title">プロジェクトを新規作成</h1>
+        <p class="lead">GitLabでプロジェクトを作成し、ローカルの<code>C:\work</code>へクローンしてVS Codeで開くまでの流れです。</p>
+      </section>
+
+      <section class="chapter">
+        <article class="topic topic--accent">
+          <div class="topic__title">
+            <h2>GitLab側でプロジェクトを作る</h2>
+          </div>
+          <ol class="step-list">
+            <li>プロジェクトの名前を入力する。</li>
+            <li>プロジェクトのURLで、グループまたはネームスペースを選択する。</li>
+            <li>プロジェクトの可視性は、表示レベルを非公開にする。</li>
+            <li>プロジェクトの初期設定で「リポジトリを初期化しREADMEファイルを生成する」にチェックを入れる。</li>
+            <li>プロジェクトを作成ボタンをクリックする。</li>
+          </ol>
+        </article>
+
+        <article class="topic">
+          <div class="topic__title">
+            <h2>ローカルへクローン</h2>
+          </div>
+          <p>PowerShellで作業フォルダへ移動してから、GitLabのURLを使ってクローンします。</p>
+          <div class="code-panel" data-language="PowerShell">
+            <pre><code>cd C:\work
+
+git clone &lt;GitLabのURL&gt;</code></pre>
+          </div>
+          <p class="note">URLはGitLabでプロジェクトを開き、「コード」という青いボタンを押すと表示されます。</p>
+        </article>
+
+        <article class="topic">
+          <div class="topic__title">
+            <h2>VS Codeで開く</h2>
+          </div>
+          <ol class="step-list">
+            <li><code>C:\work</code>にフォルダが作成されていることを確認する。</li>
+            <li>そのフォルダをVS Codeで開く。</li>
+          </ol>
+        </article>
+      </section>
+
+      <nav class="page-nav" aria-label="ページ移動">
+        <span></span>
+        <a class="page-nav__link page-nav__link--next" href="yml.html">
+          <span class="page-nav__label">次へ</span>
+          <strong>02. yml書き方</strong>
+        </a>
+      </nav>
+    </main>
+  </div>
+</body>
+
+</html>

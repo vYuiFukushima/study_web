@@ -201,7 +201,6 @@ code {
   white-space: pre;
   background: var(--base);
   border: 1px solid rgba(77, 69, 53, 0.14);
-  border-left: 5px solid var(--accent);
   border-radius: 8px;
 }
 
