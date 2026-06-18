@@ -76,11 +76,15 @@
           </ol>
           <div class="clone-tool" aria-labelledby="workdir-tool-title">
             <div class="clone-tool__head">
-              <h3 id="workdir-tool-title">パスからコマンドを作成</h3>
+              <h3 id="workdir-tool-title">パスとコミットメッセージからコマンドを作成</h3>
             </div>
             <label class="clone-tool__field" for="workdirPathInput">
               <span>ディレクトリーのパス</span>
               <input id="workdirPathInput" type="text" placeholder="C:\work\プロジェクト名" autocomplete="off">
+            </label>
+            <label class="clone-tool__field" for="workdirCommitMessageInput">
+              <span>コミットメッセージ</span>
+              <input id="workdirCommitMessageInput" type="text" placeholder="任意のコミットメッセージ" autocomplete="off">
             </label>
           </div>
           <div class="code-panel" data-language="PowerShell">
@@ -96,11 +100,11 @@ git push</code></pre>
         <article class="topic">
           <h2>確認するときの表示例</h2>
           <p><code>git status</code>で、コミット対象として追加されたファイルを確認できます。</p>
-          <ul class="status-sample">
-            <li>Changes to be committed:</li>
-            <li>new file: 02_xlsx_converter.py</li>
-            <li>new file: report 1.json</li>
-          </ul>
+          <div class="code-panel" data-language="Text">
+            <pre>Changes to be committed:
+  new file: 02_xlsx_converter.py
+  new file: report 1.json</pre>
+          </div>
         </article>
 
         <article class="topic">

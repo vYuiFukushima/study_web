@@ -36,15 +36,18 @@ if (cloneUrlInput && cloneCommandOutput) {
 }
 
 const workdirPathInput = document.querySelector("#workdirPathInput");
+const workdirCommitMessageInput = document.querySelector("#workdirCommitMessageInput");
 const workdirCommandOutput = document.querySelector("#workdirCommandOutput");
 
 if (workdirPathInput && workdirCommandOutput) {
   const updateWorkdirCommand = () => {
     const workdirPath = workdirPathInput.value.trim() || "<ディレクトリーのパス>";
-    workdirCommandOutput.textContent = `cd ${workdirPath}\n\ngit add .\ngit status\ngit commit -m "任意のコミットメッセージ"\ngit push`;
+    const commitMessage = (workdirCommitMessageInput?.value.trim() || "任意のコミットメッセージ").replace(/"/g, '`"');
+    workdirCommandOutput.textContent = `cd ${workdirPath}\n\ngit add .\ngit status\ngit commit -m "${commitMessage}"\ngit push`;
   };
 
   workdirPathInput.addEventListener("input", updateWorkdirCommand);
+  workdirCommitMessageInput?.addEventListener("input", updateWorkdirCommand);
   updateWorkdirCommand();
 }
 
