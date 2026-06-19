@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitLab | コマンド詳細</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="study-home-link" href="../index.html">学習コンテンツ一覧へ</a>
+
+  <header class="topbar">
+    <a class="brand" href="overview.html" aria-label="GitLab 学習ノート">
+      <span class="brand__mark" aria-hidden="true">GL</span>
+      <span class="brand__text">
+        <span class="brand__label">GitLab Notes</span>
+        <span class="brand__name">GitLab 使い方</span>
+      </span>
+    </a>
+    <nav class="topbar__links" aria-label="主要ページ">
+      <a class="topbar__link" href="overview.html">概要</a>
+      <a class="topbar__link" href="yml.html">YAML</a>
+      <a class="topbar__link" href="runner.html">Runner</a>
+      <a class="topbar__link" href="run.html">実行</a>
+      <a class="topbar__link" href="artifacts.html">保存場所</a>
+    </nav>
+  </header>
+
+  <div class="page-shell">
+    <aside class="sidebar" aria-label="GitLabページ一覧">
+      <nav class="toc">
+        <a class="toc__link" href="overview.html">
+          <span class="toc__number">00</span>
+          <span class="toc__text">GitLabとRunner</span>
+        </a>
+        <a class="toc__link" href="index.html">
+          <span class="toc__number">01</span>
+          <span class="toc__text">プロジェクト作成</span>
+        </a>
+        <a class="toc__link" href="yml.html">
+          <span class="toc__number">02-1</span>
+          <span class="toc__text">yml書き方</span>
+        </a>
+        <a class="toc__link toc__link--sub" href="script.html">
+          <span class="toc__number">02-2</span>
+          <span class="toc__text">scriptの書き方</span>
+        </a>
+        <a class="toc__link toc__link--sub toc__link--deep is-active" href="command-details.html">
+          <span class="toc__number">02-2-1</span>
+          <span class="toc__text">コマンド詳細</span>
+        </a>
+        <a class="toc__link toc__link--sub" href="runner.html">
+          <span class="toc__number">02-3</span>
+          <span class="toc__text">自分のRunner</span>
+        </a>
+        <a class="toc__link" href="run.html">
+          <span class="toc__number">03</span>
+          <span class="toc__text">実行方法</span>
+        </a>
+        <a class="toc__link" href="errors.html">
+          <span class="toc__number">04</span>
+          <span class="toc__text">エラー対処</span>
+        </a>
+        <a class="toc__link" href="variables.html">
+          <span class="toc__number">05</span>
+          <span class="toc__text">環境変数</span>
+        </a>
+        <a class="toc__link" href="artifacts.html">
+          <span class="toc__number">06</span>
+          <span class="toc__text">生成ファイル保存場所</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="hero hero--accent" aria-labelledby="page-title">
+        <span class="page-kicker">02-2-1 / 10</span>
+        <h1 id="page-title">コマンド詳細</h1>
+        <p class="lead">ファイル確認系とGit系のコマンドを、実行例とログの見方まで少し詳しく整理します。</p>
+      </section>
+
+      <section class="chapter">
+        <article class="topic" id="file-commands">
+          <h2>ファイル確認系コマンド</h2>
+          <h3>ファイル一覧を表示</h3>
+          <div class="code-panel" data-language="YAML">
+            <pre><code>script:
+  - dir</code></pre>
+          </div>
+          <p>実行しているフォルダ内のファイル一覧が表示されます。</p>
+
+          <p>さらに、特定のファイルが存在するか確認できます。</p>
+          <div class="code-panel" data-language="YAML">
+            <pre><code>script:
+  - dir README.md</code></pre>
+          </div>
+          <p><code>dir</code>の後ろにファイル名を書きます。</p>
+
+          <div class="code-panel" data-language="YAML">
+            <pre><code>script:
+  - ls</code></pre>
+          </div>
+          <div class="code-panel" data-language="YAML">
+            <pre><code>script:
+  - ls README.md</code></pre>
+          </div>
+
+          <p><code>dir</code>と<code>ls</code>は、どちらもファイル一覧を表示するためのコマンドです。主に使う環境が違います。</p>
+          <div class="table-wrap">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>コマンド</th>
+                  <th>主な環境</th>
+                  <th>役割</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><code>dir</code></th>
+                  <td>Windows</td>
+                  <td>ファイル一覧表示</td>
+                </tr>
+                <tr>
+                  <th><code>ls</code></th>
+                  <td>Linux</td>
+                  <td>ファイル一覧表示</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>現在のフォルダを表示</h3>
+          <div class="code-panel" data-language="YAML">
+            <pre><code>script:
+  - pwd</code></pre>
+          </div>
+          <p>ジョブが動いている瞬間の作業フォルダを、ログで確認するためのコマンドです。</p>
+        </article>
+
+        <article class="topic" id="git-commands">
+          <h2>Git系</h2>
+          <h3>git status</h3>
+          <div class="code-panel" data-language="YAML">
+            <pre><code>script:
+  - git status</code></pre>
+          </div>
+          <p>ファイルがGitLabにPushされているか、つまりGitの現在状態を確認します。</p>
+
+          <h3>ログ結果例</h3>
+          <div class="code-panel" data-language="Text">
+            <pre><code>$ git status
+HEAD detached at e923ce1
+nothing to commit, working tree clean</code></pre>
+          </div>
+          <ul class="translation-box">
+            <li><code>HEAD detached at e923ce1</code>: コミット<code>e923ce1</code>の状態で実行中。</li>
+            <li><code>nothing to commit</code>: コミットする変更なし。</li>
+            <li><code>working tree clean</code>: 変更されたファイルなし。</li>
+          </ul>
+
+          <h3>git log --oneline</h3>
+          <div class="code-panel" data-language="YAML">
+            <pre><code>script:
+  - git log --oneline</code></pre>
+          </div>
+          <p>どのコミットで実行されたか、つまりコミット履歴を確認します。</p>
+
+          <h3>ログ結果例</h3>
+          <div class="code-panel" data-language="Text">
+            <pre><code>$ git log --oneline
+fe26e26 GitLabお試しgit log --oneline
+e923ce1 GitLabお試しgit status
+72f4788 GitLabお試しpwd
+cf0e003 GitLabお試しls2
+9b8e2e8 GitLabお試しls
+d23b080 GitLabお試しdir２
+d04f643 GitLabお試しdir
+f58cb59 GitLabお試しdir
+eba6c74 GitLabお試しdir
+c761ec3 Add first GitLab pipeline
+c8c99f0 Initial commit
+Cleaning up project directory and file based variables00:00
+Job succeeded</code></pre>
+          </div>
+        </article>
+      </section>
+
+      <nav class="page-nav" aria-label="ページ移動">
+        <a class="page-nav__link" href="script.html">
+          <span class="page-nav__label">前へ</span>
+          <strong>02-2. scriptの書き方</strong>
+        </a>
+        <a class="page-nav__link page-nav__link--next" href="runner.html">
+          <span class="page-nav__label">次へ</span>
+          <strong>02-3. 自分のGitLab Runner</strong>
+        </a>
+      </nav>
+    </main>
+  </div>
+</body>
+
+</html>
