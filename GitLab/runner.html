@@ -97,7 +97,9 @@
             <li>プラットフォームのオペレーティングシステムを<code>Windows</code>にする。</li>
             <li>Runner認証トークンをコピーし、メモ帳などに一時保管する。</li>
           </ol>
-          <p class="note">タグはRunnerを選ぶための目印です。Runner側のタグと<code>.gitlab-ci.yml</code>側の<code>tags</code>は一致させます。登録が完了したら、一時保管したトークンは削除します。</p>
+          <p class="note">
+            タグはRunnerを選ぶための目印です。Runner側のタグと<code>.gitlab-ci.yml</code>側の<code>tags</code>は一致させます。登録が完了したら、一時保管したトークンは削除します。
+          </p>
         </article>
 
         <article class="topic">
@@ -111,7 +113,7 @@
         </article>
 
         <article class="topic">
-          <h2>質問への回答</h2>
+          <h2>質問への回答をする</h2>
           <ol class="step-list">
             <li>GitLabのURLには<code>https://gitlab.com</code>を入力する。</li>
             <li>登録トークンには、GitLab画面で取得したRunner認証トークンを入力する。</li>
@@ -161,10 +163,17 @@ dentaku_test:
   tags:
     - windows
   script:
+    - chcp 65001
+    - $env:PYTHONUTF8="1"
     - '&amp; "C:\Users\yui.fukushima\AppData\Local\Programs\Python\Python311\python.exe" dentaku_0424.py'
     - echo "電卓テスト終了"</code></pre>
           </div>
-          <p class="note">GitLab RunnerがLocalSystemとして動いている場合、Pythonの場所を知らないことがあります。そのためPythonをフルパスで指定します。</p>
+          <p class="note">・GitLab RunnerがLocalSystemとして動いている場合、Pythonの場所を知らないことがあります。<br>
+            そのため<B>Pythonをフルパスで指定</B>します。</p>
+          <p class="note">・文字化け対策<br>
+            <code>chcp 65001</code>は<b>PowerShellの文字コードをUTF-8に変更する</b>コマンド。<br>
+            <code>$env:PYTHONUTF8="1"</code>は<b>Pythonに「UTF-8モードで動いてね」</b>と指示。
+          </p>
         </article>
       </section>
 
