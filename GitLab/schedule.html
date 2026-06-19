@@ -102,16 +102,12 @@
           <p class="note">作成後、画面への反映まで少し時間がかかることがあります。</p>
         </article>
 
-        <article class="topic topic--accent">
-          <h2>Runnerの確認</h2>
-          <p><code>アサインされたプロジェクトのRunner</code>に、定期実行で使いたいRunnerがいることを確認します。</p>
-          <ol class="step-list">
-            <li><code>設定</code>を開く。</li>
-            <li><code>CI/CD</code>を開く。</li>
-            <li><code>Runner</code>を開く。</li>
-            <li><code>アサインされたプロジェクトのRunner</code>を確認する。</li>
-            <li>いない場合は、<code>その他の利用可能なプロジェクトRunner</code>から<code>プロジェクトへ割り当て</code>を押す。</li>
-          </ol>
+        <article class="topic">
+          <h2>実行されない場合</h2>
+          <p>設定後、反映までに時間がかかることもあります。
+            <br>また、GitLabのスケジュール時刻の認識（表示時刻・内部時刻）とPC時計に差があり、定期実行が期待通りに動作しないことがあります。
+          </p>
+          <p>設定する時刻は、GitLabの表示時刻とPC時計の差を考慮して5分以上先の時間に設定すると良いです。</p>
         </article>
 
         <article class="topic">
@@ -176,7 +172,8 @@
 25 * * * *      # 毎時25分
 0 19 * * *      # 19:00</code></pre>
           </div>
-          <p class="note">GitLabはCronの解析に<code>fugit</code>を使うため、<code>1#2</code>（第2月曜日）や<code>sun%2</code>（隔週日曜日）のような拡張構文も使えます。</p>
+          <p class="note">
+            GitLabはCronの解析に<code>fugit</code>を使うため、<code>1#2</code>（第2月曜日）や<code>sun%2</code>（隔週日曜日）のような拡張構文も使えます。</p>
         </article>
       </section>
 
