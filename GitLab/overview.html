@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitLab | GitLabとRunner</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a class="study-home-link" href="../index.html">学習コンテンツ一覧へ</a>
+
+  <header class="topbar">
+    <a class="brand" href="overview.html" aria-label="GitLab 学習ノート">
+      <span class="brand__mark" aria-hidden="true">GL</span>
+      <span class="brand__text">
+        <span class="brand__label">GitLab Notes</span>
+        <span class="brand__name">GitLab 使い方</span>
+      </span>
+    </a>
+    <nav class="topbar__links" aria-label="主要ページ">
+      <a class="topbar__link" href="overview.html">概要</a>
+      <a class="topbar__link" href="yml.html">YAML</a>
+      <a class="topbar__link" href="runner.html">Runner</a>
+      <a class="topbar__link" href="run.html">実行</a>
+      <a class="topbar__link" href="artifacts.html">保存場所</a>
+    </nav>
+  </header>
+
+  <div class="page-shell">
+    <aside class="sidebar" aria-label="GitLabページ一覧">
+      <nav class="toc">
+        <a class="toc__link is-active" href="overview.html">
+          <span class="toc__number">00</span>
+          <span class="toc__text">GitLabとRunner</span>
+        </a>
+        <a class="toc__link" href="index.html">
+          <span class="toc__number">01</span>
+          <span class="toc__text">プロジェクト作成</span>
+        </a>
+        <a class="toc__link" href="yml.html">
+          <span class="toc__number">02-1</span>
+          <span class="toc__text">yml書き方</span>
+        </a>
+        <a class="toc__link toc__link--sub" href="script.html">
+          <span class="toc__number">02-2</span>
+          <span class="toc__text">scriptの書き方</span>
+        </a>
+        <a class="toc__link toc__link--sub" href="runner.html">
+          <span class="toc__number">02-3</span>
+          <span class="toc__text">自分のRunner</span>
+        </a>
+        <a class="toc__link" href="run.html">
+          <span class="toc__number">03</span>
+          <span class="toc__text">実行方法</span>
+        </a>
+        <a class="toc__link" href="errors.html">
+          <span class="toc__number">04</span>
+          <span class="toc__text">エラー対処</span>
+        </a>
+        <a class="toc__link" href="variables.html">
+          <span class="toc__number">05</span>
+          <span class="toc__text">環境変数</span>
+        </a>
+        <a class="toc__link" href="artifacts.html">
+          <span class="toc__number">06</span>
+          <span class="toc__text">生成ファイル保存場所</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="hero" aria-labelledby="page-title">
+        <span class="page-kicker">00 / 09</span>
+        <h1 id="page-title">GitLabとRunner</h1>
+        <p class="lead">GitLabはソースコードやCI/CDを管理し、RunnerはGitLabから指示された処理を実際に実行します。</p>
+      </section>
+
+      <section class="chapter">
+        <article class="topic">
+          <h2>GitLabとは</h2>
+          <p>GitLabは、ソースコードを管理するためのサービスです。</p>
+          <ul class="plain-list">
+            <li>Gitリポジトリ管理</li>
+            <li>ソースコードの共有</li>
+            <li>Merge Requestによるコードレビュー</li>
+            <li>Issue管理</li>
+            <li>CI/CDによる自動実行</li>
+          </ul>
+          <p class="note">開発者はGitLabへソースコードをPushし、チームで管理・開発を行います。</p>
+        </article>
+
+        <article class="topic">
+          <h2>GitLab Runnerとは</h2>
+          <p>GitLab Runnerは、GitLabから指示を受けて実際に処理を実行するプログラムです。</p>
+          <ul class="plain-list">
+            <li>Pythonスクリプト実行</li>
+            <li>テスト実行</li>
+            <li>Playwright実行</li>
+            <li>WinAppDriver実行</li>
+            <li>アプリのビルド</li>
+            <li>レポート作成</li>
+            <li>Slack通知</li>
+          </ul>
+          <p class="note">GitLabが「何を実行するか」を管理し、GitLab Runnerが「実際に実行する役割」を担当します。</p>
+        </article>
+
+        <article class="topic">
+          <h2>GitLab.com共有Runner</h2>
+          <p>GitLab.comがあらかじめ用意しているRunnerです。Runnerを自分で準備しなくても使用できます。</p>
+          <ul class="plain-list">
+            <li>GitLab.comが管理する</li>
+            <li>主にLinux環境で実行する</li>
+            <li>Dockerを利用して実行する</li>
+            <li>セットアップ不要ですぐ使える</li>
+            <li>PlaywrightなどのWebテストに利用できる</li>
+          </ul>
+          <h3>実行ログ例</h3>
+          <p>実行ログの上部に次のような記載があれば、GitLab.com共有Runnerを使用しています。</p>
+          <div class="code-panel" data-language="Text">
+            <pre><code>on blue-6.saas-linux-small-amd64.runners-manager.gitlab.com
+Preparing the "docker+machine" executor
+Using Docker executor with image python:3.11</code></pre>
+          </div>
+        </article>
+
+        <article class="topic">
+          <h2>自分のGitLab Runner</h2>
+          <p>利用者自身がインストールして管理するRunnerです。Windows専用ツールなど、共有Runnerでは実行しにくい処理で使います。</p>
+          <div class="code-panel" data-language="Text">
+            <pre><code>C:\GitLab-Runner</code></pre>
+          </div>
+          <ul class="plain-list">
+            <li>利用者が管理する</li>
+            <li>Windows環境で実行できる</li>
+            <li>PowerShellで実行できる</li>
+            <li>WinAppDriverなどWindows専用ツールを利用できる</li>
+            <li>実行環境を自由にカスタマイズできる</li>
+          </ul>
+          <h3>設定例</h3>
+          <div class="code-panel" data-language="TOML">
+            <pre><code>executor = "shell"
+shell = "powershell"</code></pre>
+          </div>
+        </article>
+
+        <article class="topic">
+          <h2>使い分け</h2>
+          <p>基本はGitLab.com共有Runnerを利用します。環境構築が不要で、PythonやPlaywrightの実行をすぐ始められるためです。</p>
+          <p>WinAppDriver、Windowsデスクトップアプリのテスト、社内専用ツール、特定のWindows環境が必要な処理では、自分のGitLab Runnerを利用します。</p>
+        </article>
+
+        <article class="topic">
+          <h2>まとめ</h2>
+          <div class="table-wrap">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  <th>GitLab.com共有Runner</th>
+                  <th>自分のGitLab Runner</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>管理者</th>
+                  <td>GitLab</td>
+                  <td>利用者</td>
+                </tr>
+                <tr>
+                  <th>OS</th>
+                  <td>主にLinux</td>
+                  <td>任意、今回はWindows</td>
+                </tr>
+                <tr>
+                  <th>環境構築</th>
+                  <td>不要</td>
+                  <td>必要</td>
+                </tr>
+                <tr>
+                  <th>Playwright</th>
+                  <td>使える</td>
+                  <td>使える</td>
+                </tr>
+                <tr>
+                  <th>WinAppDriver</th>
+                  <td>使えない</td>
+                  <td>使える</td>
+                </tr>
+                <tr>
+                  <th>利用開始まで</th>
+                  <td>すぐ利用可能</td>
+                  <td>セットアップが必要</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">基本的にはGitLab.com共有Runnerを利用し、Windows環境やWinAppDriverなど特殊な要件がある場合のみ自分のGitLab Runnerを利用します。</p>
+        </article>
+      </section>
+
+      <nav class="page-nav" aria-label="ページ移動">
+        <span></span>
+        <a class="page-nav__link page-nav__link--next" href="index.html">
+          <span class="page-nav__label">次へ</span>
+          <strong>01. プロジェクトを新規作成</strong>
+        </a>
+      </nav>
+    </main>
+  </div>
+</body>
+
+</html>

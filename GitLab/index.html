@@ -13,7 +13,7 @@
   <a class="study-home-link" href="../index.html">学習コンテンツ一覧へ</a>
 
   <header class="topbar">
-    <a class="brand" href="index.html" aria-label="GitLab 学習ノート">
+    <a class="brand" href="overview.html" aria-label="GitLab 学習ノート">
       <span class="brand__mark" aria-hidden="true">GL</span>
       <span class="brand__text">
         <span class="brand__label">GitLab Notes</span>
@@ -21,7 +21,9 @@
       </span>
     </a>
     <nav class="topbar__links" aria-label="主要ページ">
+      <a class="topbar__link" href="overview.html">概要</a>
       <a class="topbar__link" href="yml.html">YAML</a>
+      <a class="topbar__link" href="runner.html">Runner</a>
       <a class="topbar__link" href="run.html">実行</a>
       <a class="topbar__link" href="artifacts.html">保存場所</a>
     </nav>
@@ -30,13 +32,25 @@
   <div class="page-shell">
     <aside class="sidebar" aria-label="GitLabページ一覧">
       <nav class="toc">
+        <a class="toc__link" href="overview.html">
+          <span class="toc__number">00</span>
+          <span class="toc__text">GitLabとRunner</span>
+        </a>
         <a class="toc__link is-active" href="index.html">
           <span class="toc__number">01</span>
           <span class="toc__text">プロジェクト作成</span>
         </a>
         <a class="toc__link" href="yml.html">
-          <span class="toc__number">02</span>
+          <span class="toc__number">02-1</span>
           <span class="toc__text">yml書き方</span>
+        </a>
+        <a class="toc__link toc__link--sub" href="script.html">
+          <span class="toc__number">02-2</span>
+          <span class="toc__text">scriptの書き方</span>
+        </a>
+        <a class="toc__link toc__link--sub" href="runner.html">
+          <span class="toc__number">02-3</span>
+          <span class="toc__text">自分のRunner</span>
         </a>
         <a class="toc__link" href="run.html">
           <span class="toc__number">03</span>
@@ -59,7 +73,7 @@
 
     <main class="content">
       <section class="hero" aria-labelledby="page-title">
-        <span class="page-kicker">01 / 06</span>
+        <span class="page-kicker">01 / 09</span>
         <h1 id="page-title">プロジェクトを新規作成</h1>
         <p class="lead">GitLabでプロジェクトを作成し、ローカルの<code>C:\work</code>へクローンしてVS Codeで開くまでの流れです。</p>
       </section>
@@ -112,10 +126,13 @@ git clone &lt;GitLabのURL&gt;</code></pre>
       </section>
 
       <nav class="page-nav" aria-label="ページ移動">
-        <span></span>
+        <a class="page-nav__link" href="overview.html">
+          <span class="page-nav__label">前へ</span>
+          <strong>00. GitLabとRunner</strong>
+        </a>
         <a class="page-nav__link page-nav__link--next" href="yml.html">
           <span class="page-nav__label">次へ</span>
-          <strong>02. yml書き方</strong>
+          <strong>02-1. yml書き方</strong>
         </a>
       </nav>
     </main>
