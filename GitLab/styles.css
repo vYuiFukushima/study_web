@@ -406,6 +406,7 @@ pre code {
 
 .plain-list + .note,
 .step-list + .note,
+.code-panel + .note,
 .code-panel + .plain-list,
 .code-panel + .step-list {
   margin-top: 1rem;
