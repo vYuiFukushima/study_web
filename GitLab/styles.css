@@ -321,6 +321,11 @@ pre code {
   box-shadow: var(--shadow);
 }
 
+.hero--accent {
+  border-color: rgba(109, 128, 107, 0.38);
+  background: linear-gradient(135deg, rgba(166, 181, 165, 0.22), rgba(255, 250, 240, 0.88));
+}
+
 .page-kicker {
   display: inline-flex;
   width: fit-content;
