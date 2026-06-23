@@ -200,11 +200,7 @@ from appium.webdriver.common.appiumby import AppiumBy</code></pre>
             <p class="code-note">メソッドの最初の引数は、ほぼ必ず <code>self</code> です。</p>
           </article>
 
-          <article class="syntax-card">
-            <h3>unittestでのクラスの書き方</h3>
-            <pre><code>class クラス名(unittest.TestCase):
-    ...</code></pre>
-          </article>
+
         </div>
 
         <div class="file-role-grid file-role-grid--stacked">
@@ -239,7 +235,11 @@ from appium.webdriver.common.appiumby import AppiumBy</code></pre>
             return self.create_web_element(value["ELEMENT"])
         return super()._unwrap_value(value)</code></pre>
           </article>
-
+          <article class="syntax-card">
+            <h3>unittestでのクラスの書き方</h3>
+            <pre><code>class クラス名(unittest.TestCase):
+    ...</code></pre>
+          </article>
           <article class="syntax-card">
             <h3>setUp</h3>
             <pre><code>def setUp(self):
@@ -298,8 +298,8 @@ options.set_capability("app", r"【exeのフルパス】")</code></pre>
         </div>
 
         <div class="table-card">
-            <h3>現在の書き方</h3>
-            <div class="table-scroll">
+          <h3>現在の書き方</h3>
+          <div class="table-scroll">
             <table>
               <thead>
                 <tr>
