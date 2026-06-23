@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WinAppDriver</title>
-  <link rel="stylesheet" href="styles.css?v=20260617-winappdriver-layout-fix">
+  <link rel="stylesheet" href="styles.css?v=20260623-winappdriver-current">
 </head>
 
 <body class="tool-detail-page">
@@ -99,8 +99,8 @@
         <div class="compare-code-grid">
           <article class="syntax-card">
             <h3>バージョン固定</h3>
-            <pre><code>python -m pip install selenium==4.0.0
-python -m pip install Appium-Python-Client==1.3.0</code></pre>
+            <pre><code>python -m pip install selenium==4.45.0
+python -m pip install Appium-Python-Client==5.1.1</code></pre>
           </article>
 
           <article class="syntax-card">
@@ -121,8 +121,13 @@ python -m unittest -v ファイル名（拡張子なし）</code></pre>
         <article class="syntax-card syntax-card--wide">
           <h3>必須</h3>
           <pre><code>import unittest
-from appium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait</code></pre>
+from selenium import webdriver
+from selenium.webdriver.common.options import BaseOptions
+from selenium.webdriver.remote.client_config import ClientConfig
+from selenium.webdriver.remote.command import Command
+from selenium.webdriver.remote.remote_connection import RemoteConnection
+from selenium.webdriver.support.ui import WebDriverWait
+from appium.webdriver.common.appiumby import AppiumBy</code></pre>
         </article>
 
         <div class="assert-summary-grid">
@@ -204,26 +209,64 @@ from selenium.webdriver.support.ui import WebDriverWait</code></pre>
 
         <div class="file-role-grid file-role-grid--stacked">
           <article class="syntax-card">
+            <h3>WinAppDriver用Options</h3>
+            <pre><code>class WinAppDriverOptions(BaseOptions):
+    @property
+    def default_capabilities(self):
+        return {}
+
+    def to_capabilities(self):
+        return self._caps.copy()</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <h3>WinAppDriver用Remote</h3>
+            <pre><code>class WinAppDriverRemote(webdriver.Remote):
+    def start_session(self, capabilities):
+        response = self.command_executor.execute(
+            Command.NEW_SESSION,
+            {"desiredCapabilities": capabilities}
+        )
+        if response.get("status") not in (0, None):
+            self.error_handler.check_response(response)
+        self.session_id = response.get("sessionId")
+        self.caps = response.get("value", {})
+        if not self.session_id and isinstance(self.caps, dict):
+            self.session_id = self.caps.get("sessionId")
+
+    def _unwrap_value(self, value):
+        if isinstance(value, dict) and "ELEMENT" in value:
+            return self.create_web_element(value["ELEMENT"])
+        return super()._unwrap_value(value)</code></pre>
+          </article>
+
+          <article class="syntax-card">
             <h3>setUp</h3>
             <pre><code>def setUp(self):
-    desired_caps = {}
-    desired_caps["app"] = "アプリの指定"
-    self.driver = webdriver.Remote(
-        command_executor="http://localhost:4723",
-        desired_capabilities=desired_caps
+    options = WinAppDriverOptions()
+    options.set_capability("platformName", "Windows")
+    options.set_capability("deviceName", "WindowsPC")
+    options.set_capability("app", "アプリの指定")
+
+    client_config = ClientConfig(remote_server_addr="http://127.0.0.1:4723")
+    connection = RemoteConnection(client_config=client_config)
+
+    self.driver = WinAppDriverRemote(
+        command_executor=connection,
+        options=options
     )</code></pre>
           </article>
 
           <article class="syntax-card">
             <h3>アプリの指定</h3>
             <pre><code># Microsoft Store アプリ
-desired_caps["app"] = "【アプリのAUMID】"
+options.set_capability("app", "【アプリのAUMID】")
 
 # PowerShellで調べる
 Get-StartApps | Where-Object Name -like "*●●*"
 
 # 社内ツール、メモ帳などデスクトップアプリ
-desired_caps["app"] = r"【exeのフルパス】"</code></pre>
+options.set_capability("app", r"【exeのフルパス】")</code></pre>
           </article>
 
           <article class="syntax-card">
@@ -255,31 +298,36 @@ desired_caps["app"] = r"【exeのフルパス】"</code></pre>
         </div>
 
         <div class="table-card">
-          <h3>2.0.0以降の書き方</h3>
-          <div class="table-scroll">
+            <h3>現在の書き方</h3>
+            <div class="table-scroll">
             <table>
               <thead>
                 <tr>
                   <th>検索対象</th>
-                  <th>旧（非推奨・削除）</th>
-                  <th>新（推奨）</th>
+                  <th>書き方</th>
+                  <th>使う場面</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <th>AccessibilityId</th>
+                  <td><code>find_element(AppiumBy.ACCESSIBILITY_ID, "...")</code></td>
+                  <td>AutomationIdで探す。最優先で使う。</td>
+                </tr>
+                <tr>
                   <th>Name</th>
-                  <td><code>find_element_by_name("...")</code></td>
                   <td><code>find_element(AppiumBy.NAME, "...")</code></td>
+                  <td>画面に表示されている文字で探す。</td>
                 </tr>
                 <tr>
                   <th>XPath</th>
-                  <td><code>find_element_by_xpath("...")</code></td>
                   <td><code>find_element(AppiumBy.XPATH, "...")</code></td>
+                  <td>ほかの方法で取りづらいときだけ使う。</td>
                 </tr>
                 <tr>
                   <th>ClassName</th>
-                  <td><code>find_element_by_class_name("...")</code></td>
                   <td><code>find_element(AppiumBy.CLASS_NAME, "...")</code></td>
+                  <td>同じ種類の部品をまとめて探すとき。</td>
                 </tr>
               </tbody>
             </table>
@@ -287,20 +335,20 @@ desired_caps["app"] = r"【exeのフルパス】"</code></pre>
         </div>
 
         <article class="syntax-card syntax-card--wide">
-          <h3>Appium-Python-Client 1.3.0 の例</h3>
-          <pre><code>from appium.webdriver.common.mobileby import MobileBy
+          <h3>AppiumBy の例</h3>
+          <pre><code>from appium.webdriver.common.appiumby import AppiumBy
 
 # Accessibility ID の場合
-driver.find_element(MobileBy.ACCESSIBILITY_ID, "...")
+driver.find_element(AppiumBy.ACCESSIBILITY_ID, "...")
 
 # Name の場合
-driver.find_element(MobileBy.NAME, "...")
+driver.find_element(AppiumBy.NAME, "...")
 
 # XPath の場合
-driver.find_element(MobileBy.XPATH, "...")
+driver.find_element(AppiumBy.XPATH, "...")
 
 # Class Name の場合
-driver.find_element(MobileBy.CLASS_NAME, "...")</code></pre>
+driver.find_element(AppiumBy.CLASS_NAME, "...")</code></pre>
         </article>
 
         <div class="table-card table-card--locator-methods">
@@ -318,17 +366,17 @@ driver.find_element(MobileBy.CLASS_NAME, "...")</code></pre>
                 <tr>
                   <th>1</th>
                   <td>AccessibilityId</td>
-                  <td><code>self.driver.find_element(MobileBy.ACCESSIBILITY_ID, "AutomationId").click()</code></td>
+                  <td><code>self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "AutomationId").click()</code></td>
                 </tr>
                 <tr>
                   <th>2</th>
                   <td>Name</td>
-                  <td><code>self.driver.find_element(MobileBy.NAME, "表示されている文字")</code></td>
+                  <td><code>self.driver.find_element(AppiumBy.NAME, "表示されている文字")</code></td>
                 </tr>
                 <tr>
                   <th>3</th>
                   <td>XPath</td>
-                  <td><code>self.driver.find_element(MobileBy.XPATH, "//Button[@Name='2']").click()</code></td>
+                  <td><code>self.driver.find_element(AppiumBy.XPATH, "//Button[@Name='2']").click()</code></td>
                 </tr>
               </tbody>
             </table>
@@ -346,7 +394,7 @@ driver.find_element(MobileBy.CLASS_NAME, "...")</code></pre>
         <div class="assert-grid">
           <article class="syntax-card">
             <h4>左クリック</h4>
-            <pre><code>element = self.driver.find_element(MobileBy.ACCESSIBILITY_ID, "num2Button")
+            <pre><code>element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "num2Button")
 element.click()</code></pre>
           </article>
 
@@ -354,37 +402,37 @@ element.click()</code></pre>
             <h4>右クリック</h4>
             <pre><code>from selenium.webdriver.common.action_chains import ActionChains
 
-element = self.driver.find_element_by_識別方法("識別値")
+element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 ActionChains(self.driver).context_click(element).perform()</code></pre>
           </article>
 
           <article class="syntax-card">
             <h4>右クリック後のメニューをクリック</h4>
-            <pre><code>target = self.driver.find_element_by_識別方法("右クリック対象の識別値")
+            <pre><code>target = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "右クリック対象の識別値")
 ActionChains(self.driver).context_click(target).perform()
 
 menu = WebDriverWait(self.driver, 最大待機秒).until(
-    lambda driver: driver.find_element_by_識別方法("メニュー項目の識別値")
+    lambda driver: driver.find_element(AppiumBy.NAME, "メニュー項目の識別値")
 )
 menu.click()</code></pre>
           </article>
 
           <article class="syntax-card">
             <h4>ダブルクリック</h4>
-            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+            <pre><code>element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 ActionChains(self.driver).double_click(element).perform()</code></pre>
           </article>
 
           <article class="syntax-card">
             <h4>ドラッグ＆ドロップ</h4>
-            <pre><code>start = self.driver.find_element_by_識別方法("開始側の識別値")
-end = self.driver.find_element_by_識別方法("終了側の識別値")
+            <pre><code>start = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "開始側の識別値")
+end = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "終了側の識別値")
 ActionChains(self.driver).drag_and_drop(start, end).perform()</code></pre>
           </article>
 
           <article class="syntax-card">
             <h4>長押し</h4>
-            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+            <pre><code>element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 ActionChains(self.driver).click_and_hold(element).perform()
 ActionChains(self.driver).release().perform()</code></pre>
           </article>
@@ -392,10 +440,10 @@ ActionChains(self.driver).release().perform()</code></pre>
 
         <article class="syntax-card syntax-card--wide">
           <h3>線を描く</h3>
-          <pre><code>canvas = self.driver.find_element_by_識別方法("キャンバスの識別値")
+          <pre><code>canvas = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "キャンバスの識別値")
 ActionChains(self.driver).click_and_hold(canvas).move_by_offset(移動X, 移動Y).release().perform()</code></pre>
           <p>終了地点が右に30の場合の例です。</p>
-          <pre><code>start_point = self.driver.find_element_by_accessibility_id("ListViewItem-15")
+          <pre><code>start_point = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "ListViewItem-15")
 ActionChains(self.driver)\
     .click_and_hold(start_point)\
     .move_by_offset(30, 0)\
@@ -413,13 +461,13 @@ ActionChains(self.driver)\
         <div class="compare-code-grid">
           <article class="syntax-card">
             <h3>文字入力</h3>
-            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+            <pre><code>element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 element.send_keys("入力したい文字")</code></pre>
           </article>
 
           <article class="syntax-card">
             <h3>クリアしてから入力</h3>
-            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+            <pre><code>element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 element.clear()
 element.send_keys("入力したい文字")</code></pre>
             <p class="code-note">入力欄に既に何か入っている可能性があるなら、まずクリアします。</p>
@@ -430,7 +478,7 @@ element.send_keys("入力したい文字")</code></pre>
           <h3>特殊キー</h3>
           <pre><code>from selenium.webdriver.common.keys import Keys
 
-element = self.driver.find_element_by_識別方法("識別値")
+element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 element.send_keys("abc", Keys.ENTER)
 
 # Backspaceを3回押す例
@@ -539,7 +587,7 @@ end_time = time.time() + timeout
 
 while time.time() < end_time:
     try:
-        element = self.driver.find_element_by_識別方法("識別値")
+        element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
         break
     except Exception:
         time.sleep(poll_frequency)
@@ -556,7 +604,7 @@ poll_frequency = 0.5
 end_time = time.time() + timeout
 
 while time.time() < end_time:
-    element = self.driver.find_element_by_識別方法("テキスト確認対象の識別値")
+    element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "テキスト確認対象の識別値")
     actual_text = str(element.text)
     if actual_text == "期待するテキスト（完全一致）":
         break
@@ -569,21 +617,21 @@ self.assertEqual("期待するテキスト（完全一致）", actual_text, "指
           <article class="syntax-card">
             <h4>WebDriverWait：要素が出るまで待つ</h4>
             <pre><code>element = WebDriverWait(self.driver, 最大待機秒).until(
-    lambda driver: driver.find_element_by_識別方法("識別値")
+    lambda driver: driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 )</code></pre>
           </article>
 
           <article class="syntax-card">
             <h4>WebDriverWait：完全一致</h4>
             <pre><code>WebDriverWait(self.driver, 最大待機秒).until(
-    lambda driver: driver.find_element_by_識別方法("テキスト確認対象の識別値").text == "期待するテキスト"
+    lambda driver: driver.find_element(AppiumBy.ACCESSIBILITY_ID, "テキスト確認対象の識別値").text == "期待するテキスト"
 )</code></pre>
           </article>
 
           <article class="syntax-card">
             <h4>WebDriverWait：部分一致</h4>
             <pre><code>WebDriverWait(self.driver, 最大待機秒).until(
-    lambda driver: "期待する部分文字列" in driver.find_element_by_識別方法("テキスト確認対象の識別値").text
+    lambda driver: "期待する部分文字列" in driver.find_element(AppiumBy.ACCESSIBILITY_ID, "テキスト確認対象の識別値").text
 )</code></pre>
           </article>
 
@@ -591,7 +639,7 @@ self.assertEqual("期待するテキスト（完全一致）", actual_text, "指
             <h4>上書き確認ダイアログ</h4>
             <pre><code>try:
     overwrite = WebDriverWait(self.driver, 5).until(
-        lambda driver: driver.find_element_by_accessibility_id("1")
+        lambda driver: driver.find_element(AppiumBy.ACCESSIBILITY_ID, "1")
     )
     overwrite.click()
 except Exception:
@@ -609,7 +657,7 @@ except Exception:
         <div class="assert-grid">
           <article class="syntax-card">
             <h4>含まれているか確認（部分一致）</h4>
-            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+            <pre><code>element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 self.assertIn("期待する文字列", str(element.text), "失敗時のメッセージ")</code></pre>
           </article>
 
@@ -626,7 +674,7 @@ self.assertFalse(条件式, "失敗時メッセージ")</code></pre>
 
           <article class="syntax-card">
             <h4>実際の値を取得</h4>
-            <pre><code>element = self.driver.find_element_by_識別方法("識別値")
+            <pre><code>element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 actual = str(element.text)</code></pre>
           </article>
         </div>
@@ -653,7 +701,7 @@ logger.info("文字列 %s 文字列", 値)</code></pre>
           <pre><code>from selenium.common.exceptions import NoSuchElementException
 
 try:
-    element = self.driver.find_element_by_識別方法("識別値")
+    element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "識別値")
 except NoSuchElementException:
     self.fail("ここに自分で書きたいエラーメッセージ")</code></pre>
         </article>
