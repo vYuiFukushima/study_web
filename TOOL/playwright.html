@@ -355,7 +355,9 @@ assert "登録完了" in message</code></pre>
 
             <section class="syntax-card">
               <h4>テキスト完全一致</h4>
-              <pre><code>expect(ロケータ).to_have_text("期待値")</code></pre>
+              <pre><code>expect(
+    変数名.locator("セレクタ")
+).to_have_text("期待値")</code></pre>
               <p class="code-note">ロケータ（Locator）：画面上のボタンやテキストボックスなど、操作・確認したい要素を指定するためのものです。</p>
               <p>例</p>
               <pre><code>expect(
@@ -365,7 +367,9 @@ assert "登録完了" in message</code></pre>
 
             <section class="syntax-card">
               <h4>テキスト部分一致</h4>
-              <pre><code>expect(ロケータ).to_contain_text("文字列")</code></pre>
+              <pre><code>expect(
+    変数名.locator("セレクタ")
+).to_contain_text("文字列")</code></pre>
               <p>例</p>
               <pre><code>expect(
     page.locator("#message")
@@ -374,7 +378,9 @@ assert "登録完了" in message</code></pre>
 
             <section class="syntax-card">
               <h4>チェック状態確認</h4>
-              <pre><code>expect(ロケータ).to_be_checked()</code></pre>
+              <pre><code>expect(
+    変数名.locator("セレクタ")
+).to_be_checked()</code></pre>
               <p>例</p>
               <pre><code>expect(
     page.locator("#agree")
@@ -383,7 +389,9 @@ assert "登録完了" in message</code></pre>
 
             <section class="syntax-card">
               <h4>表示確認</h4>
-              <pre><code>expect(ロケータ).to_be_visible()</code></pre>
+              <pre><code>expect(
+    変数名.locator("セレクタ")
+).to_be_visible()</code></pre>
               <p>例</p>
               <pre><code>expect(
     page.locator("#message")
@@ -392,7 +400,9 @@ assert "登録完了" in message</code></pre>
 
             <section class="syntax-card">
               <h4>非表示確認</h4>
-              <pre><code>expect(ロケータ).not_to_be_visible()</code></pre>
+              <pre><code>expect(
+    変数名.locator("セレクタ")
+).not_to_be_visible()</code></pre>
               <p>例</p>
               <pre><code>expect(
     page.locator("#loading")
@@ -426,22 +436,22 @@ assert "登録完了" in message</code></pre>
                 <tr>
                   <th>テキスト完全一致</th>
                   <td><code>assert 実際の値 == "文字列"</code></td>
-                  <td><code>expect(locator).to_have_text("文字列")</code></td>
+                  <td><code>expect(page.locator("セレクタ")).to_have_text("文字列")</code></td>
                 </tr>
                 <tr>
                   <th>テキスト部分一致</th>
                   <td><code>assert "文字列" in 実際の値</code></td>
-                  <td><code>expect(locator).to_contain_text("文字列")</code></td>
+                  <td><code>expect(page.locator("セレクタ")).to_contain_text("文字列")</code></td>
                 </tr>
                 <tr>
                   <th>チェック状態確認</th>
                   <td><code>assert page.is_checked("セレクタ")</code></td>
-                  <td><code>expect(locator).to_be_checked()</code></td>
+                  <td><code>expect(page.locator("セレクタ")).to_be_checked()</code></td>
                 </tr>
                 <tr>
                   <th>表示確認</th>
                   <td><code>assert page.is_visible("セレクタ")</code></td>
-                  <td><code>expect(locator).to_be_visible()</code></td>
+                  <td><code>expect(page.locator("セレクタ")).to_be_visible()</code></td>
                 </tr>
               </tbody>
             </table>
