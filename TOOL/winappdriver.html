@@ -627,6 +627,28 @@ while time.time() < end_time:
     time.sleep(poll_frequency)
 
 self.assertIn("期待する文字列（部分一致）", actual_text, "指定時間内に期待文字列が含まれること")</code></pre>
+
+          <h4>小数点を含む部分一致で待つ</h4>
+          <pre><code>import re
+
+actual_text = ""
+match = None
+timeout = 10
+poll_frequency = 0.5
+end_time = time.time() + timeout
+
+while time.time() < end_time:
+    element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "テキスト確認対象の識別値")
+    actual_text = str(element.text)
+    match = re.search(r"\d+\.\d+", actual_text)
+    if match:
+        break
+    time.sleep(poll_frequency)
+
+self.assertIsNotNone(match, "指定時間内に小数点を含む数値が表示されること")
+actual_number = float(match.group())
+
+self.assertEqual(28.29, actual_number, f"期待値は28.29、実際の値は{actual_text}です。")</code></pre>
         </article>
 
         <div class="assert-grid">
