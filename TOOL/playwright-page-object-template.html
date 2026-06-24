@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Object パターンのコード例</title>
+  <link rel="stylesheet" href="styles.css?v=20260617-page-top">
+</head>
+
+<body class="tool-detail-page">
+  <a class="study-home-link" href="../index.html">学習コンテンツへ戻る</a>
+
+  <nav class="tool-top-nav" aria-label="TOOLページナビゲーション">
+    <div class="tool-top-nav__inner">
+      <a class="tool-top-nav__brand" href="index.html">テスト自動化ツール</a>
+      <div class="tool-top-nav__links">
+        <a href="index.html">ホーム</a>
+        <details class="top-nav-group">
+          <summary>プログラミング</summary>
+          <div class="top-nav-menu">
+            <details class="top-nav-group top-nav-group--nested">
+              <summary>Playwright</summary>
+              <div class="top-nav-menu top-nav-menu--nested">
+                <a href="playwright.html">Playwrightトップ</a>
+                <a href="playwright-page-object-data-driven.html">保守性を高める</a>
+                <a href="playwright-page-object-template.html">Page Objectコード例</a>
+              </div>
+            </details>
+            <a href="winappdriver.html">WinAppDriver</a>
+          </div>
+        </details>
+        <a href="index.html#nocode-tools">ノーコード</a>
+        <details class="top-nav-group">
+          <summary>APIテスト</summary>
+          <div class="top-nav-menu">
+            <a href="../POSTMAN/index.html">Postman</a>
+          </div>
+        </details>
+        <a href="index.html#summary">まとめ</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero hero--detail">
+    <div class="hero__inner">
+      <a class="back-link" href="playwright-page-object-data-driven.html#file-role">Page Objectへ戻る</a>
+      <p class="eyebrow">Playwright / Page Object</p>
+      <h1>Page Object パターンのコード例</h1>
+      <p class="lead"><code>main.py</code> と <code>pages/form.py</code>、<code>pages/confirm.py</code> に分けて、テストの流れと画面操作を整理する例です。</p>
+
+      <div class="hero-highlights" aria-label="このページの概要">
+        <div class="highlight-card">
+          <span>main.py</span>
+          <strong>何をするか</strong>
+        </div>
+        <div class="highlight-card">
+          <span>form.py</span>
+          <strong>入力画面の操作</strong>
+        </div>
+        <div class="highlight-card">
+          <span>confirm.py</span>
+          <strong>確認画面の操作</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <nav class="toc" aria-label="Page Objectコード例ページ内メニュー">
+      <a href="playwright-page-object-data-driven.html#overview">保守性を高める</a>
+      <a href="playwright-page-object-data-driven.html#page-object">Page Object</a>
+      <a href="#structure">フォルダ構成</a>
+      <a href="#main-py">main.py</a>
+      <a href="#form-py">pages/form.py</a>
+      <a href="#confirm-py">pages/confirm.py</a>
+    </nav>
+
+    <div class="content-column">
+      <section id="structure" class="section">
+        <div class="section-heading">
+          <p class="section-label">Structure</p>
+          <h2>フォルダ構成例</h2>
+          <p>テストの流れを書くファイルと、画面ごとの操作を書くファイルを分けます。</p>
+        </div>
+
+        <pre class="tool-tree"><code>プロジェクト
+├─ main.py
+└─ pages
+   ├─ form.py
+   └─ confirm.py</code></pre>
+
+        <div class="table-card">
+          <h3>各ファイルの役割</h3>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>ファイル</th>
+                  <th>役割</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>main.py</th>
+                  <td>テスト全体の流れを書く</td>
+                </tr>
+                <tr>
+                  <th>pages/form.py</th>
+                  <td>入力画面の操作を書く</td>
+                </tr>
+                <tr>
+                  <th>pages/confirm.py</th>
+                  <td>確認画面の操作や値取得を書く</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="main-py" class="section">
+        <div class="section-heading">
+          <p class="section-label">main.py</p>
+          <h2>テストの流れを書く</h2>
+          <p>Page Objectのメソッドを呼び出し、「何をするか」が分かる形にします。</p>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>main.py</h3>
+          <pre><code>from playwright.sync_api import sync_playwright
+
+from pages.form import FormPageObject
+from pages.confirm import ConfirmPageObject
+
+
+def main():
+
+    with sync_playwright() as p:
+
+        # ブラウザ起動
+        browser = p.chromium.launch(
+            headless=False
+        )
+
+        # 新しいページを作成
+        page = browser.new_page()
+
+        # 対象画面へアクセス
+        page.goto("URL")
+
+        # PageObject生成
+        form_page = FormPageObject(page)
+        confirm_page = ConfirmPageObject(page)
+
+        # -----------------------------
+        # 画面表示待機
+        # -----------------------------
+        form_page.メソッド名()
+
+        # -----------------------------
+        # テキスト入力
+        # -----------------------------
+        form_page.メソッド名("値")
+
+        # -----------------------------
+        # 数値入力
+        # -----------------------------
+        form_page.メソッド名("値")
+
+        # -----------------------------
+        # 日付入力
+        # -----------------------------
+        form_page.メソッド名("値")
+
+        # -----------------------------
+        # チェックボックス選択
+        # -----------------------------
+        form_page.メソッド名(True)
+
+        # -----------------------------
+        # セレクトボックス選択
+        # -----------------------------
+        form_page.メソッド名("値")
+
+        # -----------------------------
+        # ボタンクリック
+        # -----------------------------
+        form_page.メソッド名()
+
+        # -----------------------------
+        # 画面表示待機
+        # -----------------------------
+        confirm_page.メソッド名()
+
+        # -----------------------------
+        # 値取得
+        # -----------------------------
+        result = confirm_page.メソッド名()
+
+        print(result)
+
+        # -----------------------------
+        # 検証
+        # -----------------------------
+        assert result == "期待値"
+
+        # ブラウザ終了
+        browser.close()
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+        </article>
+      </section>
+
+      <section id="form-py" class="section">
+        <div class="section-heading">
+          <p class="section-label">pages/form.py</p>
+          <h2>入力画面の操作を書く</h2>
+          <p>入力、選択、クリックなど、フォーム画面で使う操作をまとめます。</p>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>pages/form.py</h3>
+          <pre><code>from playwright.sync_api import Page
+
+
+class FormPageObject:
+
+    def __init__(self, page: Page):
+        self.page = page
+
+    # -----------------------------
+    # 画面表示待機
+    # -----------------------------
+    def wait_until_networkidle(self):
+        """
+        画面の読み込みが終わるまで待機
+        """
+        self.page.wait_for_load_state("networkidle")
+
+    # -----------------------------
+    # テキスト入力
+    # -----------------------------
+    def input_text(self, value):
+        """
+        テキストを入力する
+        """
+        self.page.fill("セレクタ", value)
+
+    # -----------------------------
+    # 数値入力
+    # -----------------------------
+    def input_number(self, value):
+        """
+        数値を入力する
+        """
+        self.page.fill("セレクタ", value)
+
+    # -----------------------------
+    # 日付入力
+    # -----------------------------
+    def input_date(self, value):
+        """
+        日付を入力する
+        """
+        self.page.fill("セレクタ", value)
+
+    # -----------------------------
+    # Tabキー押下
+    # -----------------------------
+    def press_tab(self):
+        """
+        Tabキーを押下する
+        """
+        self.page.press("セレクタ", "Tab")
+
+    # -----------------------------
+    # セレクトボックス選択
+    # -----------------------------
+    def select_option(self, value):
+        """
+        プルダウンを選択する
+        """
+        self.page.select_option("セレクタ", value)
+
+    # -----------------------------
+    # チェックボックス選択
+    # -----------------------------
+    def select_checkbox(self, checked: bool):
+        """
+        チェックボックスをON/OFFする
+        """
+        checkbox = self.page.locator("セレクタ")
+
+        if checkbox.is_checked() != checked:
+            checkbox.click()
+
+    # -----------------------------
+    # ラジオボタン選択
+    # -----------------------------
+    def select_radio(self):
+        """
+        ラジオボタンを選択する
+        """
+        self.page.click("セレクタ")
+
+    # -----------------------------
+    # ボタンクリック
+    # -----------------------------
+    def click_button(self):
+        """
+        ボタンをクリックする
+        """
+        self.page.click("セレクタ")
+
+    # -----------------------------
+    # テキスト取得
+    # -----------------------------
+    def get_text(self):
+        """
+        テキストを取得する
+        """
+        return self.page.text_content("セレクタ")
+
+    # -----------------------------
+    # 入力値取得
+    # -----------------------------
+    def get_value(self):
+        """
+        入力値を取得する
+        """
+        return self.page.input_value("セレクタ")
+
+    # -----------------------------
+    # 表示確認
+    # -----------------------------
+    def is_visible(self):
+        """
+        要素が表示されているか確認する
+        """
+        return self.page.locator("セレクタ").is_visible()
+
+    # -----------------------------
+    # 活性確認
+    # -----------------------------
+    def is_enabled(self):
+        """
+        要素が操作可能か確認する
+        """
+        return self.page.locator("セレクタ").is_enabled()
+
+    # -----------------------------
+    # チェック状態確認
+    # -----------------------------
+    def is_checked(self):
+        """
+        チェック状態を確認する
+        """
+        return self.page.locator("セレクタ").is_checked()</code></pre>
+        </article>
+      </section>
+
+      <section id="confirm-py" class="section">
+        <div class="section-heading">
+          <p class="section-label">pages/confirm.py</p>
+          <h2>確認画面の操作を書く</h2>
+          <p>表示内容の取得、状態確認、スクリーンショット取得などをまとめます。</p>
+        </div>
+
+        <article class="syntax-card syntax-card--wide">
+          <h3>pages/confirm.py</h3>
+          <pre><code>from playwright.sync_api import Page
+
+
+class ConfirmPageObject:
+
+    def __init__(self, page: Page):
+        self.page = page
+
+    # -----------------------------
+    # 画面表示待機
+    # -----------------------------
+    def wait_until_networkidle(self):
+        """
+        画面の読み込みが終わるまで待機
+        """
+        self.page.wait_for_load_state("networkidle")
+
+    # -----------------------------
+    # テキスト取得
+    # -----------------------------
+    def get_text(self):
+        """
+        テキストを取得する
+        """
+        return self.page.text_content("セレクタ")
+
+    # -----------------------------
+    # 入力値取得
+    # -----------------------------
+    def get_value(self):
+        """
+        入力値を取得する
+        """
+        return self.page.input_value("セレクタ")
+
+    # -----------------------------
+    # 表示確認
+    # -----------------------------
+    def is_visible(self):
+        """
+        要素が表示されているか確認する
+        """
+        return self.page.locator("セレクタ").is_visible()
+
+    # -----------------------------
+    # 活性確認
+    # -----------------------------
+    def is_enabled(self):
+        """
+        要素が操作可能か確認する
+        """
+        return self.page.locator("セレクタ").is_enabled()
+
+    # -----------------------------
+    # チェック状態確認
+    # -----------------------------
+    def is_checked(self):
+        """
+        チェック状態を確認する
+        """
+        return self.page.locator("セレクタ").is_checked()
+
+    # -----------------------------
+    # 件数取得
+    # -----------------------------
+    def get_count(self):
+        """
+        要素数を取得する
+        """
+        return self.page.locator("セレクタ").count()
+
+    # -----------------------------
+    # 属性値取得
+    # -----------------------------
+    def get_attribute(self):
+        """
+        属性値を取得する
+        """
+        return self.page.get_attribute(
+            "セレクタ",
+            "属性名"
+        )
+
+    # -----------------------------
+    # スクリーンショット取得
+    # -----------------------------
+    def take_screenshot(self):
+        """
+        スクリーンショットを取得する
+        """
+        self.page.screenshot(
+            path="保存先ファイル名.png"
+        )
+
+    # -----------------------------
+    # ボタンクリック
+    # -----------------------------
+    def click_button(self):
+        """
+        ボタンをクリックする
+        """
+        self.page.click("セレクタ")</code></pre>
+        </article>
+      </section>
+    </div>
+  </main>
+  <button class="page-top-button" type="button" aria-label="ページ上部へ戻る">↑</button>
+  <script src="tool.js?v=20260617-page-top"></script>
+</body>
+
+</html>
