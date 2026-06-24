@@ -194,7 +194,8 @@ class TestPageObject:
         # -----------------------------
         # 検証
         # -----------------------------
-        assert result == "期待値"</code></pre>
+        expect(page.locator("セレクタ")).to_contain_text("期待値")
+</code></pre>
         </article>
       </section>
 
