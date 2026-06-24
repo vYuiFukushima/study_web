@@ -1030,6 +1030,16 @@ tbody tr:last-child td {
   font-size: 1.1rem;
 }
 
+.syntax-card--text-wait h4 {
+  margin: 22px 0 10px;
+  color: var(--warm-text);
+  font-size: 1rem;
+}
+
+.syntax-card--text-wait h3 + h4 {
+  margin-top: 0;
+}
+
 .syntax-card p {
   margin: 12px 0 6px;
   color: var(--warm-text);
