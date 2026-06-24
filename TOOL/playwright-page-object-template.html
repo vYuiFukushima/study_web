@@ -124,7 +124,8 @@
         <div class="section-heading">
           <p class="section-label">hotel_test.py</p>
           <h2>テストの流れを書く</h2>
-          <p>pytestでは <code>page</code> フィクスチャを使うため、<code>sync_playwright()</code> は書きません。Page Objectのメソッドを呼び出し、「何をするか」が分かる形にします。</p>
+          <p>pytestでは <code>page</code> フィクスチャを使うため、<code>sync_playwright()</code> は書きません。Page
+            Objectのメソッドを呼び出し、「何をするか」が分かる形にします。</p>
         </div>
 
         <article class="syntax-card syntax-card--wide">
@@ -155,6 +156,10 @@ class TestPageObject:
         # テキスト入力
         # -----------------------------
         form_page.メソッド名("値")
+        # -----------------------------
+        # クリック
+        # -----------------------------
+        form_page.click_check()
 
         # -----------------------------
         # チェックボックス選択
@@ -227,6 +232,12 @@ class FormPageObject:
         テキストを入力する
         """
         self.page.fill("セレクタ", value)
+
+    # -----------------------------
+    # クリック
+    # -----------------------------
+    def click_check(self):
+        self.page.click("セレクタ")
 
     # -----------------------------
     # Tabキー押下
@@ -464,4 +475,3 @@ class ConfirmPageObject:
 </body>
 
 </html>
-
