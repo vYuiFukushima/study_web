@@ -47,12 +47,12 @@
       <a class="back-link" href="playwright-page-object-data-driven.html#file-role">Page Objectへ戻る</a>
       <p class="eyebrow">Playwright / Page Object</p>
       <h1>Page Object パターンのコード例</h1>
-      <p class="lead"><code>main.py</code> と <code>pages/form.py</code>、<code>pages/confirm.py</code>
+      <p class="lead"><code>hotel_test.py</code> と <code>pages/form.py</code>、<code>pages/confirm.py</code>
         に分けて、テストの流れと画面操作を整理する例です。</p>
 
       <div class="hero-highlights" aria-label="このページの概要">
         <div class="highlight-card">
-          <span>main.py</span>
+          <span>hotel_test.py</span>
           <strong>何をするか</strong>
         </div>
         <div class="highlight-card">
@@ -72,7 +72,7 @@
       <a href="playwright-page-object-data-driven.html#overview">保守性を高める</a>
       <a href="playwright-page-object-data-driven.html#page-object">Page Object</a>
       <a href="#structure">フォルダ構成</a>
-      <a href="#main-py">main.py</a>
+      <a href="#main-py">hotel_test.py</a>
       <a href="#form-py">pages/form.py</a>
       <a href="#confirm-py">pages/confirm.py</a>
     </nav>
@@ -86,7 +86,7 @@
         </div>
 
         <pre class="tool-tree"><code>プロジェクト
-├─ main.py
+├─ hotel_test.py
 └─ pages
    ├─ form.py
    └─ confirm.py</code></pre>
@@ -103,8 +103,8 @@
               </thead>
               <tbody>
                 <tr>
-                  <th>main.py</th>
-                  <td>テスト全体の流れを書く</td>
+                  <th>hotel_test.py</th>
+                  <td>pytestでテスト全体の流れを書く</td>
                 </tr>
                 <tr>
                   <th>pages/form.py</th>
@@ -122,30 +122,22 @@
 
       <section id="main-py" class="section">
         <div class="section-heading">
-          <p class="section-label">main.py</p>
+          <p class="section-label">hotel_test.py</p>
           <h2>テストの流れを書く</h2>
-          <p>Page Objectのメソッドを呼び出し、「何をするか」が分かる形にします。</p>
+          <p>pytestでは <code>page</code> フィクスチャを使うため、<code>sync_playwright()</code> は書きません。Page Objectのメソッドを呼び出し、「何をするか」が分かる形にします。</p>
         </div>
 
         <article class="syntax-card syntax-card--wide">
-          <h3>main.py</h3>
-          <pre><code>from playwright.sync_api import sync_playwright
+          <h3>hotel_test.py</h3>
+          <pre><code>from playwright.sync_api import Page
 
 from pages.form import FormPageObject
 from pages.confirm import ConfirmPageObject
 
 
-def main():
+class TestPageObject:
 
-    with sync_playwright() as p:
-
-        # ブラウザ起動
-        browser = p.chromium.launch(
-            headless=False
-        )
-
-        # 新しいページを作成
-        page = browser.new_page()
+    def test_hotel(self, page: Page):
 
         # 対象画面へアクセス
         page.goto("URL")
@@ -157,7 +149,7 @@ def main():
         # -----------------------------
         # 画面表示待機
         # -----------------------------
-        form_page.メソッド名()
+        form_page.wait_until_networkidle()
 
         # -----------------------------
         # テキスト入力
@@ -168,44 +160,36 @@ def main():
         # チェックボックス選択
         # -----------------------------
         form_page.メソッド名(True)
-      
-        #  チェックボックスが3つの場合の書き方例
-          変数.メソッド名(値1, 値2, 値3)
 
+        # チェックボックスが3つの場合の書き方例
+        form_page.メソッド名(値1, 値2, 値3)
 
-          # -----------------------------
-          # セレクトボックス選択
-          # -----------------------------
-          form_page.メソッド名("値")
+        # -----------------------------
+        # セレクトボックス選択
+        # -----------------------------
+        form_page.メソッド名("値")
 
-          # -----------------------------
-          # ボタンクリック
-          # -----------------------------
-          form_page.メソッド名()
+        # -----------------------------
+        # ボタンクリック
+        # -----------------------------
+        form_page.メソッド名()
 
-          # -----------------------------
-          # 画面表示待機
-          # -----------------------------
-          confirm_page.メソッド名()
+        # -----------------------------
+        # 画面表示待機
+        # -----------------------------
+        confirm_page.wait_until_networkidle()
 
-          # -----------------------------
-          # 値取得
-          # -----------------------------
-          result = confirm_page.メソッド名()
+        # -----------------------------
+        # 値取得
+        # -----------------------------
+        result = confirm_page.メソッド名()
 
-          print(result)
+        print(result)
 
-          # -----------------------------
-          # 検証
-          # -----------------------------
-          assert result == "期待値"
-
-          # ブラウザ終了
-          browser.close()
-
-
-          if __name__ == "__main__":
-          main()</code></pre>
+        # -----------------------------
+        # 検証
+        # -----------------------------
+        assert result == "期待値"</code></pre>
         </article>
       </section>
 
@@ -273,25 +257,25 @@ class FormPageObject:
 
         if checkbox.is_checked() != checked:
             checkbox.click()
-
-
-  # チェックボックスが3つの場合の書き方例
+    # -----------------------------
+    # チェックボックスが3つの場合
+    # -----------------------------
     def メソッド名(self, 引数1: bool, 引数2: bool, 引数3: bool):
 
-      変数1 = self.page.locator("セレクタ1")
+        変数1 = self.page.locator("セレクタ1")
 
-      if 変数1.is_checked() != 引数1:
-          変数1.click()
+        if 変数1.is_checked() != 引数1:
+            変数1.click()
 
-      変数2 = self.page.locator("セレクタ2")
+        変数2 = self.page.locator("セレクタ2")
 
-      if 変数2.is_checked() != 引数2:
-          変数2.click()
+        if 変数2.is_checked() != 引数2:
+            変数2.click()
 
-      変数3 = self.page.locator("セレクタ3")
+        変数3 = self.page.locator("セレクタ3")
 
-      if 変数3.is_checked() != 引数3:
-          変数3.click()       
+        if 変数3.is_checked() != 引数3:
+            変数3.click()
 
     # -----------------------------
     # ラジオボタン選択
@@ -480,3 +464,4 @@ class ConfirmPageObject:
 </body>
 
 </html>
+
