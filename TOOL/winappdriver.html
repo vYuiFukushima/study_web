@@ -548,7 +548,7 @@ from datetime import datetime
 def take_screenshot(self, label):
     daytext = datetime.now().strftime("%Y%m%d")
     time_text = datetime.now().strftime("%H%M%S")
-    folder = r"C:\Users\SAMPLE\Documents"
+    folder = r"フォルダパス"
     folder_path = os.path.join(folder, f"●●_{daytext}")
     os.makedirs(folder_path, exist_ok=True)
     file_path = os.path.join(folder_path, f"{time_text}_{label}.png")
@@ -611,6 +611,21 @@ while time.time() < end_time:
     time.sleep(poll_frequency)
 
 self.assertEqual("期待するテキスト（完全一致）", actual_text, "指定時間内に期待テキストになること")</code></pre>
+
+          <h4>一部一致で待つ</h4>
+          <pre><code>actual_text = ""
+timeout = 10
+poll_frequency = 0.5
+end_time = time.time() + timeout
+
+while time.time() < end_time:
+    element = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "テキスト確認対象の識別値")
+    actual_text = str(element.text)
+    if "期待する文字列（一部一致）" in actual_text:
+        break
+    time.sleep(poll_frequency)
+
+self.assertIn("期待する文字列（一部一致）", actual_text, "指定時間内に期待文字列が含まれること")</code></pre>
         </article>
 
         <div class="assert-grid">
