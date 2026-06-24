@@ -47,7 +47,8 @@
       <a class="back-link" href="playwright-page-object-data-driven.html#file-role">Page Objectへ戻る</a>
       <p class="eyebrow">Playwright / Page Object</p>
       <h1>Page Object パターンのコード例</h1>
-      <p class="lead"><code>main.py</code> と <code>pages/form.py</code>、<code>pages/confirm.py</code> に分けて、テストの流れと画面操作を整理する例です。</p>
+      <p class="lead"><code>main.py</code> と <code>pages/form.py</code>、<code>pages/confirm.py</code>
+        に分けて、テストの流れと画面操作を整理する例です。</p>
 
       <div class="hero-highlights" aria-label="このページの概要">
         <div class="highlight-card">
@@ -164,16 +165,6 @@ def main():
         form_page.メソッド名("値")
 
         # -----------------------------
-        # 数値入力
-        # -----------------------------
-        form_page.メソッド名("値")
-
-        # -----------------------------
-        # 日付入力
-        # -----------------------------
-        form_page.メソッド名("値")
-
-        # -----------------------------
         # チェックボックス選択
         # -----------------------------
         form_page.メソッド名(True)
@@ -246,24 +237,6 @@ class FormPageObject:
     def input_text(self, value):
         """
         テキストを入力する
-        """
-        self.page.fill("セレクタ", value)
-
-    # -----------------------------
-    # 数値入力
-    # -----------------------------
-    def input_number(self, value):
-        """
-        数値を入力する
-        """
-        self.page.fill("セレクタ", value)
-
-    # -----------------------------
-    # 日付入力
-    # -----------------------------
-    def input_date(self, value):
-        """
-        日付を入力する
         """
         self.page.fill("セレクタ", value)
 
