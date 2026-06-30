@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MagicPod</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <a class="study-home-link" href="../index.html">学習コンテンツへ戻る</a>
+
+  <nav class="top-nav" aria-label="MagicPodページ内メニュー">
+    <a class="top-nav__brand" href="#top">MagicPod</a>
+    <div class="top-nav__links">
+      <a href="#about">概要</a>
+      <a href="#gui">GUI</a>
+      <a href="#difference">違い</a>
+      <a href="#features">できること</a>
+      <a href="#limits">苦手なこと</a>
+      <a href="#compare">比較</a>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="hero__inner">
+      <p class="eyebrow">No-code Test Automation</p>
+      <h1>MagicPodとは？</h1>
+      <p class="lead">
+        MagicPodは、Webアプリやモバイルアプリの自動テストを、コードを書かずに作成・実行できるテスト自動化ツールです。
+      </p>
+
+      <div class="hero-summary" aria-label="MagicPodの要点">
+        <section class="summary-card">
+          <span>作り方</span>
+          <strong>GUIで手順を組み立てる</strong>
+        </section>
+        <section class="summary-card">
+          <span>主な対象</span>
+          <strong>Web・Android・iOS</strong>
+        </section>
+        <section class="summary-card">
+          <span>特徴</span>
+          <strong>Self-healingで保守しやすい</strong>
+        </section>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <aside class="toc" aria-label="ページ内目次">
+      <a href="#about">MagicPodとは</a>
+      <a href="#gui">GUIとは</a>
+      <a href="#difference">Playwrightとの違い</a>
+      <a href="#features">MagicPodでできること</a>
+      <a href="#strength">MagicPodの特徴</a>
+      <a href="#limits">MagicPodが苦手なこと</a>
+      <a href="#compare">他ツールとの比較</a>
+      <a href="#playwright-user">Playwright経験者向け</a>
+      <a href="#summary">まとめ</a>
+    </aside>
+
+    <div class="content-column">
+      <section id="about" class="section">
+        <div class="section-heading">
+          <p class="section-label">About</p>
+          <h2>一言でいうと</h2>
+        </div>
+
+        <article class="content-card lead-card">
+          <p>
+            MagicPodは、<strong>Webアプリやモバイルアプリの自動テストを、コードを書かずに作成・実行できるテスト自動化ツール</strong>です。
+          </p>
+          <p>
+            PlaywrightやSeleniumではコードを書いてテストを作成しますが、MagicPodでは画面上で操作を組み合わせてテストを作成します。
+          </p>
+        </article>
+      </section>
+
+      <section id="gui" class="section">
+        <div class="section-heading">
+          <p class="section-label">GUI</p>
+          <h2>GUIとは？</h2>
+          <p>GUI（Graphical User Interface）とは、画面を見ながらマウスで操作できる仕組みのことです。</p>
+        </div>
+
+        <div class="action-grid">
+          <article class="action-card">
+            <span class="action-icon" aria-hidden="true">Click</span>
+            <h3>ボタンをクリック</h3>
+            <p>画面上のボタンやリンクを選んで操作します。</p>
+          </article>
+          <article class="action-card">
+            <span class="action-icon" aria-hidden="true">Input</span>
+            <h3>テキストを入力</h3>
+            <p>フォームや検索欄に文字を入力します。</p>
+          </article>
+          <article class="action-card">
+            <span class="action-icon" aria-hidden="true">Select</span>
+            <h3>メニューを選択</h3>
+            <p>プルダウンやメニューから項目を選びます。</p>
+          </article>
+          <article class="action-card">
+            <span class="action-icon" aria-hidden="true">Drag</span>
+            <h3>ドラッグ＆ドロップ</h3>
+            <p>画面上の要素をつかんで移動します。</p>
+          </article>
+        </div>
+
+        <div class="note-panel">
+          <p>MagicPodでは、このGUIを使ってテストを作成します。</p>
+        </div>
+      </section>
+
+      <section id="difference" class="section">
+        <div class="section-heading">
+          <p class="section-label">Difference</p>
+          <h2>Playwrightとの違い</h2>
+          <p>同じログインテストでも、Playwrightはコードで書き、MagicPodは画面上で手順を並べます。</p>
+        </div>
+
+        <div class="compare-grid">
+          <article class="syntax-card">
+            <div class="card-heading">
+              <span class="status-badge">Playwright</span>
+              <h3>コードを書いてテストを作成</h3>
+            </div>
+            <pre><code>await page.goto("https://example.com");
+await page.fill("#user", "hanako");
+await page.click("#login");</code></pre>
+          </article>
+
+          <article class="syntax-card">
+            <div class="card-heading">
+              <span class="status-badge status-badge--accent">MagicPod</span>
+              <h3>画面上で手順を並べる</h3>
+            </div>
+            <ol class="step-list">
+              <li>URLを開く</li>
+              <li>ユーザーIDを入力</li>
+              <li>パスワードを入力</li>
+              <li>ログインボタンをクリック</li>
+              <li>ログイン成功を確認</li>
+            </ol>
+          </article>
+        </div>
+
+        <blockquote class="closing-note">
+          コードを書く代わりに、GUIで操作を組み立てるのがMagicPodです。
+        </blockquote>
+      </section>
+
+      <section id="features" class="section">
+        <div class="section-heading">
+          <p class="section-label">What You Can Do</p>
+          <h2>MagicPodでできること</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card feature-card--wide">
+            <span class="feature-number">01</span>
+            <h3>Webアプリの自動テスト</h3>
+            <p>PlaywrightやSeleniumで行うような一般的なWebテストをGUIで作成できます。</p>
+            <ul class="tag-list">
+              <li>ログイン</li>
+              <li>商品検索</li>
+              <li>データ登録</li>
+              <li>データ更新</li>
+              <li>データ削除</li>
+              <li>CSVダウンロード</li>
+              <li>CSVアップロード</li>
+              <li>エラーメッセージ確認</li>
+              <li>画面遷移確認</li>
+            </ul>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">02</span>
+            <h3>モバイルアプリのテスト</h3>
+            <p>Android・iOSのスマートフォンアプリの自動テストも作成できます。</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">03</span>
+            <h3>APIテスト</h3>
+            <p>APIを直接呼び出し、レスポンス内容を確認できます。</p>
+            <div class="mini-flow">
+              <span>ログインAPI</span>
+              <span>ユーザー情報取得API</span>
+              <span>レスポンス確認</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">04</span>
+            <h3>CI/CDとの連携</h3>
+            <p>GitHub Actions、GitLab Runner、Jenkins、Azure DevOpsなどと連携できます。</p>
+            <div class="mini-flow">
+              <span>毎日9時</span>
+              <span>GitLab Runner実行</span>
+              <span>MagicPodテスト実行</span>
+              <span>Slack通知</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">05</span>
+            <h3>データ駆動テスト</h3>
+            <p>CSVやExcelなどのデータを使い、同じテストを複数回実行できます。</p>
+            <pre class="compact-code"><code>user001
+user002
+user003</code></pre>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">06</span>
+            <h3>スクリーンショット・動画保存</h3>
+            <p>テスト失敗時にスクリーンショットや実行動画を自動保存できます。</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">07</span>
+            <h3>並列実行</h3>
+            <p>Chrome、Edge、Firefoxなど複数ブラウザで同時実行できます。</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">08</span>
+            <h3>変数の利用</h3>
+            <p>取得した値を後続処理で利用できます。</p>
+            <div class="mini-flow">
+              <span>商品番号取得</span>
+              <span>検索</span>
+              <span>商品名取得</span>
+              <span>別画面で利用</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">09</span>
+            <h3>条件分岐</h3>
+            <p>状態に応じて処理を分けられます。</p>
+            <div class="branch-panel">
+              <span>ログイン済みならそのまま続行</span>
+              <span>そうでなければログイン</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">10</span>
+            <h3>JavaScriptの利用</h3>
+            <p>基本はノーコードですが、必要に応じてJavaScriptを書くこともできます。</p>
+            <ul class="check-list">
+              <li>日付計算</li>
+              <li>ランダム文字列生成</li>
+              <li>JSON加工</li>
+              <li>文字列操作</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="strength" class="section">
+        <div class="section-heading">
+          <p class="section-label">Strength</p>
+          <h2>MagicPodの特徴</h2>
+        </div>
+
+        <article class="content-card healing-card">
+          <div>
+            <span class="status-badge status-badge--accent">Self-healing</span>
+            <h3>軽微な画面変更に強い</h3>
+            <p>
+              例えばHTMLのIDが変わると、通常のSeleniumでは要素が見つからずにエラーになることがあります。
+              MagicPodはボタンの文字、HTML構造、周囲の要素、見た目なども参考にして対象を探します。
+            </p>
+          </div>
+
+          <div class="code-compare">
+            <section>
+              <p>変更前</p>
+              <pre><code>&lt;button id="login"&gt;</code></pre>
+            </section>
+            <section>
+              <p>変更後</p>
+              <pre><code>&lt;button id="btnLogin"&gt;</code></pre>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section id="limits" class="section">
+        <div class="section-heading">
+          <p class="section-label">Limits</p>
+          <h2>MagicPodが苦手なこと</h2>
+        </div>
+
+        <div class="limit-grid">
+          <article class="limit-card">
+            <h3>複雑なアルゴリズム</h3>
+            <p>機械学習、高度な数学計算、複雑なグラフ探索などには向いていません。</p>
+          </article>
+          <article class="limit-card">
+            <h3>非常に複雑なループ処理</h3>
+            <p>1000件比較、特殊な条件判定、さらに複雑な計算を組み合わせる処理は苦手です。</p>
+          </article>
+          <article class="limit-card">
+            <h3>Playwrightほど自由度は高くない</h3>
+            <p>PlaywrightではNode.jsが利用できるため、ほぼ何でも実装できます。MagicPodはGUI中心です。</p>
+          </article>
+          <article class="limit-card">
+            <h3>Windowsデスクトップアプリの操作</h3>
+            <p>Excel、メモ帳、業務Windowsアプリなどを自由に操作する用途には向いていません。</p>
+          </article>
+          <article class="limit-card">
+            <h3>AutoItのようなWindows操作</h3>
+            <p>座標クリック、キーボード操作、Windows全体の自動操作などは得意ではありません。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="compare" class="section">
+        <div class="section-heading">
+          <p class="section-label">Comparison</p>
+          <h2>他ツールとの比較</h2>
+        </div>
+
+        <div class="table-card">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>ツール</th>
+                  <th>コードを書く</th>
+                  <th>主な対象</th>
+                  <th>自由度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>MagicPod</th>
+                  <td>基本不要</td>
+                  <td>Web・モバイル</td>
+                  <td>★★★☆☆</td>
+                </tr>
+                <tr>
+                  <th>Playwright</th>
+                  <td>必要</td>
+                  <td>Web</td>
+                  <td>★★★★★</td>
+                </tr>
+                <tr>
+                  <th>Selenium</th>
+                  <td>必要</td>
+                  <td>Web</td>
+                  <td>★★★★☆</td>
+                </tr>
+                <tr>
+                  <th>WinAppDriver</th>
+                  <td>必要</td>
+                  <td>Windowsアプリ</td>
+                  <td>★★★★☆</td>
+                </tr>
+                <tr>
+                  <th>AutoIt</th>
+                  <td>必要</td>
+                  <td>Windows操作全般</td>
+                  <td>★★★★★</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="playwright-user" class="section">
+        <div class="section-heading">
+          <p class="section-label">For Playwright Users</p>
+          <h2>Playwright経験者向けのイメージ</h2>
+        </div>
+
+        <div class="mapping-panel">
+          <section>
+            <h3>Playwright</h3>
+            <ol class="step-list">
+              <li><code>page.goto()</code></li>
+              <li><code>page.fill()</code></li>
+              <li><code>page.click()</code></li>
+              <li><code>expect()</code></li>
+            </ol>
+          </section>
+          <section>
+            <h3>MagicPod</h3>
+            <ol class="step-list">
+              <li>URLを開く</li>
+              <li>文字入力</li>
+              <li>クリック</li>
+              <li>画面確認</li>
+            </ol>
+          </section>
+        </div>
+
+        <blockquote class="closing-note">
+          PlaywrightやSeleniumで書くコードを、GUIの部品として組み立てて作るツールがMagicPodです。
+        </blockquote>
+      </section>
+
+      <section id="summary" class="section">
+        <div class="section-heading">
+          <p class="section-label">Summary</p>
+          <h2>まとめ</h2>
+        </div>
+
+        <article class="content-card">
+          <ul class="summary-list">
+            <li>Web・モバイルアプリ向けのテスト自動化ツール</li>
+            <li>GUIでテストを作成できるため、基本的にコード不要</li>
+            <li>PlaywrightやSeleniumと同じようなWebテストを作成できる</li>
+            <li>GitLab RunnerやGitHub ActionsなどのCI/CDとも連携可能</li>
+            <li>Self-healing機能により、軽微な画面変更に強い</li>
+            <li>JavaScriptも利用できるため、柔軟な処理も可能</li>
+            <li>Windowsデスクトップアプリの自動化には向いていない</li>
+            <li>Playwrightほど自由ではないが、保守性と開発速度に優れている</li>
+          </ul>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <a class="page-top-button" href="#top" aria-label="ページ上部へ戻る">↑</a>
+</body>
+
+</html>
